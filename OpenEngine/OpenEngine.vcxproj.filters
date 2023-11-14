@@ -19,6 +19,12 @@
     <Filter Include="源文件\OECore">
       <UniqueIdentifier>{c05a6e69-c805-4ff4-b58b-6b227d169e64}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Core">
+      <UniqueIdentifier>{193c2327-8537-4eea-aeec-21658b6df359}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Core\Physics">
+      <UniqueIdentifier>{f4cf8b3a-80b9-44d6-a620-32a6726d0afe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp">
