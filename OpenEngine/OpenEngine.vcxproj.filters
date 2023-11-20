@@ -40,6 +40,12 @@
     <Filter Include="源文件\OEApplication">
       <UniqueIdentifier>{6da45585-4b61-4da4-99bf-638c443d3931}</UniqueIdentifier>
     </Filter>
+    <Filter Include="源文件\Core">
+      <UniqueIdentifier>{193c2327-8537-4eea-aeec-21658b6df359}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Core\Physics">
+      <UniqueIdentifier>{f4cf8b3a-80b9-44d6-a620-32a6726d0afe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp">
