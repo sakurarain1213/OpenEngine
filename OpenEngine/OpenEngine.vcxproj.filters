@@ -13,11 +13,32 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="源文件\OEWindows">
+    <Filter Include="头文件\OETool">
+      <UniqueIdentifier>{0108176c-922c-42b4-ad20-7c81efd2dc26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\OECore">
+      <UniqueIdentifier>{c05a6e69-c805-4ff4-b58b-6b227d169e64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\OEWindows">
       <UniqueIdentifier>{e991b309-91de-4a73-976e-bacdeee29614}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\OECore">
-      <UniqueIdentifier>{c05a6e69-c805-4ff4-b58b-6b227d169e64}</UniqueIdentifier>
+    <Filter Include="源文件\OETool">
+      <UniqueIdentifier>{d19d6f4d-fce7-44c3-90a5-cd547ba8618a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\OEDebug">
+      <UniqueIdentifier>{d19f9627-ead1-4c56-85dd-ec091e2921e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\OEDebug">
+      <UniqueIdentifier>{8de2590c-6303-4fce-99c0-49bc5a4f15a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\OEWindows">
+      <UniqueIdentifier>{a419be3a-ab23-4b6e-944f-734c4d36909c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\OEApplication">
+      <UniqueIdentifier>{9f086007-8bc8-403e-a632-361d6836c649}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\OEApplication">
+      <UniqueIdentifier>{6da45585-4b61-4da4-99bf-638c443d3931}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -27,19 +48,67 @@
     <ClCompile Include="..\..\..\..\OpenGL\dependency\src\glad.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Action.h">
+      <Filter>头文件\OETool</Filter>
+    </ClCompile>
     <ClCompile Include="Window.h">
+      <Filter>头文件\OEWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>源文件\OEDebug</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>源文件\OETool</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
       <Filter>源文件\OEWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="IniFile.cpp">
+      <Filter>源文件\OETool</Filter>
+    </ClCompile>
+    <ClCompile Include="Context.cpp">
+      <Filter>源文件\OEApplication</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>源文件\OEApplication</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="WindowSetting.h">
-      <Filter>源文件\OEWindows</Filter>
+    <ClInclude Include="PropertyMap.h">
+      <Filter>头文件\OECore</Filter>
     </ClInclude>
-    <ClInclude Include="Setting.h">
-      <Filter>源文件\OECore</Filter>
+    <ClInclude Include="WindowSetting.h">
+      <Filter>头文件\OEWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowDevice.h">
+      <Filter>头文件\OEWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleHandler.h">
+      <Filter>头文件\OEDebug</Filter>
+    </ClInclude>
+    <ClInclude Include="ILogHandler.h">
+      <Filter>头文件\OEDebug</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>头文件\OEDebug</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>头文件\OETool</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowDeviceSetting.h">
+      <Filter>头文件\OEWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>头文件\OEApplication</Filter>
+    </ClInclude>
+    <ClInclude Include="Context.h">
+      <Filter>头文件\OEApplication</Filter>
+    </ClInclude>
+    <ClInclude Include="IniFile.h">
+      <Filter>头文件\OETool</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
