@@ -13,11 +13,11 @@ namespace OpenEngine::Debug {
 		LOG_DEFAULT
 	};
 
-	const std::string error_header = "[ERROR] ";
-	const std::string warning_header = "[WARNING] ";
-	const std::string success_header = "[SUCCESS] ";
-	const std::string info_header = "[INFO] ";
-	const std::string default_header = "";
+	static const std::string error_header = "[ERROR] ";
+	static const std::string warning_header = "[WARNING] ";
+	static const std::string success_header = "[SUCCESS] ";
+	static const std::string info_header = "[INFO] ";
+	static const std::string default_header = "";
 
 	struct LogData {
 		LogType logType;
@@ -50,7 +50,9 @@ namespace OpenEngine::Debug {
 
 	class ILogHandler {
 		friend class Logger;
-	private:
+	public:
+		virtual ~ILogHandler() {}
+	protected:
 		virtual void Log(const LogData& log) = 0;
 	};
 }

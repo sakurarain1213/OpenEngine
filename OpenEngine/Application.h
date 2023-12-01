@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Context.h"
+#include "Game.h"
 #include "Time.h"
 
 namespace OpenEngine::App {
@@ -13,5 +13,6 @@ namespace OpenEngine::App {
 	private:
 		std::string base_path;
 		Context m_context;
+		Game m_game;
 	};
 }

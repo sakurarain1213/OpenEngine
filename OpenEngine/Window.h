@@ -1,11 +1,8 @@
 #pragma once
 
-#include <GLFW/glfw3.h>
 #include "WindowSetting.h"
-#include "Logger.h"
 #include "Action.h"
 #include "WindowDevice.h"
-#include <unordered_map>
 
 namespace OpenEngine {
 	

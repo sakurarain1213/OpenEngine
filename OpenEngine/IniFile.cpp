@@ -1,3 +1,5 @@
+#pragma once
+
 #include "IniFile.h"
 
 namespace OpenEngine {

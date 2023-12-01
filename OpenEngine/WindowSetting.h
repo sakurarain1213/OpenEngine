@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string>
+#include <boost/serialization/string.hpp>
 
 namespace OpenEngine::Setting {
 	class WindowSetting {

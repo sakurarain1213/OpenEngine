@@ -1,10 +1,12 @@
 #pragma once
+
 #include <memory>
 #include "WindowDevice.h"
-#include "WindowDeviceSetting.h"
 #include "Window.h"
-#include "WindowSetting.h"
+#include "RenderDriver.h"
+#include "AssetDatabase.hpp"
 #include "IniFile.h"
+
 
 namespace OpenEngine::App {
 	class Context {
@@ -13,6 +15,9 @@ namespace OpenEngine::App {
 	public:
 		std::unique_ptr<WindowDevice> device;
 		std::unique_ptr<Window> window;
+		std::unique_ptr<RenderDriver> driver;
+		std::unique_ptr<Editor::AssetDatabase> assets;
 		IniFile projectSetting;
+
 	};
 }

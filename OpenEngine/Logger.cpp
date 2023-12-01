@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Logger.h"
 #include "Time.h"
 #include "ConsoleHandler.h"

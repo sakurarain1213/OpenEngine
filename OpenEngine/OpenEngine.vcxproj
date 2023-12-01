@@ -72,19 +72,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>D:\OpenGL\dependency\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\OpenGL\dependency\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\Project\boost_1_83_0\stage\lib;D:\OpenGL\dependency\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>D:\OpenGL\dependency\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\OpenGL\dependency\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\Project\boost_1_83_0\stage\lib;D:\OpenGL\dependency\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>D:\OpenGL\dependency\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\OpenGL\dependency\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\Project\boost_1_83_0\stage\lib;D:\OpenGL\dependency\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>D:\OpenGL\dependency\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\OpenGL\dependency\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\Project\boost_1_83_0\stage\lib;D:\OpenGL\dependency\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -93,6 +93,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -109,6 +110,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -125,6 +127,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,6 +144,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,78 +155,66 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\OpenGL\dependency\src\glad.c">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Allocator.cpp" />
-    <ClCompile Include="BaseApplication.cpp" />
-    <ClCompile Include="EmptyApplication.cpp" />
-    <ClCompile Include="GraphicsManager.cpp" />
-    <ClCompile Include="hellowengine_win.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="MemoryManager.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="RigidBody.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Window.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="test.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="WindowsApplication.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="..\..\..\..\OpenGL\dependency\src\glad.c" />
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="AssetDatabase.cpp" />
+    <ClInclude Include="AssetDatabase.hpp" />
+    <ClCompile Include="Context.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="IniFile.cpp" />
+    <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClInclude Include="AssetImporter.h" />
+    <ClInclude Include="ElementBuffer.h" />
+    <ClInclude Include="IAssetImporter.h" />
+    <ClInclude Include="IBuffer.h" />
+    <ClInclude Include="RenderDriver.h" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Time.cpp" />
+    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="stb_image.cpp" />
+    <ClInclude Include="stb_image.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureImporter.h" />
+    <ClInclude Include="VertexArray.h" />
+    <ClInclude Include="VertexBuffer.h" />
+    <ClInclude Include="Window.h" />
+    <ClCompile Include="test.cpp" />
+    <ClInclude Include="Action.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Math.h" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Allocator.h" />
-    <ClInclude Include="BaseApplication.h" />
-    <ClInclude Include="GraphicsManager.h" />
-    <ClInclude Include="IApplication.h" />
-    <ClInclude Include="InputManager.h" />
-    <ClInclude Include="Interface.h" />
-    <ClInclude Include="IRuntimeModule.h" />
-    <ClInclude Include="MemoryManager.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="RigidBody.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Setting.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="WindowsApplication.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="WindowSetting.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClInclude>
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="ConsoleHandler.h" />
+    <ClInclude Include="Context.h" />
+    <ClInclude Include="DriverSetting.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GUID.h" />
+    <ClInclude Include="ILogHandler.h" />
+    <ClInclude Include="ImportSetting.h" />
+    <ClInclude Include="IniFile.h" />
+    <ClInclude Include="Logger.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="PropertyMap.h" />
+    <ClInclude Include="Time.h" />
+    <ClInclude Include="WindowDevice.h" />
+    <ClInclude Include="WindowDeviceSetting.h" />
+    <ClInclude Include="WindowSetting.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\Eigen3.3.3.9\build\native\Eigen3.targets" Condition="Exists('..\packages\Eigen3.3.3.9\build\native\Eigen3.targets')" />
+    <Import Project="..\packages\boost.1.83.0\build\boost.targets" Condition="Exists('..\packages\boost.1.83.0\build\boost.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Eigen3.3.3.9\build\native\Eigen3.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eigen3.3.3.9\build\native\Eigen3.targets'))" />
+    <Error Condition="!Exists('..\packages\boost.1.83.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.83.0\build\boost.targets'))" />
   </Target>
 </Project>

@@ -13,11 +13,32 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="源文件\OEWindows">
+    <Filter Include="头文件\OETool">
+      <UniqueIdentifier>{0108176c-922c-42b4-ad20-7c81efd2dc26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\OECore">
+      <UniqueIdentifier>{c05a6e69-c805-4ff4-b58b-6b227d169e64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\OEWindows">
       <UniqueIdentifier>{e991b309-91de-4a73-976e-bacdeee29614}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\OECore">
-      <UniqueIdentifier>{c05a6e69-c805-4ff4-b58b-6b227d169e64}</UniqueIdentifier>
+    <Filter Include="源文件\OETool">
+      <UniqueIdentifier>{d19d6f4d-fce7-44c3-90a5-cd547ba8618a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\OEDebug">
+      <UniqueIdentifier>{d19f9627-ead1-4c56-85dd-ec091e2921e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\OEDebug">
+      <UniqueIdentifier>{8de2590c-6303-4fce-99c0-49bc5a4f15a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\OEWindows">
+      <UniqueIdentifier>{a419be3a-ab23-4b6e-944f-734c4d36909c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\OEApplication">
+      <UniqueIdentifier>{9f086007-8bc8-403e-a632-361d6836c649}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\OEApplication">
+      <UniqueIdentifier>{6da45585-4b61-4da4-99bf-638c443d3931}</UniqueIdentifier>
     </Filter>
     <Filter Include="源文件\Core">
       <UniqueIdentifier>{193c2327-8537-4eea-aeec-21658b6df359}</UniqueIdentifier>
@@ -25,20 +46,32 @@
     <Filter Include="源文件\Core\Physics">
       <UniqueIdentifier>{f4cf8b3a-80b9-44d6-a620-32a6726d0afe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\Framework">
-      <UniqueIdentifier>{5e79a393-e0b8-4cb0-b73d-e7a857ad291e}</UniqueIdentifier>
+    <Filter Include="头文件\OERendering">
+      <UniqueIdentifier>{e83c5060-884e-4491-a11a-1f3b4d2a5e25}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\Framework\Interface">
-      <UniqueIdentifier>{d1cd2571-9a3a-450b-b685-cd2faabe0ea2}</UniqueIdentifier>
+    <Filter Include="头文件\OEEditor">
+      <UniqueIdentifier>{1e87de5c-e028-4a7b-8577-4500d8df4347}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\Framework\Common">
-      <UniqueIdentifier>{2a6ffa2d-dcb8-4045-8de3-87729b361ced}</UniqueIdentifier>
+    <Filter Include="源文件\OEEditor">
+      <UniqueIdentifier>{6f4e90de-e7fb-45d0-8c2f-dea33a3b2290}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\Windows">
-      <UniqueIdentifier>{994dd268-9b00-44b1-b690-5e4ce38f928e}</UniqueIdentifier>
+    <Filter Include="头文件\OERendering\Assets">
+      <UniqueIdentifier>{620d1713-b111-417d-965f-f808ab24c891}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\Core\Application">
-      <UniqueIdentifier>{3ccc2d91-47bd-49da-886d-2928db5eb112}</UniqueIdentifier>
+    <Filter Include="源文件\OECore">
+      <UniqueIdentifier>{4d8cd4ba-6023-4b79-830a-11bb17d3e8d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\OERendering\Buffer">
+      <UniqueIdentifier>{d3b9dc67-5cd1-4d8f-bf2d-c776ce07bcf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\OERendering">
+      <UniqueIdentifier>{55b5bcf7-4505-406f-bb17-2f0f835a708f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\OERendering\Assets">
+      <UniqueIdentifier>{9d54a3d1-ecc7-4d1a-b2ce-c5d187ec7f11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\OECore\AssetImporter">
+      <UniqueIdentifier>{5f1de591-cb87-4790-ae5f-f967b4d525b2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -48,79 +81,136 @@
     <ClCompile Include="..\..\..\..\OpenGL\dependency\src\glad.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Window.h">
+    <ClCompile Include="Logger.cpp">
+      <Filter>源文件\OEDebug</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>源文件\OETool</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
       <Filter>源文件\OEWindows</Filter>
     </ClCompile>
-    <ClCompile Include="RigidBody.cpp">
-      <Filter>源文件\Core\Physics</Filter>
+    <ClCompile Include="IniFile.cpp">
+      <Filter>源文件\OETool</Filter>
     </ClCompile>
-    <ClCompile Include="MemoryManager.cpp">
-      <Filter>源文件\Framework\Common</Filter>
+    <ClCompile Include="Context.cpp">
+      <Filter>源文件\OEApplication</Filter>
     </ClCompile>
-    <ClCompile Include="hellowengine_win.cpp">
-      <Filter>源文件\Windows</Filter>
+    <ClCompile Include="Application.cpp">
+      <Filter>源文件\OEApplication</Filter>
     </ClCompile>
-    <ClCompile Include="BaseApplication.cpp">
-      <Filter>源文件\Framework\Common</Filter>
+    <ClCompile Include="AssetDatabase.cpp">
+      <Filter>源文件\OEEditor</Filter>
     </ClCompile>
-    <ClCompile Include="WindowsApplication.cpp">
-      <Filter>源文件\Framework\Common</Filter>
+    <ClCompile Include="Game.cpp">
+      <Filter>源文件\OEApplication</Filter>
     </ClCompile>
-    <ClCompile Include="Allocator.cpp">
-      <Filter>源文件\Framework\Common</Filter>
+    <ClCompile Include="Object.cpp">
+      <Filter>源文件\OECore</Filter>
     </ClCompile>
-    <ClCompile Include="EmptyApplication.cpp">
-      <Filter>源文件\Framework\Common</Filter>
+    <ClCompile Include="Texture.cpp">
+      <Filter>源文件\OERendering\Assets</Filter>
     </ClCompile>
-    <ClCompile Include="GraphicsManager.cpp">
-      <Filter>源文件\Framework\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>源文件\Framework\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>源文件\Framework\Common</Filter>
+    <ClCompile Include="stb_image.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Math.h">
+      <Filter>头文件\OECore</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="PropertyMap.h">
+      <Filter>头文件\OECore</Filter>
+    </ClInclude>
     <ClInclude Include="WindowSetting.h">
-      <Filter>源文件\OEWindows</Filter>
+      <Filter>头文件\OEWindows</Filter>
     </ClInclude>
-    <ClInclude Include="Setting.h">
-      <Filter>源文件\OECore</Filter>
+    <ClInclude Include="WindowDevice.h">
+      <Filter>头文件\OEWindows</Filter>
     </ClInclude>
-    <ClInclude Include="MemoryManager.h">
-      <Filter>源文件\Framework\Common</Filter>
+    <ClInclude Include="ConsoleHandler.h">
+      <Filter>头文件\OEDebug</Filter>
     </ClInclude>
-    <ClInclude Include="RigidBody.h">
-      <Filter>源文件\Core\Physics</Filter>
+    <ClInclude Include="ILogHandler.h">
+      <Filter>头文件\OEDebug</Filter>
     </ClInclude>
-    <ClInclude Include="BaseApplication.h">
-      <Filter>源文件\Framework\Common</Filter>
+    <ClInclude Include="Logger.h">
+      <Filter>头文件\OEDebug</Filter>
     </ClInclude>
-    <ClInclude Include="WindowsApplication.h">
-      <Filter>源文件\Framework\Common</Filter>
+    <ClInclude Include="Time.h">
+      <Filter>头文件\OETool</Filter>
     </ClInclude>
-    <ClInclude Include="Allocator.h">
-      <Filter>源文件\Framework\Common</Filter>
+    <ClInclude Include="WindowDeviceSetting.h">
+      <Filter>头文件\OEWindows</Filter>
     </ClInclude>
-    <ClInclude Include="GraphicsManager.h">
-      <Filter>源文件\Framework\Common</Filter>
+    <ClInclude Include="Application.h">
+      <Filter>头文件\OEApplication</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>源文件\Framework\Common</Filter>
+    <ClInclude Include="Context.h">
+      <Filter>头文件\OEApplication</Filter>
     </ClInclude>
-    <ClInclude Include="IApplication.h">
-      <Filter>源文件\Framework\Common</Filter>
+    <ClInclude Include="IniFile.h">
+      <Filter>头文件\OETool</Filter>
     </ClInclude>
-    <ClInclude Include="Interface.h">
-      <Filter>源文件\Framework\Common</Filter>
+    <ClInclude Include="DriverSetting.h">
+      <Filter>头文件\OERendering</Filter>
     </ClInclude>
-    <ClInclude Include="IRuntimeModule.h">
-      <Filter>源文件\Framework\Common</Filter>
+    <ClInclude Include="Object.h">
+      <Filter>头文件\OECore</Filter>
+    </ClInclude>
+    <ClInclude Include="GUID.h">
+      <Filter>头文件\OECore</Filter>
+    </ClInclude>
+    <ClInclude Include="ImportSetting.h">
+      <Filter>头文件\OECore\AssetImporter</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>头文件\OERendering\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>头文件\OEApplication</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetDatabase.hpp">
+      <Filter>头文件\OEEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderDriver.h">
+      <Filter>头文件\OERendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>头文件\OETool</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>头文件\OEWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="IBuffer.h">
+      <Filter>头文件\OERendering\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexArray.h">
+      <Filter>头文件\OERendering\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBuffer.h">
+      <Filter>头文件\OERendering\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="ElementBuffer.h">
+      <Filter>头文件\OERendering\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>头文件\OERendering\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureImporter.h">
+      <Filter>头文件\OECore\AssetImporter</Filter>
+    </ClInclude>
+    <ClInclude Include="IAssetImporter.h">
+      <Filter>头文件\OECore\AssetImporter</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetImporter.h">
+      <Filter>头文件\OECore\AssetImporter</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
