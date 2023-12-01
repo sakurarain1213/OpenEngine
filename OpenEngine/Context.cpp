@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Context.h"
 
 namespace OpenEngine::App {
@@ -17,5 +19,11 @@ namespace OpenEngine::App {
 		windowSetting.refreshRate = projectSetting.GetInt("window", "refreshRate");
 		window = std::make_unique<Window>(*device, windowSetting);
 		window->SetContextCurrent();
+		Setting::DriverSetting driverSetting;
+		driverSetting.debugMode = projectSetting.Getbool("driver", "debugMode");
+		driver = std::make_unique<RenderDriver>(driverSetting);
+
+		assets = std::make_unique<Editor::AssetDatabase>(base_path + "/Assets");
+		assets->ImportAllAssets();
 	}
 }

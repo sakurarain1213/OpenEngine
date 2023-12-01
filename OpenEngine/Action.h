@@ -1,7 +1,7 @@
 #pragma once
 
 #include <functional>
-#include <unordered_map>
+#include <boost/serialization/unordered_map.hpp>
 
 namespace OpenEngine {
 	using ListenerID = uint64_t;
