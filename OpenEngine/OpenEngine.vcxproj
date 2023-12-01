@@ -158,6 +158,10 @@
     <ClCompile Include="..\..\..\..\OpenGL\dependency\src\glad.c" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="AssetDatabase.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="GeometryComponent.cpp" />
+    <ClCompile Include="InputSystem.cpp" />
+    <ClCompile Include="World.cpp" />
     <ClInclude Include="AssetDatabase.hpp" />
     <ClCompile Include="Context.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -166,21 +170,34 @@
     <ClCompile Include="Object.cpp" />
     <ClInclude Include="AssetImporter.h" />
     <ClInclude Include="ElementBuffer.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="GeometryComponent.h" />
     <ClInclude Include="IAssetImporter.h" />
     <ClInclude Include="IBuffer.h" />
+    <ClInclude Include="IComponent.h" />
+    <ClInclude Include="InputSystem.h" />
+    <ClInclude Include="IRuntimeModule.h" />
+    <ClInclude Include="ISystem.h" />
+    <ClInclude Include="PhysicSystem.h" />
     <ClInclude Include="RenderDriver.h" />
+    <ClCompile Include="PhysicSystem.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Time.cpp" />
+    <ClCompile Include="TransformComponent.cpp" />
+    <ClCompile Include="TransformSystem.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="stb_image.cpp" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureImporter.h" />
+    <ClInclude Include="TransformComponent.h" />
+    <ClInclude Include="TransformSystem.h" />
     <ClInclude Include="VertexArray.h" />
     <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="Window.h" />
     <ClCompile Include="test.cpp" />
     <ClInclude Include="Action.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Math.h" />

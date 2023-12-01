@@ -73,6 +73,15 @@
     <Filter Include="头文件\OECore\AssetImporter">
       <UniqueIdentifier>{5f1de591-cb87-4790-ae5f-f967b4d525b2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\OECore\ECS">
+      <UniqueIdentifier>{7d8464f5-0aa0-48ef-85e0-9c9e0b8865e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\OECore\ECS\Component">
+      <UniqueIdentifier>{2abe2a57-5030-4ffe-8d01-bcc80bb2c09f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\OECore\ECS\System">
+      <UniqueIdentifier>{d086cc92-6d99-4950-b1c4-ab680e12f1a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp">
@@ -113,6 +122,27 @@
     </ClCompile>
     <ClCompile Include="stb_image.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>头文件\OECore\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>头文件\OECore\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryComponent.cpp">
+      <Filter>头文件\OECore\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformComponent.cpp">
+      <Filter>头文件\OECore\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>头文件\OECore\ECS\System</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicSystem.cpp">
+      <Filter>头文件\OECore\ECS\System</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformSystem.cpp">
+      <Filter>头文件\OECore\ECS\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +241,36 @@
     </ClInclude>
     <ClInclude Include="stb_image.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IRuntimeModule.h">
+      <Filter>头文件\OECore\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>头文件\OECore\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>头文件\OECore\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryComponent.h">
+      <Filter>头文件\OECore\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformComponent.h">
+      <Filter>头文件\OECore\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponent.h">
+      <Filter>头文件\OECore\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>头文件\OECore\ECS\System</Filter>
+    </ClInclude>
+    <ClInclude Include="ISystem.h">
+      <Filter>头文件\OECore\ECS\System</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicSystem.h">
+      <Filter>头文件\OECore\ECS\System</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformSystem.h">
+      <Filter>头文件\OECore\ECS\System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
