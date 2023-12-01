@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "IApplication.h"
+#include<iostream>
 
 using namespace My;
 
@@ -14,7 +15,8 @@ int main(int argc, char** argv) {
         printf("App Initialize failed, will exit now.");
         return ret;
     }
-
+    int ver = g_pApp->GetName();
+    printf("%d\n", ver);
     while (!g_pApp->IsQuit()) {
         g_pApp->Tick();
     }

@@ -11,7 +11,7 @@ namespace My {
         virtual void Tick();
 
         virtual bool IsQuit();
-
+        virtual int GetName();
     protected:
         // Flag if need quit the main loop of the application
         bool m_bQuit;

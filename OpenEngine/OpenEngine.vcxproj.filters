@@ -54,32 +54,32 @@
     <ClCompile Include="RigidBody.cpp">
       <Filter>源文件\Core\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>源文件\Framework\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="EmptyApplication.cpp">
-      <Filter>源文件\Framework\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="Allocator.cpp">
-      <Filter>源文件\Framework\Common</Filter>
-    </ClCompile>
     <ClCompile Include="MemoryManager.cpp">
-      <Filter>源文件\Framework\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicsManager.cpp">
       <Filter>源文件\Framework\Common</Filter>
     </ClCompile>
     <ClCompile Include="hellowengine_win.cpp">
       <Filter>源文件\Windows</Filter>
     </ClCompile>
+    <ClCompile Include="BaseApplication.cpp">
+      <Filter>源文件\Framework\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowsApplication.cpp">
+      <Filter>源文件\Framework\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Allocator.cpp">
+      <Filter>源文件\Framework\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="EmptyApplication.cpp">
+      <Filter>源文件\Framework\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsManager.cpp">
+      <Filter>源文件\Framework\Common</Filter>
+    </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>源文件\Framework\Common</Filter>
     </ClCompile>
-    <ClCompile Include="BaseApplication.cpp">
-      <Filter>源文件\Core\Application</Filter>
-    </ClCompile>
-    <ClCompile Include="WindowsApplication.cpp">
-      <Filter>源文件\Core\Application</Filter>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件\Framework\Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -92,19 +92,19 @@
     <ClInclude Include="Setting.h">
       <Filter>源文件\OECore</Filter>
     </ClInclude>
-    <ClInclude Include="Interface.h">
-      <Filter>源文件\Framework\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="IRuntimeModule.h">
-      <Filter>源文件\Framework\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="IApplication.h">
-      <Filter>源文件\Framework\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="Allocator.h">
+    <ClInclude Include="MemoryManager.h">
       <Filter>源文件\Framework\Common</Filter>
     </ClInclude>
-    <ClInclude Include="MemoryManager.h">
+    <ClInclude Include="RigidBody.h">
+      <Filter>源文件\Core\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseApplication.h">
+      <Filter>源文件\Framework\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowsApplication.h">
+      <Filter>源文件\Framework\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Allocator.h">
       <Filter>源文件\Framework\Common</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsManager.h">
@@ -113,14 +113,14 @@
     <ClInclude Include="InputManager.h">
       <Filter>源文件\Framework\Common</Filter>
     </ClInclude>
-    <ClInclude Include="BaseApplication.h">
-      <Filter>源文件\Core\Application</Filter>
+    <ClInclude Include="IApplication.h">
+      <Filter>源文件\Framework\Common</Filter>
     </ClInclude>
-    <ClInclude Include="WindowsApplication.h">
-      <Filter>源文件\Core\Application</Filter>
+    <ClInclude Include="Interface.h">
+      <Filter>源文件\Framework\Common</Filter>
     </ClInclude>
-    <ClInclude Include="RigidBody.h">
-      <Filter>源文件\Core\Physics</Filter>
+    <ClInclude Include="IRuntimeModule.h">
+      <Filter>源文件\Framework\Common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@
 #include<Windows.h>
 
 #include<tchar.h>
+
 namespace My {
 	class WindowsApplication : _implements_ BaseApplication
 	{
@@ -13,7 +14,7 @@ namespace My {
 		virtual int Initialize();
 		virtual void Finalize();
 		virtual void Tick();
-		
+		virtual int GetName();
 		HWND GetWindowsHandler();
 	protected:
 		static LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
@@ -23,7 +24,7 @@ namespace My {
 		
 	private:
 		HWND mHWND;
-
+		
 	};
 }
 

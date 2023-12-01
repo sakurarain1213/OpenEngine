@@ -24,3 +24,7 @@ bool My::BaseApplication::IsQuit()
 {
     return m_bQuit;
 }
+
+int My::BaseApplication::GetName() {
+    return 0;
+}

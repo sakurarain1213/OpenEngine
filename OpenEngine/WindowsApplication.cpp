@@ -49,7 +49,9 @@ LRESULT My::WindowsApplication::WindowProc(HWND hWnd, UINT message, WPARAM wPara
     // Handle any messages the switch statement didn't
     return DefWindowProc(hWnd, message, wParam, lParam);
 }
-
+int WindowsApplication::GetName() {
+    return 10;
+}
 int WindowsApplication::Initialize() {
     BaseApplication::Initialize();
     

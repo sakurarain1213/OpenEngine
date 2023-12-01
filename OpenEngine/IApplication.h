@@ -2,6 +2,7 @@
 #include "Interface.h"
 #include "IRuntimeModule.h"
 
+
 namespace My {
     _Interface_ IApplication : _implements_ IRuntimeModule
     {
@@ -12,5 +13,6 @@ namespace My {
             virtual void Tick() = 0;
 
             virtual bool IsQuit() = 0;
+            virtual int GetName()=0;
     };
 }
