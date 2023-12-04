@@ -10,13 +10,15 @@ namespace OpenEngine {
 	class Entity : public IRuntimeModule
 	{
 	public:
+		virtual std::string GetType();
 		virtual int Initialize() ;
 		virtual int Initialize(World* world);
 		virtual void Finalize() ;
+		virtual void Tick();
 
-
-		Entity();
-		Entity(int id);
+		
+		Entity(std::string name);
+		Entity(std::string name,int id);
 		virtual ~Entity();
 
 		void SetEid(int id);
@@ -24,6 +26,7 @@ namespace OpenEngine {
 		void AddChild(std::shared_ptr<Entity> child);
 		void RemoveChild(std::shared_ptr<Entity>child);
 		Entity* GetParent();
+		void SetWorld(World* world);
 		World* GetWorld();
 		void SetParent(Entity* parent);
 		bool IsChild(std::shared_ptr<Entity>child);
@@ -42,15 +45,5 @@ namespace OpenEngine {
 
 	};
 
-	template<typename T>
-	T* OpenEngine::Entity::AddComponent() {
-		void* comp = nullptr;
-		if (std::is_same<T, TransformComponent>::value) {
-			TransformComponent* mTransform = new TransformComponent();
-			mTransform->SetOwner(this);
-			Components.push_back(mTransform);
-			comp = mTransform;
-		}
-		return comp;
-	}
+	
 }

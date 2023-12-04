@@ -1,6 +1,9 @@
 #include "Entity.h"
 #include<stdio.h>
 using namespace OpenEngine;
+std::string OpenEngine::Entity::GetType() {
+	return "Entity";
+}
 int OpenEngine::Entity::Initialize() {
 	return 0;
 }
@@ -16,14 +19,16 @@ void OpenEngine::Entity::Finalize() {
 
 }
 
-OpenEngine::Entity::Entity() :
-	mParent(nullptr){}
 
-OpenEngine::Entity::Entity(int id) {
+
+OpenEngine::Entity::Entity(std::string name) : IRuntimeModule(name) {
 	mParent = nullptr;
-	Eid = id;
+	
 }
-
+OpenEngine::Entity::Entity(std::string name,int id) : IRuntimeModule(name) {
+	mParent = nullptr;
+	SetEid(id);
+}
 OpenEngine::Entity::~Entity() {
 	printf("%dEntity destroyed!\n", Eid);
 	Finalize();
@@ -67,7 +72,9 @@ bool OpenEngine::Entity::IsChild(std::shared_ptr<Entity> child) {
 Entity* OpenEngine::Entity::GetParent() {
 	return mParent;
 }
-
+void OpenEngine::Entity::SetWorld(World* world) {
+	mWorld = world;
+}
 World* OpenEngine::Entity::GetWorld() {
 	return mWorld;
 }

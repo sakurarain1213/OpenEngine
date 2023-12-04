@@ -80,7 +80,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>D:\OpenGL\dependency\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Project\boost_1_83_0\stage\lib;D:\OpenGL\dependency\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\boost_1_83_0\stage\lib;D:\Project\boost_1_83_0\stage\lib;D:\OpenGL\dependency\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>D:\OpenGL\dependency\include;$(IncludePath)</IncludePath>

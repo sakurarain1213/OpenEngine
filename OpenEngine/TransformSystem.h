@@ -1,5 +1,9 @@
 #pragma once
-class TransformSystem
-{
-};
+#include"ISystem.h"
+namespace OpenEngine {
+	class TransformSystem : public ISystem
+	{
+		TransformSystem();
 
+	};
+}

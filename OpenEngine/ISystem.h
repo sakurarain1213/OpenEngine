@@ -1,10 +1,12 @@
 #pragma once
-#include"Object.h"
+#include"IRuntimeModule.h"
 namespace OpenEngine {
 	class ISystem : public IRuntimeModule {
 	public:
-		ISystem() :mIsActive(true) {};
-
+		
+		virtual std::string GetType() {
+			return "ISystem";
+		};
 		virtual int Initialize() = 0;
 		virtual void Finalize() = 0;
 		virtual void Tick() = 0;
