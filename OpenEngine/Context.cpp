@@ -23,7 +23,17 @@ namespace OpenEngine::App {
 		driverSetting.debugMode = projectSetting.Getbool("driver", "debugMode");
 		driver = std::make_unique<RenderDriver>(driverSetting);
 
-		assets = std::make_unique<Editor::AssetDatabase>(base_path + "/Assets");
+		assets = std::make_unique<Editor::AssetDatabase>(base_path + "/iAssets");
 		assets->ImportAllAssets();
+
+		//以下为初始化一个测试用World,包含一个entity
+
+		worldmanager = std::make_unique<World>("world");
+		worldmanager->Initialize();
+		auto test_entity= worldmanager->CreateEntity("e1");
+		Entity* e = test_entity.get();
+		TransformComponent* transc=e->AddComponent<TransformComponent>();
+		Eigen::Vector3f vel(1, 1, 0);
+		transc->SetLinearVelocity({1,1,0});
 	}
 }

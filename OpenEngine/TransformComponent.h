@@ -15,8 +15,12 @@ namespace OpenEngine {
 		void SetPosition(Vector3f posi);
 		void Rotate(Quaternionf rota);
 
+		void SetLinearVelocity(Vector3f vel);
+		void SetAngularVelocity(Quaternionf vel);
 	public:
 		Vector3f Position;
+		Vector3f LinearVelocity;
+		Quaternionf  AngularVelocity;
 		Quaternionf Rotation;
 		Vector3f Scale;
 

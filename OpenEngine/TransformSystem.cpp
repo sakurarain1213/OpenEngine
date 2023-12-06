@@ -1,6 +1,10 @@
 #include "TransformSystem.h"
+#include"Time.h"
+#include<algorithm>
+#include<iostream>
+using namespace Eigen;
 OpenEngine::TransformSystem::TransformSystem(World* world) :ISystem("TransformSystem") {
-
+	mWorld = world;
 }
 
 int OpenEngine::TransformSystem::Initialize()noexcept {
@@ -11,6 +15,18 @@ int OpenEngine::TransformSystem::Initialize()noexcept {
 
 void OpenEngine::TransformSystem::Tick()noexcept {
 
+	float dTime = Time::GetDeltaTime();
+
+	for (TransformComponent* t : components) {
+		
+		t->SetPosition(t->Position + dTime * t->LinearVelocity);
+
+		float x = t->Position.x();
+		float y = t->Position.y();
+		std::cout << x << " " << y << "\n";
+	}
+	
+		
 
 }
 

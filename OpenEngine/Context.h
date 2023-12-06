@@ -6,8 +6,8 @@
 #include "RenderDriver.h"
 #include "AssetDatabase.hpp"
 #include "IniFile.h"
-
-
+#include"World.h"
+#include"Entity.h"
 namespace OpenEngine::App {
 	class Context {
 	public:
@@ -17,6 +17,7 @@ namespace OpenEngine::App {
 		std::unique_ptr<Window> window;
 		std::unique_ptr<RenderDriver> driver;
 		std::unique_ptr<Editor::AssetDatabase> assets;
+		std::unique_ptr<World>worldmanager;
 		IniFile projectSetting;
 
 	};

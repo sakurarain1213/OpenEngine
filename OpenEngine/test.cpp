@@ -18,6 +18,8 @@ int main() {
     testElement.push_back(1);
     testElement.push_back(2);
     Mesh testMesh(testVertexs, testElement);
+
+    
     app.Run();
     return 0;
 }

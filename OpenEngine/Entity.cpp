@@ -32,7 +32,7 @@ OpenEngine::Entity::Entity(std::string name, const boost::uuids::uuid& guid) : I
 	mGuid = guid;
 }
 OpenEngine::Entity::~Entity() {
-	printf("%dEntity destroyed!\n", mGuid);
+	
 	Finalize();
 }
 boost::uuids::uuid OpenEngine::Entity::GetGuid()const noexcept {
@@ -89,34 +89,3 @@ size_t OpenEngine::Entity::GetChildrenCount() {
 }
 
 
-template<typename T>
-T* OpenEngine::Entity::AddComponent() {
-	void* comp = nullptr;
-	if (std::is_same<T, TransformComponent>::value) {
-		mTransform = new TransformComponent(this);
-		
-		mTransform->Initialize();
-		mWorld->mTransformSystem->AddComponent(mTransform);
-		comp = mTransform;
-	}
-
-	return (T*)comp;
-}
-
-template<typename T>
-T* OpenEngine::Entity::GetComponent() {
-	void* ret = nullptr;
-	if (std::is_same<T, TransformComponent>::value) {
-		ret = mTransform;
-	}
-	return (T*)ret;
-}
-
-template<typename T>
-void OpenEngine::Entity::RemoveComponent() {
-	if (std::is_same<T, TransformComponent>::value) {
-		mTransform->Finalize();
-		delete mTransform;
-		mTransform = nullptr;
-	}
-}

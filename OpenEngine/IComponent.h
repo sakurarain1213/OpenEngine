@@ -1,15 +1,15 @@
 #pragma once
-#include"IRuntimeModule.h"
+#include"Object.h"
 #include<string>
 namespace OpenEngine {
 	class Entity;
 	
-	class IComponent : public IRuntimeModule {
+	class IComponent : public Object {
 	public:
 		virtual int Initialize() = 0;
 		virtual void Finalize() = 0;
-
-		IComponent(): IRuntimeModule("IComponent") {
+		
+		IComponent(): Object("IComponent") {
 			mOwner = nullptr;
 			mIsActive = true;
 		}

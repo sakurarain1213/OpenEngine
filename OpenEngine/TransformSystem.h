@@ -1,11 +1,11 @@
 #pragma once
 #include"ISystem.h"
 #include<set>
-
+#include"TransformComponent.h"
 namespace OpenEngine {
 
 	class World;
-	class TransformComponent;
+	
 
 	class TransformSystem : public ISystem
 	{

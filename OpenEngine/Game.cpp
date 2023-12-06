@@ -11,7 +11,9 @@ namespace OpenEngine::App {
 		Object::DestroyQueuingObject();
 	}
 
-	void Game::Update() {}
+	void Game::Update() {
+		m_context.worldmanager->Tick();
+	}
 
 	void Game::FixedUpdate() {}
 }
