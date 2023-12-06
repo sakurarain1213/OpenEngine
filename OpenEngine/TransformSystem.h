@@ -15,14 +15,15 @@ namespace OpenEngine {
 			return "TransformSystem";
 		};
 
-		virtual int Initialize();
-		virtual void Finalize();
-		virtual void Tick();
+		virtual int Initialize() noexcept;
+		virtual void Finalize() noexcept;
+		virtual void Tick() noexcept;
 
 		virtual void AddComponent(TransformComponent* comp);
 		virtual void DeleteComponent(TransformComponent* comp);
 
 	private:
 		std::set<TransformComponent*> components;
+		World* mWorld;
 	};
 }

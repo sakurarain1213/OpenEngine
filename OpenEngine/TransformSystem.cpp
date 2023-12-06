@@ -3,18 +3,18 @@ OpenEngine::TransformSystem::TransformSystem(World* world) :ISystem("TransformSy
 
 }
 
-int OpenEngine::TransformSystem::Initialize() {
+int OpenEngine::TransformSystem::Initialize()noexcept {
 	
 	return 0;
 
 }
 
-void OpenEngine::TransformSystem::Tick() {
+void OpenEngine::TransformSystem::Tick()noexcept {
 
 
 }
 
-void OpenEngine::TransformSystem::Finalize() {
+void OpenEngine::TransformSystem::Finalize()noexcept {
 
 
 }

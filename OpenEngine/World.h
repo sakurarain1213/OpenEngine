@@ -20,13 +20,13 @@ namespace OpenEngine {
 		World(std::string name);
 
 		std::shared_ptr<Entity>	CreateEntity(std::string name);
-		std::shared_ptr<Entity>	CreateEntity(std::string name,int id);
-		void	DeleteEntity(int id);
-		std::shared_ptr<Entity>	GetEntity(int id);
+		std::shared_ptr<Entity>	CreateEntity(std::string name, const boost::uuids::uuid& guid);
+		void	DeleteEntity(const boost::uuids::uuid& guid);
+		std::shared_ptr<Entity>	GetEntity(const boost::uuids::uuid& guid);
 		size_t GetEntityCount();
 
-		void LoadScene(const std::string& scenePath);
-		void DumpEntities();
+		//void LoadScene(const std::string& scenePath);
+		//void DumpEntities();
 
 
 		

@@ -2,9 +2,11 @@
 #include"IComponent.h"
 #include"IRuntimeModule.h"
 #include"TransformComponent.h"
+#include"World.h"
 #include<vector>
 #include<list>
 #include<memory>
+#include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid.hpp>
 namespace OpenEngine {
 	class World;
@@ -15,7 +17,7 @@ namespace OpenEngine {
 		virtual int Initialize() ;
 		virtual int Initialize(World* world);
 		virtual void Finalize() ;
-		
+		virtual void Tick()noexcept;
 
 		
 		Entity(std::string name);
@@ -23,7 +25,7 @@ namespace OpenEngine {
 		virtual ~Entity();
 		boost::uuids::uuid	GetGuid() const noexcept;
 		void	SetGuid(const boost::uuids::uuid& guid) noexcept;
-		boost::uuids::uuid GetGuid();
+		
 		void AddChild(std::shared_ptr<Entity> child);
 		void RemoveChild(std::shared_ptr<Entity>child);
 		Entity* GetParent();
@@ -34,7 +36,7 @@ namespace OpenEngine {
 		size_t GetChildrenCount();
 
 		
-		template<typename T>T* AddComponent(){};
+		template<typename T>T* AddComponent();
 		template<typename T>T* GetComponent();
 		template<typename T>void	RemoveComponent();
 		

@@ -4,7 +4,7 @@ namespace OpenEngine {
 	class ISystem : public IRuntimeModule {
 	public:
 		ISystem(std::string name):IRuntimeModule(name) {
-
+			mIsActive = true;
 		}
 		virtual std::string GetType() {
 			return "ISystem";

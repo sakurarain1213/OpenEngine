@@ -19,11 +19,12 @@ void OpenEngine::Entity::Finalize() {
 
 }
 
-
+void OpenEngine::Entity::Tick() noexcept{}
 
 OpenEngine::Entity::Entity(std::string name) : IRuntimeModule(name) {
 	mParent = nullptr;
-	
+	mTransform = nullptr;
+	mGuid = boost::uuids::random_generator()();
 }
 OpenEngine::Entity::Entity(std::string name, const boost::uuids::uuid& guid) : IRuntimeModule(name) {
 	mParent = nullptr;
@@ -34,10 +35,10 @@ OpenEngine::Entity::~Entity() {
 	printf("%dEntity destroyed!\n", mGuid);
 	Finalize();
 }
-boost::uuids::uuid OpenEngine::Entity::GetGuid() {
+boost::uuids::uuid OpenEngine::Entity::GetGuid()const noexcept {
 	return mGuid;
 }
-void OpenEngine::Entity::SetGuid(const boost::uuids::uuid& guid) {
+void OpenEngine::Entity::SetGuid(const boost::uuids::uuid& guid)noexcept {
 	mGuid = guid;
 }
 
@@ -95,6 +96,7 @@ T* OpenEngine::Entity::AddComponent() {
 		mTransform = new TransformComponent(this);
 		
 		mTransform->Initialize();
+		mWorld->mTransformSystem->AddComponent(mTransform);
 		comp = mTransform;
 	}
 
