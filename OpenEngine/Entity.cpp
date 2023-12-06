@@ -25,19 +25,20 @@ OpenEngine::Entity::Entity(std::string name) : IRuntimeModule(name) {
 	mParent = nullptr;
 	
 }
-OpenEngine::Entity::Entity(std::string name,int id) : IRuntimeModule(name) {
+OpenEngine::Entity::Entity(std::string name, const boost::uuids::uuid& guid) : IRuntimeModule(name) {
 	mParent = nullptr;
-	SetEid(id);
+	mTransform = nullptr;
+	mGuid = guid;
 }
 OpenEngine::Entity::~Entity() {
-	printf("%dEntity destroyed!\n", Eid);
+	printf("%dEntity destroyed!\n", mGuid);
 	Finalize();
 }
-int OpenEngine::Entity::GetEid() {
-	return Eid;
+boost::uuids::uuid OpenEngine::Entity::GetGuid() {
+	return mGuid;
 }
-void OpenEngine::Entity::SetEid(int id) {
-	Eid = id;
+void OpenEngine::Entity::SetGuid(const boost::uuids::uuid& guid) {
+	mGuid = guid;
 }
 
 void OpenEngine::Entity::AddChild(std::shared_ptr<Entity> child) {
@@ -86,3 +87,34 @@ size_t OpenEngine::Entity::GetChildrenCount() {
 	return mchildrenE.size();
 }
 
+
+template<typename T>
+T* OpenEngine::Entity::AddComponent() {
+	void* comp = nullptr;
+	if (std::is_same<T, TransformComponent>::value) {
+		mTransform = new TransformComponent(this);
+		
+		mTransform->Initialize();
+		comp = mTransform;
+	}
+
+	return (T*)comp;
+}
+
+template<typename T>
+T* OpenEngine::Entity::GetComponent() {
+	void* ret = nullptr;
+	if (std::is_same<T, TransformComponent>::value) {
+		ret = mTransform;
+	}
+	return (T*)ret;
+}
+
+template<typename T>
+void OpenEngine::Entity::RemoveComponent() {
+	if (std::is_same<T, TransformComponent>::value) {
+		mTransform->Finalize();
+		delete mTransform;
+		mTransform = nullptr;
+	}
+}

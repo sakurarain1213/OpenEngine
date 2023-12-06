@@ -9,6 +9,9 @@ namespace OpenEngine {
 		TransformComponent(Entity* owner);
 		TransformComponent();
 
+		virtual int Initialize();
+		virtual void Finalize();
+
 		void SetPosition(Vector3f posi);
 		void Rotate(Quaternionf rota);
 

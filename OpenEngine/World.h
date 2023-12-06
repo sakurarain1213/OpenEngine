@@ -14,7 +14,7 @@ namespace OpenEngine {
 	public:
 		virtual std::string GetType();
 		virtual int Initialize();
-		virtual void Finalize() = 0;
+		virtual void Finalize();
 		virtual void Tick();
 
 		World(std::string name);
@@ -29,7 +29,7 @@ namespace OpenEngine {
 		void DumpEntities();
 
 
-		std::list<ISystem*> Systems;
+		
 
 		TransformSystem* mTransformSystem;
 

@@ -18,7 +18,12 @@ OpenEngine::TransformComponent::TransformComponent(Entity* entity) {
 	mOwner = entity;
 	mIsActive = true;
 }
+int OpenEngine::TransformComponent::Initialize() {
+	return 0;
+}
+void OpenEngine::TransformComponent::Finalize() {
 
+}
 void OpenEngine::TransformComponent::SetPosition(Vector3f posi) {
 	Position = posi;
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include"IRuntimeModule.h"
-
+#include<string>
 namespace OpenEngine {
 	class Entity;
 	
@@ -9,7 +9,10 @@ namespace OpenEngine {
 		virtual int Initialize() = 0;
 		virtual void Finalize() = 0;
 
-		IComponent():mOwner(nullptr),mIsActive(true){}
+		IComponent(): IRuntimeModule("IComponent") {
+			mOwner = nullptr;
+			mIsActive = true;
+		}
 
 		bool IsActive() { return mIsActive; }
 		void SetActive(bool state) { mIsActive = state; }

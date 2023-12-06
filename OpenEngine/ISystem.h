@@ -3,7 +3,9 @@
 namespace OpenEngine {
 	class ISystem : public IRuntimeModule {
 	public:
-		
+		ISystem(std::string name):IRuntimeModule(name) {
+
+		}
 		virtual std::string GetType() {
 			return "ISystem";
 		};

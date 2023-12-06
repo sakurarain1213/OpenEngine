@@ -9,19 +9,26 @@ std::string OpenEngine::World::GetType() {
 	return "World";
 }
 void OpenEngine::World::Tick() {
-	for (auto sys : Systems) {
-		sys->Tick();
-	}
+	
+	mTransformSystem->Tick();
 }
 
 int OpenEngine::World::Initialize() {
 	
-	mTransformSystem = new TransformSystem();
+	mTransformSystem = new TransformSystem(this);
+	mTransformSystem->Initialize();
+
+
 	return 0;
 }
+void OpenEngine::World::Finalize() {
+	mEntities.clear();
 
+	mTransformSystem->Finalize();
+}
 shared_ptr<Entity> OpenEngine::World::CreateEntity(string name) {
-	Entity e(name);
-	shared_ptr<Entity> p = e;
-	return e;
+	auto entity = std::make_shared<Entity>();
+	entity->Initialize(this);
+	mEntities[entity->GetGuid()] = entity;
+	return entity;
 }

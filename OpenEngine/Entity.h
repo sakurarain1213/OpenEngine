@@ -5,6 +5,7 @@
 #include<vector>
 #include<list>
 #include<memory>
+#include <boost/uuid/uuid.hpp>
 namespace OpenEngine {
 	class World;
 	class Entity : public IRuntimeModule
@@ -14,15 +15,15 @@ namespace OpenEngine {
 		virtual int Initialize() ;
 		virtual int Initialize(World* world);
 		virtual void Finalize() ;
-		virtual void Tick();
+		
 
 		
 		Entity(std::string name);
-		Entity(std::string name,int id);
+		Entity(std::string name, const boost::uuids::uuid& guid);
 		virtual ~Entity();
-
-		void SetEid(int id);
-		int GetEid();
+		boost::uuids::uuid	GetGuid() const noexcept;
+		void	SetGuid(const boost::uuids::uuid& guid) noexcept;
+		boost::uuids::uuid GetGuid();
 		void AddChild(std::shared_ptr<Entity> child);
 		void RemoveChild(std::shared_ptr<Entity>child);
 		Entity* GetParent();
@@ -34,15 +35,17 @@ namespace OpenEngine {
 
 		
 		template<typename T>T* AddComponent(){};
-
-		std::list<IComponent*> Components;
+		template<typename T>T* GetComponent();
+		template<typename T>void	RemoveComponent();
+		
 
 	private:
-		int Eid;
+		boost::uuids::uuid		mGuid;
 		std::vector<std::shared_ptr<Entity>> mchildrenE;
 		Entity* mParent;
 		World* mWorld;
 
+		TransformComponent* mTransform;
 	};
 
 	
