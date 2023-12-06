@@ -272,5 +272,17 @@
     <ClInclude Include="TransformSystem.h">
       <Filter>头文件\OECore\ECS\System</Filter>
     </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>头文件\OERendering\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>头文件\OERendering\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="Uniformbuffer.h">
+      <Filter>头文件\OERendering\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Uniform.h">
+      <Filter>头文件\OERendering\Assets</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
