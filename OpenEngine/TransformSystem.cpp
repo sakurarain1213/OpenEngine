@@ -23,7 +23,7 @@ void OpenEngine::TransformSystem::Tick()noexcept {
 
 		float x = t->Position.x();
 		float y = t->Position.y();
-		std::cout << x << " " << y << "\n";
+		
 	}
 	
 		
