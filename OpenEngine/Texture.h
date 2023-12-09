@@ -31,6 +31,7 @@ namespace OpenEngine {
 
 	class Texture : Object {
 		friend class Importer::TextureImporter;
+		friend class Material;
 	public:
 		uint32_t GetHeight() { return m_height; }
 		uint32_t GetWidth() { return m_width; }
@@ -49,7 +50,7 @@ namespace OpenEngine {
 
 	private:
 		void Initialize();
-
+		void Bind(uint32_t slot);
 		const unsigned char* m_raw;
 		uint32_t m_height;
 		uint32_t m_width;

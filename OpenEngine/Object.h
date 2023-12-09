@@ -3,6 +3,7 @@
 #include <string>
 #include <unordered_map>
 #include <queue>
+#include "GUID.h"
 
 namespace OpenEngine {
 	class Object {
@@ -19,7 +20,7 @@ namespace OpenEngine {
 			if (__OBJECT_MAP.find(id) != __OBJECT_MAP.end()) {
 				Object* obj = __OBJECT_MAP[id];
 				if (!obj) return nullptr;
-				if (obj->GetType() == T::ClassType()) {
+				if (typeid(*obj) == typeid(T)) {
 					return (T*)obj;
 				}
 				else {

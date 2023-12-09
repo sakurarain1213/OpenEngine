@@ -28,7 +28,7 @@ namespace OpenEngine::Editor {
 			}
 		}
 		void ImportAsset(GUID guid) {
-			if (__IMPORTPATH_MAP.find(guid.uid) != __IMPORTPATH_MAP.end()) {
+			if (__IMPORTPATH_MAP.find(guid.uid) != __IMPORTPATH_MAP.end()) { 
 				__OBJECT_MAP[guid.uid] = m_assetImporter.Import(__IMPORTPATH_MAP[guid.uid], __IMPORTSETTING_MAP[guid.uid]);
 			}
 		}

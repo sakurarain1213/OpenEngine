@@ -161,6 +161,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GeometryComponent.cpp" />
     <ClCompile Include="InputSystem.cpp" />
+    <ClInclude Include="ShaderImporter.h" />
     <ClCompile Include="World.cpp" />
     <ClInclude Include="AssetDatabase.hpp" />
     <ClCompile Include="Context.cpp" />

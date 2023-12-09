@@ -30,6 +30,7 @@ namespace OpenEngine::Importer {
 				return std::vector<int>();
 			}
 			Texture* tex = new Texture(width, height, format, importSetting.GetPropertyBool("useMipmap"));
+			tex->name = importSetting.GetProperty("name");
 			tex->wrapU = (TextureWrapMode)importSetting.GetPropertyInt("wrapU");
 			tex->wrapV = (TextureWrapMode)importSetting.GetPropertyInt("wrapV");
 			tex->minFilter = (TextureFilterMode)importSetting.GetPropertyInt("minFilter");

@@ -284,5 +284,8 @@
     <ClInclude Include="Uniform.h">
       <Filter>头文件\OERendering\Assets</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderImporter.h">
+      <Filter>头文件\OECore\AssetImporter</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

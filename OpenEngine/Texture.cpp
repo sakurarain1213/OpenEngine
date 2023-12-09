@@ -15,7 +15,7 @@ namespace OpenEngine {
 		minFilter(LINEAR_MIPMAP_LINEAR),
 		magFilter(LINEAR),
 		useMipmap(useMipmap),
-		Object("Anonymous Texture") {
+		Object("New Texture") {
 		Initialize();
 	}
 
@@ -56,4 +56,8 @@ namespace OpenEngine {
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
+	void Texture::Bind(uint32_t slot) {
+		glActiveTexture(GL_TEXTURE0 + slot);
+		glBindTexture(GL_TEXTURE_2D, m_textureID);
+	}
 }

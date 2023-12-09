@@ -23,7 +23,7 @@ namespace OpenEngine {
 			m_vertexBuffer(),
 			m_elementBuffer(),
 			m_vertexArray(m_vertexBuffer, m_elementBuffer),
-			Object("Anonymous Mesh") {
+			Object("New Mesh") {
 			SetupVertexAttribPoint();
 			UploadMeshData();
 		}

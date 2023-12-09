@@ -13,6 +13,48 @@ namespace OpenEngine {
 		friend class ShaderImporter;
 		friend class Material;
 	public:
+		Shader(const std::string& vert, const std::string& frag):
+			m_shaderID(0),
+			Object("New Shader") {
+
+			const char* vertCode = vert.c_str();
+			const char* fragCode = frag.c_str();
+			GLuint vertID, fragID;
+			GLint success;
+			char log[512];
+
+			vertID = glCreateShader(GL_VERTEX_SHADER);
+			glShaderSource(vertID, 1, &vertCode, NULL);
+			glGetShaderiv(vertID, GL_COMPILE_STATUS, &success);
+			if (!success) {
+				glGetShaderInfoLog(vertID, 512, NULL, log);
+				OE_ERROR("[Shader] " + name + " : Vertex shader compilation failed (" + log + ")");
+			}
+
+			fragID = glCreateShader(GL_FRAGMENT_SHADER);
+			glShaderSource(fragID, 1, &fragCode, NULL);
+			glGetShaderiv(fragID, GL_COMPILE_STATUS, &success);
+			if (!success) {
+				glGetShaderInfoLog(fragID, 512, NULL, log);
+				OE_ERROR("[Shader] " + name + " : Fragment shader Compilation failed (" + log + ")");
+			}
+
+			m_shaderID = glCreateProgram();
+			glAttachShader(m_shaderID, vertID);
+			glAttachShader(m_shaderID, fragID);
+			glLinkProgram(m_shaderID);
+			glGetProgramiv(m_shaderID, GL_LINK_STATUS, &success);
+			if (!success) {
+				glGetProgramInfoLog(m_shaderID, 512, NULL, log);
+				OE_ERROR("[Shader] " + name + " : Link failed (" + log + ")");
+			}
+
+			glDeleteShader(vertID);
+			glDeleteShader(fragID);
+		}
+		~Shader() {
+			glDeleteProgram(m_shaderID);
+		}
 		std::string GetType() {
 			return "Shader";
 		}
@@ -106,7 +148,7 @@ namespace OpenEngine {
 					}
 
 					if (value.has_value()) {
-						m_uniforms.emplace_back(type, name, value);
+						m_uniforms.emplace_back(name, (UniformType)type, value);
 					}
 				}
 			}
@@ -122,6 +164,9 @@ namespace OpenEngine {
 		}
 		void Use() {
 			glUseProgram(m_shaderID);
+		}
+		void UnUse() {
+			glUseProgram(0);
 		}
 		GLuint m_shaderID;
 		std::unordered_map<std::string, GLint> m_uniformLocation;
