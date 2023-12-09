@@ -82,6 +82,12 @@
     <Filter Include="头文件\OECore\ECS\System">
       <UniqueIdentifier>{d086cc92-6d99-4950-b1c4-ab680e12f1a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Imgui">
+      <UniqueIdentifier>{56b1876a-58a4-40ce-94e3-2024e745ad20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Imgui\sources">
+      <UniqueIdentifier>{6084ee81-ec0c-461c-8e50-4da44cd26215}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp">
@@ -143,6 +149,27 @@
     </ClCompile>
     <ClCompile Include="TransformSystem.cpp">
       <Filter>头文件\OECore\ECS\System</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_demo.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_draw.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_tables.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_widgets.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_glfw.cpp">
+      <Filter>Imgui\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_opengl3.cpp">
+      <Filter>Imgui\sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +310,33 @@
     </ClInclude>
     <ClInclude Include="Uniform.h">
       <Filter>头文件\OERendering\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_internal.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imconfig.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_opengl3_loader.h">
+      <Filter>Imgui\sources</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_glfw.h">
+      <Filter>Imgui\sources</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_opengl3.h">
+      <Filter>Imgui\sources</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_rectpack.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_textedit.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_truetype.h">
+      <Filter>Imgui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
