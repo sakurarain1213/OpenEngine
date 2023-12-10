@@ -75,6 +75,7 @@ namespace OpenEngine {
 	template<typename T>
 	void OpenEngine::Entity::RemoveComponent() {
 		if (std::is_same<T, TransformComponent>::value) {
+			mWorld->mTransformSystem->DeleteComponent(mTransform);
 			mTransform->Finalize();
 			delete mTransform;
 			mTransform = nullptr;

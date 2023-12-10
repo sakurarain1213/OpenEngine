@@ -9,6 +9,7 @@ std::string OpenEngine::World::GetType() {
 	return "World";
 }
 void OpenEngine::World::Tick() {
+
 	
 	mTransformSystem->Tick();
 }

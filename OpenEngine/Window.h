@@ -3,7 +3,20 @@
 #include "WindowSetting.h"
 #include "Action.h"
 #include "WindowDevice.h"
+//imgui
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
+#include <stdio.h>
+#define GL_SILENCE_DEPRECATION
+#if defined(IMGUI_IMPL_OPENGL_ES2)
+#include <GLES2/gl2.h>
+#endif
+#include <GLFW/glfw3.h> // Will drag system OpenGL headers
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1900) && !defined(IMGUI_DISABLE_WIN32_FUNCTIONS)
+#pragma comment(lib, "legacy_stdio_definitions")
+#endif
 namespace OpenEngine {
 	
 	class Window {
@@ -15,8 +28,14 @@ namespace OpenEngine {
 			m_title(setting.title),
 			m_fullscreen(setting.fullScreen),
 			m_refreshrate(setting.refreshRate)
+			
 		{
+			
 			CreateGLFWWindow();
+			
+			CreateimguiContext();
+			
+
 			BindOnResize();
 			onResize.AddListener(std::bind(&Window::updateSizeAfterResize, this, std::placeholders::_1, std::placeholders::_2));
 		}
@@ -26,6 +45,7 @@ namespace OpenEngine {
 		void SetContextCurrent() const;
 		void SwapBuffers() const;
 		bool ShouldClose() const;
+		void testUIRender();
 	private:
 		void CreateGLFWWindow();
 		static Window* GetInstance(GLFWwindow* glfwWindow);
@@ -35,6 +55,10 @@ namespace OpenEngine {
 			m_width = width;
 			m_height = height;
 		}
+
+		//test gui
+		
+		void CreateimguiContext();
 	public:
 		Action<uint16_t, uint16_t> onResize;
 	private:
@@ -46,5 +70,11 @@ namespace OpenEngine {
 		std::string m_title;
 		bool m_fullscreen;
 		uint32_t m_refreshrate;
+
+		//imgui
+		bool show_demo_window;
+		bool show_another_window;
+		ImVec4 clear_color;
+		ImGuiIO io;
 	};
 }

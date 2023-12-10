@@ -17,7 +17,9 @@ namespace OpenEngine::App {
 			m_game.Update();
 			m_game.FixedUpdate();
 
+			m_context.window->testUIRender();
 			m_context.window->SwapBuffers();
+			
 		}
 	}
 	bool Application::IsRunning() {
