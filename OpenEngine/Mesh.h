@@ -17,20 +17,20 @@ namespace OpenEngine {
 
 	class Mesh : Object{
 	public:
-		Mesh(std::vector<Vertex> vertices, std::vector<uint32_t> indices) :
+		Mesh(std::vector<Vertex> vertices, std::vector<uint32_t> indices, std::string name = "New Mesh") :
 			vertices(vertices),
 			indices(indices),
 			m_vertexBuffer(),
 			m_elementBuffer(),
 			m_vertexArray(m_vertexBuffer, m_elementBuffer),
-			Object("Anonymous Mesh") {
+			Object(name) {
 			SetupVertexAttribPoint();
 			UploadMeshData();
 		}
 		void UploadMeshData() {
 			m_vertexBuffer.Upload(&vertices[0], sizeof(Vertex) * vertices.size());
 			m_elementBuffer.Upload(&indices[0], sizeof(uint32_t) * indices.size());
-			OE_INFO("Mesh " + name + " : Upload " + std::to_string(vertices.size()) + " vertices and " + std::to_string(indices.size() / 3) + " faces with total memory " + std::to_string(vertices.size() * sizeof(Vertex) + indices.size() * sizeof(uint32_t)));
+			OE_INFO("[Mesh] " + name + " : Upload " + std::to_string(vertices.size()) + " vertices and " + std::to_string(indices.size() / 3) + " faces with total memory " + std::to_string(vertices.size() * sizeof(Vertex) + indices.size() * sizeof(uint32_t)));
 		}
 		std::string GetType() {
 			return "Mesh";

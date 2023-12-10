@@ -29,14 +29,13 @@ namespace OpenEngine::Importer {
 				OE_ERROR("Import " + path + " error : unknown format");
 				return std::vector<int>();
 			}
-			Texture* tex = new Texture(width, height, format, importSetting.GetPropertyBool("useMipmap"));
+			Texture* tex = new Texture(width, height, format, importSetting.GetPropertyBool("useMipmap"), importSetting.GetProperty("name"));
 			tex->wrapU = (TextureWrapMode)importSetting.GetPropertyInt("wrapU");
 			tex->wrapV = (TextureWrapMode)importSetting.GetPropertyInt("wrapV");
 			tex->minFilter = (TextureFilterMode)importSetting.GetPropertyInt("minFilter");
 			tex->minFilter = (TextureFilterMode)importSetting.GetPropertyInt("magFilter");
 			tex->m_raw = data;
 			tex->Apply();
-			OE_INFO(path + " imported");
 			stbi_image_free(data);
 			std::vector<int> ret;
 			ret.push_back(tex->GetInstanceID());
@@ -53,6 +52,12 @@ namespace OpenEngine::Importer {
 			setting.SetProperty("magFilter", LINEAR);
 			setting.SetProperty("useMipmap", "true");
 			return setting;
+		}
+		void Save(std::string path, Object* obj) {
+			OE_WARNING("[TextureImporter] " + obj->name + " can't be exported");
+		}
+		void Create(std::string path) {
+			OE_WARNING("[TextureImporter] can't create texture");
 		}
 	};
 }

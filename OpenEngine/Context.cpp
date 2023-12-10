@@ -23,8 +23,12 @@ namespace OpenEngine::App {
 		driverSetting.debugMode = projectSetting.Getbool("driver", "debugMode");
 		driver = std::make_unique<RenderDriver>(driverSetting);
 
-		assets = std::make_unique<Editor::AssetDatabase>(base_path + "/iAssets");
+		assets = std::make_unique<Editor::AssetDatabase>(base_path + "/Assets");
+		ServiceLocator::RegisterService<Editor::AssetDatabase>(*assets);
+
 		assets->ImportAllAssets();
+
+		
 
 		//以下为初始化一个测试用World,包含一个entity
 

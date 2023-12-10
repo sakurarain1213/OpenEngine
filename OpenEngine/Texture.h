@@ -29,13 +29,14 @@ namespace OpenEngine {
 
 	namespace Importer { class TextureImporter; }
 
-	class Texture : Object {
+	class Texture : public Object {
 		friend class Importer::TextureImporter;
+		friend class Material;
 	public:
 		uint32_t GetHeight() { return m_height; }
 		uint32_t GetWidth() { return m_width; }
 		TextureFormat GetFormat() { return m_format; }
-		Texture(uint32_t width, uint32_t height, TextureFormat format, bool useMipmap = true);
+		Texture(uint32_t width, uint32_t height, TextureFormat format, bool useMipmap = true, std::string name = "New Texture");
 		void Apply();
 		std::string GetType();
 		static std::string ClassType();
@@ -49,7 +50,7 @@ namespace OpenEngine {
 
 	private:
 		void Initialize();
-
+		void Bind(uint32_t slot);
 		const unsigned char* m_raw;
 		uint32_t m_height;
 		uint32_t m_width;

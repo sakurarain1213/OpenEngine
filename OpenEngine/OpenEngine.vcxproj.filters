@@ -192,6 +192,9 @@
     <ClCompile Include="ButtonComponent.cpp">
       <Filter>头文件\OECore\ECS\Component</Filter>
     </ClCompile>
+    <ClCompile Include="ServiceLocator.cpp">
+      <Filter>源文件\OETool</Filter>
+    </ClCompile>
     <ClCompile Include="CameraComponent.cpp">
       <Filter>头文件\OECore\ECS\Component</Filter>
     </ClCompile>
@@ -379,6 +382,18 @@
     </ClInclude>
     <ClInclude Include="ButtonComponent.h">
       <Filter>头文件\OECore\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderImporter.h">
+      <Filter>头文件\OECore\AssetImporter</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialImporter.h">
+      <Filter>头文件\OECore\AssetImporter</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectReference.h">
+      <Filter>头文件\OECore\AssetImporter</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceLocator.h">
+      <Filter>头文件\OETool</Filter>
     </ClInclude>
     <ClInclude Include="CameraComponent.h">
       <Filter>头文件\OECore\ECS\Component</Filter>
