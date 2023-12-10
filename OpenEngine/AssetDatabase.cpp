@@ -22,6 +22,7 @@ namespace OpenEngine::Editor {
 		return ref;
 	}
 	void AssetDatabase::ImportAsset(GUID guid) {
+		if (__OBJECT_MAP.find(guid.uid) != __OBJECT_MAP.end()) return;
 		if (__IMPORTPATH_MAP.find(guid.uid) != __IMPORTPATH_MAP.end()) {
 			const std::vector<int>& objlist = m_assetImporter->Import(__IMPORTPATH_MAP[guid.uid], __IMPORTSETTING_MAP[guid.uid]);
 			__OBJECT_MAP[guid.uid] = objlist;
