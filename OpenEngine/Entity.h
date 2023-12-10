@@ -3,6 +3,7 @@
 #include"IRuntimeModule.h"
 #include"TransformComponent.h"
 #include"ButtonComponent.h"
+#include"CameraComponent.h"
 #include"World.h"
 #include<vector>
 #include<list>
@@ -50,6 +51,7 @@ namespace OpenEngine {
 
 		TransformComponent* mTransform;
 		ButtonComponent* mButton;
+		CameraComponent* mCamera;
 	};
 	template<typename T>
 	T* OpenEngine::Entity::AddComponent() {
@@ -67,6 +69,12 @@ namespace OpenEngine {
 			mWorld->mUISystem->AddComponent(mButton);
 			comp = mButton;
 		}
+		else if (std::is_same<T, CameraComponent>::value) {
+			mCamera = new CameraComponent(this);
+			mCamera->Initialize();
+			mWorld->mCameraSystem->AddComponent(mCamera);
+			comp = mCamera;
+		}
 
 		return (T*)comp;
 	}
@@ -79,6 +87,9 @@ namespace OpenEngine {
 		}
 		else if (std::is_same<T, ButtonComponent>::value) {
 			ret = mButton;
+		}
+		else if (std::is_same<T, CameraComponent>::value) {
+			ret = mCamera;
 		}
 		return (T*)ret;
 	}
@@ -97,6 +108,13 @@ namespace OpenEngine {
 			mButton->Finalize();
 			delete mButton;
 			mButton = nullptr;
+		}
+		else if (std::is_same<T, CameraComponent>::value) {
+
+			mWorld->mCameraSystem->DeleteComponent(mCamera);
+			mCamera->Finalize();
+			delete mCamera;
+			mCamera = nullptr;
 		}
 	}
 	

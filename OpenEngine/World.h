@@ -3,6 +3,7 @@
 #include"TransformSystem.h"
 #include"UISystem.h"
 #include"ISystem.h"
+#include"CameraSystem.h"
 #include<memory>
 #include<string>
 #include<list>
@@ -33,6 +34,7 @@ namespace OpenEngine {
 
 		TransformSystem* mTransformSystem;
 		UISystem* mUISystem;
+		CameraSystem* mCameraSystem;
 	private:
 		std::unordered_map<boost::uuids::uuid, std::shared_ptr<Entity>, boost::hash<boost::uuids::uuid>>	mEntities;
 
