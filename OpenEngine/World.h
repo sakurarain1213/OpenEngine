@@ -1,6 +1,7 @@
 #pragma once
 #include"IRuntimeModule.h"
 #include"TransformSystem.h"
+#include"UISystem.h"
 #include"ISystem.h"
 #include<memory>
 #include<string>
@@ -32,7 +33,7 @@ namespace OpenEngine {
 		
 
 		TransformSystem* mTransformSystem;
-
+		UISystem* mUISystem;
 	private:
 		std::unordered_map<boost::uuids::uuid, std::shared_ptr<Entity>, boost::hash<boost::uuids::uuid>>	mEntities;
 	};

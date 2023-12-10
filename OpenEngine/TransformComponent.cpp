@@ -40,3 +40,7 @@ void OpenEngine::TransformComponent::SetLinearVelocity(Vector3f vel) {
 void OpenEngine::TransformComponent::SetAngularVelocity(Quaternionf vel) {
 	AngularVelocity = vel;
 }
+
+OpenEngine::Vec3 OpenEngine::TransformComponent::GetPosition() {
+	return LinearVelocity;
+}

@@ -11,9 +11,7 @@ namespace OpenEngine {
 	{
 	public:
 		TransformSystem(World* world);
-		std::string GetType() {
-			return "TransformSystem";
-		};
+	
 
 		virtual int Initialize() noexcept;
 		virtual void Finalize() noexcept;

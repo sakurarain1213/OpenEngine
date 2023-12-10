@@ -1,9 +1,10 @@
 #pragma once
 #include"Object.h"
+
 #include<string>
 namespace OpenEngine {
-	class Entity;
 	
+	class Entity;
 	class IComponent : public Object {
 	public:
 		virtual int Initialize() = 0;

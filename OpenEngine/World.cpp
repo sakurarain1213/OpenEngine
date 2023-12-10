@@ -18,7 +18,8 @@ int OpenEngine::World::Initialize() {
 	
 	mTransformSystem = new TransformSystem(this);
 	mTransformSystem->Initialize();
-
+	mUISystem = new UISystem(this);
+	mUISystem->Initialize();
 
 	return 0;
 }
@@ -26,6 +27,7 @@ void OpenEngine::World::Finalize() {
 	mEntities.clear();
 
 	mTransformSystem->Finalize();
+	mUISystem->Finalize();
 }
 shared_ptr<Entity> OpenEngine::World::CreateEntity(string name) {
 	auto entity = std::make_shared<Entity>(name);
