@@ -171,6 +171,9 @@
     <ClCompile Include="imgui_impl_opengl3.cpp">
       <Filter>Imgui\sources</Filter>
     </ClCompile>
+    <ClCompile Include="ServiceLocator.cpp">
+      <Filter>源文件\OETool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -340,6 +343,15 @@
     </ClInclude>
     <ClInclude Include="ShaderImporter.h">
       <Filter>头文件\OECore\AssetImporter</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialImporter.h">
+      <Filter>头文件\OECore\AssetImporter</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectReference.h">
+      <Filter>头文件\OECore\AssetImporter</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceLocator.h">
+      <Filter>头文件\OETool</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@
 #include "Window.h"
 #include "RenderDriver.h"
 #include "AssetDatabase.hpp"
+#include "ServiceLocator.h"
 #include "IniFile.h"
 #include "World.h"
 #include "Entity.h"

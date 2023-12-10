@@ -168,7 +168,11 @@
     <ClCompile Include="imgui_tables.cpp" />
     <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="InputSystem.cpp" />
+    <ClInclude Include="MaterialImporter.h" />
+    <ClInclude Include="ObjectReference.h" />
+    <ClInclude Include="ServiceLocator.h" />
     <ClInclude Include="ShaderImporter.h" />
+    <ClCompile Include="ServiceLocator.cpp" />
     <ClCompile Include="World.cpp" />
     <ClInclude Include="AssetDatabase.hpp" />
     <ClCompile Include="Context.cpp" />

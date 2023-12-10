@@ -1,8 +1,10 @@
 #pragma once
 
 #include <boost/serialization/unordered_map.hpp>
+#include <boost/serialization/nvp.hpp>
 #include <string>
 #include "Math.h"
+#include "ObjectReference.h"
 
 namespace OpenEngine::Setting {
 	class PropertyMap {
@@ -44,6 +46,12 @@ namespace OpenEngine::Setting {
 				stm >> val[i];
 			return Mat4(val);
 		}
+		ObjectReference GetPropertyObject(std::string property) const {
+			std::stringstream stm(m_properties.find(property)->second);
+			std::string guid, localid;
+			stm >> guid >> localid;
+			return ObjectReference(guid, std::stoi(localid));
+		}
 		void SetProperty(std::string property, std::string value) {
 			m_properties[property] = value;
 		}
@@ -73,9 +81,19 @@ namespace OpenEngine::Setting {
 			}
 			m_properties[property] = data;
 		}
+		void SetProperty(std::string property, ObjectReference obj) {
+			m_properties[property] = obj.guid.uid + " " + std::to_string(obj.localID);
+		}
 		void clear() {
 			m_properties.clear();
 		}
+
+		friend class boost::serialization::access;
+		template<class Archive>
+		void serialize(Archive& ar, const unsigned int version) {
+			ar& BOOST_SERIALIZATION_NVP(m_properties);
+		}
+
 	protected:
 		std::unordered_map<std::string, std::string> m_properties;
 	};

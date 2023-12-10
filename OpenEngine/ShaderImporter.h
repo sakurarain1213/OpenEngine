@@ -24,9 +24,7 @@ namespace OpenEngine::Importer {
 					else frag << line << '\n';
 				}
 			}
-			Shader* shader = new Shader(vert.str(), frag.str());
-			shader->name = importSetting.GetProperty("name");
-			OE_INFO(path + " imported");
+			Shader* shader = new Shader(vert.str(), frag.str(), importSetting.GetProperty("name"));
 			std::vector<int> ret;
 			ret.push_back(shader->GetInstanceID());
 			return ret;
@@ -35,6 +33,12 @@ namespace OpenEngine::Importer {
 			Setting::ImportSetting setting;
 			setting.SetProperty("type", "Shader");
 			return setting;
+		}
+		void Save(std::string path, Object* obj) {
+			OE_WARNING("[shaderImporter] " + obj->name + " can't be exported");
+		}
+		void Create(std::string path) {
+			OE_WARNING("[ShaderImporter] Can't create shader");
 		}
 	};
 }

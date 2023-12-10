@@ -4,12 +4,14 @@
 #include "PropertyMap.h"
 
 namespace OpenEngine {
+	namespace Importer { class MaterialImporter; }
 	class Material : public Object {
+		friend class Importer::MaterialImporter;
 	public:
 		Material() : m_shader(nullptr), Object("New Material") {}
-		Material(Shader* shader) :
+		Material(Shader* shader, std::string name = "New Material") :
 			m_shader(shader),
-			Object(shader->name + " Material") {
+			Object(name) {
 			if (m_shader) {
 				InitUniforms();
 			}
@@ -29,6 +31,21 @@ namespace OpenEngine {
 			else {
 				OE_WARNING("[Material] " + name + ": Uniform " + name + " is not found in shader " + m_shader->name);
 			}
+		}
+		void SetShader(Shader* shader) {
+			m_shader = shader;
+			if (m_shader) {
+				InitUniforms();
+			}
+		}
+		std::vector<std::string> GetUniformsNames() {
+			std::vector<std::string> ret;
+			const std::vector<Uniform>& activeUniforms = m_shader->m_uniforms;
+			for (int i = 0;i < activeUniforms.size();++i) {
+				const std::string name = activeUniforms[i].name;
+				ret.push_back(name);
+			}
+			return ret;
 		}
 	private:
 		void InitUniforms() {
