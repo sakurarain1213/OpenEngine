@@ -72,7 +72,7 @@ namespace OpenEngine {
 		else if (std::is_same<T, CameraComponent>::value) {
 			mCamera = new CameraComponent(this);
 			mCamera->Initialize();
-			mWorld->mCameraSystem->AddComponent(mCamera);
+			
 			comp = mCamera;
 		}
 
@@ -111,7 +111,7 @@ namespace OpenEngine {
 		}
 		else if (std::is_same<T, CameraComponent>::value) {
 
-			mWorld->mCameraSystem->DeleteComponent(mCamera);
+			
 			mCamera->Finalize();
 			delete mCamera;
 			mCamera = nullptr;
