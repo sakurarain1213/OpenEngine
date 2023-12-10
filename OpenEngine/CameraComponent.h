@@ -12,15 +12,15 @@ namespace OpenEngine {
 		virtual int Initialize();
 		virtual void Finalize();
 
-		Mat4 GetViewMatrix() {
+		Mat4 GetViewMatrix();
 
-		}
+		
 	private:
 		
 
 		Mat4 ViewMatrix;
 		Vec3 Position;
-		Vec3 Lookat;//N
+		Vec3 Front;//N
 		Vec3 Up;//U
 
 		Mat4 ProjectionMatrix;
