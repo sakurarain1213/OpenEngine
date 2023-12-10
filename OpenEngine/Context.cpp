@@ -34,10 +34,15 @@ namespace OpenEngine::App {
 
 		worldmanager = std::make_unique<World>("world");
 		worldmanager->Initialize();
-		auto test_entity= worldmanager->CreateEntity("e1");
+		auto test_entity = worldmanager->CreateEntity("e1");
 		Entity* e = test_entity.get();
-		TransformComponent* transc=e->AddComponent<TransformComponent>();
+		TransformComponent* transc = e->AddComponent<TransformComponent>();
+		ButtonComponent* buttonc = e->AddComponent<ButtonComponent>();
 		Eigen::Vector3f vel(1, 1, 0);
-		transc->SetLinearVelocity({1,1,0});
+		transc->SetLinearVelocity({ 5,5,0 });
+		buttonc->SetText("Start!!!");
+		buttonc->SetSize({ 200,200 });
+		
+		
 	}
 }

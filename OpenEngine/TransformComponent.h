@@ -1,5 +1,6 @@
 #pragma once
 #include"IComponent.h"
+#include"Math.h"
 #include<Eigen/Dense>
 using namespace Eigen;
 namespace OpenEngine {
@@ -17,6 +18,8 @@ namespace OpenEngine {
 
 		void SetLinearVelocity(Vector3f vel);
 		void SetAngularVelocity(Quaternionf vel);
+
+		Vec3 GetPosition();
 	public:
 		Vector3f Position;
 		Vector3f LinearVelocity;

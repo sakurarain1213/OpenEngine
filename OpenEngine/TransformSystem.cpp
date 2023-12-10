@@ -3,7 +3,7 @@
 #include<algorithm>
 #include<iostream>
 using namespace Eigen;
-OpenEngine::TransformSystem::TransformSystem(World* world) :ISystem("TransformSystem") {
+OpenEngine::TransformSystem::TransformSystem(World* world) {
 	mWorld = world;
 }
 

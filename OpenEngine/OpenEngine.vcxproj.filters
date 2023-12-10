@@ -88,6 +88,12 @@
     <Filter Include="Imgui\sources">
       <UniqueIdentifier>{6084ee81-ec0c-461c-8e50-4da44cd26215}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\OECore\Input">
+      <UniqueIdentifier>{a0d019c8-da41-461c-89e7-e79c9e29459f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\OECore\UI">
+      <UniqueIdentifier>{8c4bb639-22d1-41f6-8df5-48268087fe20}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp">
@@ -170,6 +176,21 @@
     </ClCompile>
     <ClCompile Include="imgui_impl_opengl3.cpp">
       <Filter>Imgui\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="InputMgr.cpp">
+      <Filter>头文件\OECore\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>头文件\OECore\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIComponent.cpp">
+      <Filter>头文件\OECore\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="UISystem.cpp">
+      <Filter>头文件\OECore\ECS\System</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonComponent.cpp">
+      <Filter>头文件\OECore\ECS\Component</Filter>
     </ClCompile>
     <ClCompile Include="ServiceLocator.cpp">
       <Filter>源文件\OETool</Filter>
@@ -340,6 +361,21 @@
     </ClInclude>
     <ClInclude Include="imstb_truetype.h">
       <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="InputMgr.h">
+      <Filter>头文件\OECore\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>头文件\OECore\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIComponent.h">
+      <Filter>头文件\OECore\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="UISystem.h">
+      <Filter>头文件\OECore\ECS\System</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonComponent.h">
+      <Filter>头文件\OECore\ECS\Component</Filter>
     </ClInclude>
     <ClInclude Include="ShaderImporter.h">
       <Filter>头文件\OECore\AssetImporter</Filter>

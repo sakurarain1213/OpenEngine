@@ -12,13 +12,15 @@ void OpenEngine::World::Tick() {
 
 	
 	mTransformSystem->Tick();
+	mUISystem->Tick();
 }
 
 int OpenEngine::World::Initialize() {
 	
 	mTransformSystem = new TransformSystem(this);
 	mTransformSystem->Initialize();
-
+	mUISystem = new UISystem(this);
+	mUISystem->Initialize();
 
 	return 0;
 }
@@ -26,6 +28,7 @@ void OpenEngine::World::Finalize() {
 	mEntities.clear();
 
 	mTransformSystem->Finalize();
+	mUISystem->Finalize();
 }
 shared_ptr<Entity> OpenEngine::World::CreateEntity(string name) {
 	auto entity = std::make_shared<Entity>(name);
@@ -64,3 +67,4 @@ std::shared_ptr<Entity> OpenEngine::World::GetEntity(const boost::uuids::uuid& g
 size_t OpenEngine::World::GetEntityCount() {
 	return mEntities.size();
 }
+
