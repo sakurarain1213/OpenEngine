@@ -13,12 +13,16 @@ namespace OpenEngine {
 		virtual void Finalize();
 
 		void SetText(std::string str);
-
+		void SetSize(Vec2 _size);
 		Vec3 GetPosition();
-	private:
-		Vec2 posi;
-		std::string text;
+		Vec2 GetSize();
+		std::string GetText();
 
+		
+	private:
+		
+		std::string text;
+		Vec2 size;//长宽
 
 	};
 }

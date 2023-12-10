@@ -42,5 +42,5 @@ void OpenEngine::TransformComponent::SetAngularVelocity(Quaternionf vel) {
 }
 
 OpenEngine::Vec3 OpenEngine::TransformComponent::GetPosition() {
-	return LinearVelocity;
+	return Position;
 }

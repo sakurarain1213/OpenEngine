@@ -3,14 +3,14 @@
 OpenEngine::ButtonComponent::ButtonComponent(Entity* entity) {
 	mOwner = entity;
 	mIsActive = true;
-	posi = { 0,0 };
+
 	text = "";
 }
 
 OpenEngine::ButtonComponent::ButtonComponent() {
 	mOwner = nullptr;
 	mIsActive = true;
-	posi = { 0,0 };
+
 	text = "";
 }
 
@@ -22,10 +22,23 @@ void OpenEngine::ButtonComponent::Finalize() {
 }
 
 void OpenEngine::ButtonComponent::SetText(std::string str) {
+	
 	text = str;
 }
 
 OpenEngine::Vec3 OpenEngine::ButtonComponent::GetPosition() {
 	return mOwner->GetComponent<TransformComponent>()->GetPosition();
 	
+}
+
+void OpenEngine::ButtonComponent::SetSize(Vec2 _size) {
+	size = _size;
+}
+OpenEngine::Vec2 OpenEngine::ButtonComponent::GetSize() {
+	return size;
+
+}
+
+std::string OpenEngine::ButtonComponent::GetText() {
+	return text;
 }

@@ -10,6 +10,7 @@
 #include<boost/uuid/uuid.hpp>
 namespace OpenEngine {
 	class Entity;
+
 	class World : public IRuntimeModule
 	{
 	public:
@@ -28,13 +29,12 @@ namespace OpenEngine {
 
 		//void LoadScene(const std::string& scenePath);
 		//void DumpEntities();
-
-
 		
 
 		TransformSystem* mTransformSystem;
 		UISystem* mUISystem;
 	private:
 		std::unordered_map<boost::uuids::uuid, std::shared_ptr<Entity>, boost::hash<boost::uuids::uuid>>	mEntities;
+
 	};
 }

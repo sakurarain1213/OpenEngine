@@ -12,6 +12,7 @@ void OpenEngine::World::Tick() {
 
 	
 	mTransformSystem->Tick();
+	mUISystem->Tick();
 }
 
 int OpenEngine::World::Initialize() {
@@ -66,3 +67,4 @@ std::shared_ptr<Entity> OpenEngine::World::GetEntity(const boost::uuids::uuid& g
 size_t OpenEngine::World::GetEntityCount() {
 	return mEntities.size();
 }
+
