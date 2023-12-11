@@ -1,5 +1,5 @@
 #include "CameraComponent.h"
-
+#include<math.h>
 OpenEngine::CameraComponent::CameraComponent() {
 	ViewMatrix <<   0, 0, 0, 0,
 					0, 0, 0, 0,
@@ -15,6 +15,8 @@ OpenEngine::CameraComponent::CameraComponent() {
 	NearClip = 0;
 	FarClip = 0;
 	Fov = 0;
+	VMdirtyflag = true;
+	PMdirtyflag = true;
 }
 
 OpenEngine::CameraComponent::CameraComponent(Entity* entity) {
@@ -33,6 +35,8 @@ OpenEngine::CameraComponent::CameraComponent(Entity* entity) {
 	NearClip = 0;
 	FarClip = 0;
 	Fov = 0;
+	VMdirtyflag = true;
+	PMdirtyflag = true;
 }
 
 int OpenEngine::CameraComponent::Initialize() {
@@ -71,4 +75,22 @@ OpenEngine::Mat4 OpenEngine::CameraComponent::GetViewMatrix() {
 	Result(3,2) = 0;
 	Result(3,3) = 0;
 	return Result;
+}
+
+OpenEngine::Mat4 OpenEngine::CameraComponent::GetProjectionMatrix() {
+	float right, left, top, bottom;//NearClip,FarClip;
+	top = NearClip * tan(Fov/2);
+	bottom = -top;
+	right = 16 * top / 9;
+	left = -right;
+	float n=NearClip;
+	float f = FarClip;
+	Mat4 Result;
+	Result <<
+		n / right, 0, 0, 0,
+		0, n / top, 0, 0,
+		0, 0, -(f + n) / (f - n), (-2 * f * n) / (f - n),
+		0, 0, -1, 0;
+	return Result;
+
 }
