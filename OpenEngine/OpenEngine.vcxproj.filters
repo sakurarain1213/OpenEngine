@@ -464,5 +464,11 @@
     <ClInclude Include="Jacobian.h">
       <Filter>头文件\OECore\ECS\System\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>头文件\OERendering</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderEnum.h">
+      <Filter>头文件\OERendering</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

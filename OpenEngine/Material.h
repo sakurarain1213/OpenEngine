@@ -1,12 +1,13 @@
 #pragma once
 
 #include "Shader.h"
-#include "PropertyMap.h"
+#include "RenderEnum.h"
 
 namespace OpenEngine {
 	namespace Importer { class MaterialImporter; }
 	class Material : public Object {
 		friend class Importer::MaterialImporter;
+		friend class Renderer;
 	public:
 		Material() : m_shader(nullptr), Object("New Material") {}
 		Material(Shader* shader, std::string name = "New Material") :
@@ -47,6 +48,23 @@ namespace OpenEngine {
 			}
 			return ret;
 		}
+
+		bool enableDepthTest = true;
+		bool enableDepthWrite = true;
+		TestFunc depthFunc = OE_TEST_LESS;
+		bool enableStencilTest = false;
+		uint8_t stencilMask = 0xff;
+		TestFunc stencilFunc = OE_TEST_EQUAL;
+		uint8_t stencilFuncRef = 0;
+		uint8_t stencilFuncMask = 0xff;
+		TestOperation stencilFailOperation = OE_TEST_KEEP;
+		TestOperation stencilDeepTestFailOperation = OE_TEST_KEEP;
+		TestOperation stencilPassOperation = OE_TEST_KEEP;
+		bool enableBlend = false;
+		BlendFunc blendSrcFunc = OE_BLEND_SRC_ALPHA;
+		BlendFunc blendDstFunc = OE_BLEND_ONE_MINUS_SRC_ALPHA;
+		bool enableCullFace = false;
+
 	private:
 		void InitUniforms() {
 			m_uniforms.clear();

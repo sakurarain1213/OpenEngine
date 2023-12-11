@@ -31,6 +31,11 @@ namespace OpenEngine {
 		return m_deltaTime;
 	}
 
+	float Time::GetRealtimeSinceStartup() {
+		m_duration = m_last_time - m_start_time;
+		return m_duration.count();
+	}
+
 	void Time::Initialize() {
 		m_start_time = std::chrono::steady_clock::now();
 		m_last_time = m_start_time;
@@ -49,5 +54,6 @@ namespace OpenEngine {
 	std::chrono::steady_clock::time_point Time::m_current_time;
 	std::chrono::steady_clock::time_point Time::m_last_time;
 	std::chrono::duration<float> Time::m_elapsed;
+	std::chrono::duration<float> Time::m_duration;
 	float Time::m_deltaTime;
 }

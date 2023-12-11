@@ -18,8 +18,8 @@ namespace OpenEngine::App {
 			m_game.FixedUpdate();
 
 			//m_context.window->testUIRender(); ui的渲染已交由UISystem处理
+			m_context.renderer->ExecuteDrawCalls();
 			m_context.window->SwapBuffers();
-			
 		}
 	}
 	bool Application::IsRunning() {

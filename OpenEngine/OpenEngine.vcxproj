@@ -196,6 +196,8 @@
     <ClInclude Include="MaterialImporter.h" />
     <ClInclude Include="NarrowPhase.h" />
     <ClInclude Include="ObjectReference.h" />
+    <ClInclude Include="RenderEnum.h" />
+    <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResolutionPhase.h" />
     <ClInclude Include="RigidBodyComponent.h" />
     <ClInclude Include="ServiceLocator.h" />

@@ -53,4 +53,7 @@ namespace OpenEngine {
 
 	};
 
+	using Qua = Eigen::Quaternionf;
+
+	
 }

@@ -22,6 +22,7 @@ namespace OpenEngine::App {
 		Setting::DriverSetting driverSetting;
 		driverSetting.debugMode = projectSetting.Getbool("driver", "debugMode");
 		driver = std::make_unique<RenderDriver>(driverSetting);
+		renderer = std::make_unique<Renderer>(*driver);
 
 		assets = std::make_unique<Editor::AssetDatabase>(base_path + "/Assets");
 		ServiceLocator::RegisterService<Editor::AssetDatabase>(*assets);
@@ -39,7 +40,7 @@ namespace OpenEngine::App {
 		TransformComponent* transc = e->AddComponent<TransformComponent>();
 		ButtonComponent* buttonc = e->AddComponent<ButtonComponent>();
 		Eigen::Vector3f vel(1, 1, 0);
-		transc->SetLinearVelocity({ 5,5,0 });
+		transc->SetLinearVelocity({ 20,20,0 });
 		buttonc->SetText("Start!!!");
 		buttonc->SetSize({ 200,200 });
 		
