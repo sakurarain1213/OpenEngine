@@ -14,6 +14,7 @@ namespace OpenEngine {
 		*/
 		static std::string GetDateAsString();
 		static float GetDeltaTime();
+		static float GetRealtimeSinceStartup();
 		static void Initialize();
 		static void Update();
 	private:
@@ -21,6 +22,7 @@ namespace OpenEngine {
 		static std::chrono::steady_clock::time_point m_current_time;
 		static std::chrono::steady_clock::time_point m_last_time;
 		static std::chrono::duration<float> m_elapsed;
+		static std::chrono::duration<float> m_duration;
 		static float m_deltaTime;
 	};
 }

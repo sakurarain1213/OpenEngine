@@ -55,6 +55,7 @@ namespace OpenEngine {
 			glDeleteShader(fragID);
 
 			GetActiveUniforms();
+			SetUniformBlock("GlobalUBO", 0);
 		}
 		~Shader() {
 			glDeleteProgram(m_shaderID);

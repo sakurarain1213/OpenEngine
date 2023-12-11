@@ -177,6 +177,8 @@
     <ClCompile Include="UISystem.cpp" />
     <ClInclude Include="MaterialImporter.h" />
     <ClInclude Include="ObjectReference.h" />
+    <ClInclude Include="RenderEnum.h" />
+    <ClInclude Include="Renderer.h" />
     <ClInclude Include="ServiceLocator.h" />
     <ClInclude Include="ShaderImporter.h" />
     <ClCompile Include="ServiceLocator.cpp" />

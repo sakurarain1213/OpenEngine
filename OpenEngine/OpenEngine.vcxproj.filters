@@ -401,5 +401,11 @@
     <ClInclude Include="CameraSystem.h">
       <Filter>头文件\OECore\ECS\System</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>头文件\OERendering</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderEnum.h">
+      <Filter>头文件\OERendering</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

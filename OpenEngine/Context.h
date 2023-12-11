@@ -4,6 +4,7 @@
 #include "WindowDevice.h"
 #include "Window.h"
 #include "RenderDriver.h"
+#include "Renderer.h"
 #include "AssetDatabase.hpp"
 #include "ServiceLocator.h"
 #include "IniFile.h"
@@ -17,6 +18,7 @@ namespace OpenEngine::App {
 		std::unique_ptr<WindowDevice> device;
 		std::unique_ptr<Window> window;
 		std::unique_ptr<RenderDriver> driver;
+		std::unique_ptr<Renderer> renderer;
 		std::unique_ptr<Editor::AssetDatabase> assets;
 		std::unique_ptr<World> worldmanager;
 		IniFile projectSetting;

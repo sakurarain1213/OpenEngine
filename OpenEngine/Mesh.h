@@ -16,6 +16,7 @@ namespace OpenEngine {
 	};
 
 	class Mesh : Object{
+		friend class Renderer;
 	public:
 		Mesh(std::vector<Vertex> vertices, std::vector<uint32_t> indices, std::string name = "New Mesh") :
 			vertices(vertices),
@@ -30,7 +31,15 @@ namespace OpenEngine {
 		void UploadMeshData() {
 			m_vertexBuffer.Upload(&vertices[0], sizeof(Vertex) * vertices.size());
 			m_elementBuffer.Upload(&indices[0], sizeof(uint32_t) * indices.size());
+			m_vertice_count = vertices.size();
+			m_indice_count = indices.size();
 			OE_INFO("[Mesh] " + name + " : Upload " + std::to_string(vertices.size()) + " vertices and " + std::to_string(indices.size() / 3) + " faces with total memory " + std::to_string(vertices.size() * sizeof(Vertex) + indices.size() * sizeof(uint32_t)));
+		}
+		uint32_t GetIndiceCount() {
+			return m_indice_count;
+		}
+		uint32_t GetVerticeCount() {
+			return m_vertice_count;
 		}
 		std::string GetType() {
 			return "Mesh";
@@ -41,6 +50,9 @@ namespace OpenEngine {
 		std::vector<Vertex> vertices;
 		std::vector<uint32_t> indices;
 	private:
+		void Use() {
+			m_vertexArray.Bind();
+		}
 		void SetupVertexAttribPoint() {
 			m_vertexArray.Bind();
 			m_vertexArray.BindAttribute(0, 3, sizeof(Vertex), offsetof(Vertex, position));
@@ -52,5 +64,7 @@ namespace OpenEngine {
 		Buffer::VertexBuffer m_vertexBuffer;
 		Buffer::ElementBuffer m_elementBuffer;
 		Buffer::VertexArray m_vertexArray;
+		uint32_t m_vertice_count;
+		uint32_t m_indice_count;
 	};
 }

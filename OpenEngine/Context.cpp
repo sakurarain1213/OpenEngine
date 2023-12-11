@@ -22,6 +22,7 @@ namespace OpenEngine::App {
 		Setting::DriverSetting driverSetting;
 		driverSetting.debugMode = projectSetting.Getbool("driver", "debugMode");
 		driver = std::make_unique<RenderDriver>(driverSetting);
+		renderer = std::make_unique<Renderer>(*driver);
 
 		assets = std::make_unique<Editor::AssetDatabase>(base_path + "/Assets");
 		ServiceLocator::RegisterService<Editor::AssetDatabase>(*assets);
