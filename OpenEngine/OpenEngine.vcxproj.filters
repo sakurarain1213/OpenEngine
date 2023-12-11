@@ -234,6 +234,12 @@
     <ClCompile Include="Jacobian.cpp">
       <Filter>头文件\OECore\ECS\System\Physics</Filter>
     </ClCompile>
+    <ClCompile Include="MeshRenderComponent.cpp">
+      <Filter>头文件\OECore\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshRendererSystem.cpp">
+      <Filter>头文件\OECore\ECS\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -469,6 +475,12 @@
     </ClInclude>
     <ClInclude Include="RenderEnum.h">
       <Filter>头文件\OERendering</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshRenderComponent.h">
+      <Filter>头文件\OECore\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshRendererSystem.h">
+      <Filter>头文件\OECore\ECS\System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
