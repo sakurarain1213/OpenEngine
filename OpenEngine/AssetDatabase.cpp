@@ -44,7 +44,7 @@ namespace OpenEngine::Editor {
 		return __PATH_TO_GUID_MAP.find(path) != __PATH_TO_GUID_MAP.end();
 	}
 	void AssetDatabase::CreateAsset(std::string path) {
-		path = assetPath + "/" + path;
+		path = assetPath + "\\" + path;
 		if (!m_assetImporter->CanImport(path)) {
 			OE_WARNING("[AssetDatabase::CreateAsset] " + path + " can't be created");
 			return;

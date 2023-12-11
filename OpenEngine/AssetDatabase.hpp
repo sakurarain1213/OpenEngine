@@ -28,6 +28,14 @@ namespace OpenEngine::Editor {
 				return Object::GetObject<T>(assets[localid]);
 			}
 		}
+		template <class T>
+		T* GetAsset(std::string path, uint32_t localid) {
+			path = assetPath + "\\" + path;
+			if (__PATH_TO_GUID_MAP.find(path) == __PATH_TO_GUID_MAP.end()) {
+				return nullptr;
+			}
+			return GetAsset<T>(GUID(__PATH_TO_GUID_MAP.at(path)), localid);
+		}
 		Setting::ObjectReference GetObjectReference(Object* obj);
 		void ImportAsset(GUID guid);
 		void ImportAllAssets();

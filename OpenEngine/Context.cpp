@@ -4,7 +4,7 @@
 
 namespace OpenEngine::App {
 	Context::Context(std::string base_path):
-		projectSetting(base_path + "/.project")
+		projectSetting(base_path + "\\.project")
 	{
 		Setting::WindowDeviceSetting deviceSetting;
 		deviceSetting.contextVersionMajor = projectSetting.GetInt("device", "contextVersionMajor");
@@ -24,8 +24,9 @@ namespace OpenEngine::App {
 		driver = std::make_unique<RenderDriver>(driverSetting);
 		renderer = std::make_unique<Renderer>(*driver);
 
-		assets = std::make_unique<Editor::AssetDatabase>(base_path + "/Assets");
+		assets = std::make_unique<Editor::AssetDatabase>(base_path + "\\Assets");
 		ServiceLocator::RegisterService<Editor::AssetDatabase>(*assets);
+		ServiceLocator::RegisterService<Renderer>(*renderer);
 
 		assets->ImportAllAssets();
 
@@ -39,10 +40,18 @@ namespace OpenEngine::App {
 		Entity* e = test_entity.get();
 		TransformComponent* transc = e->AddComponent<TransformComponent>();
 		ButtonComponent* buttonc = e->AddComponent<ButtonComponent>();
+		CameraComponent* camerac = e->AddComponent<CameraComponent>();
+		camerac->SetFront({ 0,0,-1 });
+		camerac->SetUp({ 0,1,0 });
+		camerac->SetFov(0.5);
+		camerac->SetNearClip(1);
+		camerac->SetFarClip(3);
+		worldmanager->mCameraSystem->SetMainCamera(camerac);
 		Eigen::Vector3f vel(1, 1, 0);
 		transc->SetLinearVelocity({ 20,20,0 });
 		buttonc->SetText("Start!!!");
 		buttonc->SetSize({ 200,200 });
+
 		
 		
 	}
