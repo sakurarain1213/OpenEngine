@@ -20,8 +20,8 @@ namespace OpenEngine {
 
 		Mat4 ViewMatrix;
 		Vec3 Position;
-		Vec3 Front;//N
-		Vec3 Up;//U
+		Vec3 Front;//向前的向量   center（焦点）可由Pos+Front得到
+		Vec3 Up;//向上   Right 可由Front cross Up得到
 
 		Mat4 ProjectionMatrix;
 		float NearClip;

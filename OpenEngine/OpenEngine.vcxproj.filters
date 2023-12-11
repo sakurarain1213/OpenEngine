@@ -94,6 +94,9 @@
     <Filter Include="头文件\OECore\UI">
       <UniqueIdentifier>{8c4bb639-22d1-41f6-8df5-48268087fe20}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\OECore\ECS\System\Physics">
+      <UniqueIdentifier>{b0ae765c-db50-4bc4-a7d6-72064c26cac6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp">
@@ -200,6 +203,36 @@
     </ClCompile>
     <ClCompile Include="CameraSystem.cpp">
       <Filter>头文件\OECore\ECS\System</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBodyComponent.cpp">
+      <Filter>头文件\OECore\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderComponent.cpp">
+      <Filter>头文件\OECore\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="AABB.cpp">
+      <Filter>头文件\OECore\ECS\System\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardPhase.cpp">
+      <Filter>头文件\OECore\ECS\System\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="NarrowPhase.cpp">
+      <Filter>头文件\OECore\ECS\System\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="IntegratePhase.cpp">
+      <Filter>头文件\OECore\ECS\System\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="ResolutionPhase.cpp">
+      <Filter>头文件\OECore\ECS\System\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Contact.cpp">
+      <Filter>头文件\OECore\ECS\System\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Inertia.cpp">
+      <Filter>头文件\OECore\ECS\System\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Jacobian.cpp">
+      <Filter>头文件\OECore\ECS\System\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -400,6 +433,36 @@
     </ClInclude>
     <ClInclude Include="CameraSystem.h">
       <Filter>头文件\OECore\ECS\System</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderComponent.h">
+      <Filter>头文件\OECore\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBodyComponent.h">
+      <Filter>头文件\OECore\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>头文件\OECore\ECS\System\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="BoardPhase.h">
+      <Filter>头文件\OECore\ECS\System\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="IntegratePhase.h">
+      <Filter>头文件\OECore\ECS\System\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="NarrowPhase.h">
+      <Filter>头文件\OECore\ECS\System\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="ResolutionPhase.h">
+      <Filter>头文件\OECore\ECS\System\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Contact.h">
+      <Filter>头文件\OECore\ECS\System\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Inertia.h">
+      <Filter>头文件\OECore\ECS\System\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Jacobian.h">
+      <Filter>头文件\OECore\ECS\System\Physics</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
       <Filter>头文件\OERendering</Filter>
