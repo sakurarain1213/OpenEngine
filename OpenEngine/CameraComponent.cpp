@@ -1,5 +1,7 @@
 #include "CameraComponent.h"
 #include<math.h>
+#include"Renderer.h"
+#include"ServiceLocator.h"
 OpenEngine::CameraComponent::CameraComponent() {
 	ViewMatrix <<   0, 0, 0, 0,
 					0, 0, 0, 0,
@@ -48,49 +50,61 @@ void OpenEngine::CameraComponent::Finalize() {
 
 OpenEngine::Mat4 OpenEngine::CameraComponent::GetViewMatrix() {
 	
-	
-	Vec3 f = Front.normalized();
-	Vec3 s = f;
-	s=s.cross(Up);
-	s.normalize();
-	
-	Vec3 u = s.cross(f);
-	u.normalize();
-	Mat4 Result;
+	if (VMdirtyflag) {
+		Vec3 f = Front.normalized();
+		Vec3 s = f;
+		s = s.cross(Up);
+		s.normalize();
 
-	Result(0,0) = s.x();
-	Result(0,1) = s.y();
-	Result(0,2) = s.z();
-	Result(1,0) = u.x();
-	Result(1,1) = u.y();
-	Result(1,2) = u.z();
-	Result(2,0) = -f.x();
-	Result(2,1) = -f.y();
-	Result(2,2) = -f.z();
-	Result(0,3) = -s.dot(Position);
-	Result(1,3) = -u.dot(Position);
-	Result(2,3) = f.dot(Position);
-	Result(3,0) = 0;
-	Result(3,1) = 0;
-	Result(3,2) = 0;
-	Result(3,3) = 0;
-	return Result;
+		Vec3 u = s.cross(f);
+		u.normalize();
+		Mat4 Result;
+
+		Result(0, 0) = s.x();
+		Result(0, 1) = s.y();
+		Result(0, 2) = s.z();
+		Result(1, 0) = u.x();
+		Result(1, 1) = u.y();
+		Result(1, 2) = u.z();
+		Result(2, 0) = -f.x();
+		Result(2, 1) = -f.y();
+		Result(2, 2) = -f.z();
+		Result(0, 3) = -s.dot(Position);
+		Result(1, 3) = -u.dot(Position);
+		Result(2, 3) = f.dot(Position);
+		Result(3, 0) = 0;
+		Result(3, 1) = 0;
+		Result(3, 2) = 0;
+		Result(3, 3) = 0;
+		ViewMatrix = Result;
+	}
+
+	return ViewMatrix;
 }
 
 OpenEngine::Mat4 OpenEngine::CameraComponent::GetProjectionMatrix() {
-	float right, left, top, bottom;//NearClip,FarClip;
-	top = NearClip * tan(Fov/2);
-	bottom = -top;
-	right = 16 * top / 9;
-	left = -right;
-	float n=NearClip;
-	float f = FarClip;
-	Mat4 Result;
-	Result <<
-		n / right, 0, 0, 0,
-		0, n / top, 0, 0,
-		0, 0, -(f + n) / (f - n), (-2 * f * n) / (f - n),
-		0, 0, -1, 0;
-	return Result;
+	if (PMdirtyflag) {
+		float right, left, top, bottom;//NearClip,FarClip;
+		top = NearClip * tan(Fov / 2);
+		bottom = -top;
+		right = 16 * top / 9;
+		left = -right;
+		float n = NearClip;
+		float f = FarClip;
+		Mat4 Result;
+		Result <<
+			n / right, 0, 0, 0,
+			0, n / top, 0, 0,
+			0, 0, -(f + n) / (f - n), (-2 * f * n) / (f - n),
+			0, 0, -1, 0;
 
+		ProjectionMatrix = Result;
+		
+	}
+	
+	return ProjectionMatrix;
+}
+
+OpenEngine::Vec3 OpenEngine::CameraComponent::GetPosition() {
+	return Position;
 }

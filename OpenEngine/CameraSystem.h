@@ -18,7 +18,7 @@ namespace OpenEngine {
 
 		std::shared_ptr<CameraComponent> GetMainCamera();
 		void SetMainCamera(std::shared_ptr<CameraComponent> camera);
-
+		void SetRenderer();
 	private:
 		World* mWorld;
 		std::shared_ptr<CameraComponent> MainCamera;

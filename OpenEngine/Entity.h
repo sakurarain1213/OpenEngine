@@ -111,7 +111,6 @@ namespace OpenEngine {
 		}
 		else if (std::is_same<T, CameraComponent>::value) {
 
-			
 			mCamera->Finalize();
 			delete mCamera;
 			mCamera = nullptr;

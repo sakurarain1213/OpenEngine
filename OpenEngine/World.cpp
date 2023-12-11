@@ -10,7 +10,7 @@ std::string OpenEngine::World::GetType() {
 }
 void OpenEngine::World::Tick() {
 
-	
+	mCameraSystem->Tick();
 	mTransformSystem->Tick();
 	mUISystem->Tick();
 }
@@ -31,6 +31,7 @@ void OpenEngine::World::Finalize() {
 
 	mTransformSystem->Finalize();
 	mUISystem->Finalize();
+	mCameraSystem->Finalize();
 }
 shared_ptr<Entity> OpenEngine::World::CreateEntity(string name) {
 	auto entity = std::make_shared<Entity>(name);

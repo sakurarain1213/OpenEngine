@@ -26,6 +26,7 @@ namespace OpenEngine::App {
 
 		assets = std::make_unique<Editor::AssetDatabase>(base_path + "\\Assets");
 		ServiceLocator::RegisterService<Editor::AssetDatabase>(*assets);
+		ServiceLocator::RegisterService<Renderer>(*renderer);
 
 		assets->ImportAllAssets();
 
