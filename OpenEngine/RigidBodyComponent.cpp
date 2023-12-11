@@ -17,6 +17,15 @@ OpenEngine::RigidBodyComponent::RigidBodyComponent()
 	SetStatic(false);
 }
 
+OpenEngine::RigidBodyComponent::RigidBodyComponent(Entity* entity) {
+	isSleep = true;
+	force = Vec3(0, 0, 0);
+	velocity = Vec3(0, 0, 0);
+	acceleration = Vec3(0, 0, 0);
+	angularVel = Vec3(0, 0, 0);
+	SetStatic(false);
+}
+
 
 void OpenEngine::RigidBodyComponent::InitializeCoeff(float mass,  Mat3& inertia, float impulseCoeff, float frictionCoeff)
 {
@@ -142,5 +151,12 @@ bool OpenEngine::RigidBodyComponent::CheckIfSleep()
 }
 
 
-
+void  OpenEngine::RigidBodyComponent::UpdateInverseInertiaWs()
+{
+	TransformComponent* transform = GetOwner()->GetComponent<TransformComponent>();
+	Matrix3f world2local = transform->GetRatationMatrixGlobal2Local33();
+	Matrix3f world2localTranposed;
+	world2localTranposed = world2local.transpose();  //¾ØÕó×ªÖÃ  ÄÚÖÃ
+	inverseInertiaWs = world2localTranposed * inverseInertia * world2local;
+}
 

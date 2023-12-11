@@ -7,6 +7,8 @@
 #include"Math.h"
 #include<Eigen/Dense>  //?
 #include"AABB.h"
+#include"TransformComponent.h"
+
 
 namespace OpenEngine {
 	class RigidBodyComponent : public IComponent
@@ -38,6 +40,7 @@ namespace OpenEngine {
 
     public:
         RigidBodyComponent();
+        RigidBodyComponent(Entity* owner);
 
         void InitializeCoeff(float mass, Mat3& inertia, float impulseCoeff, float frictionCoeff);
         // Set 和 Get 
@@ -79,10 +82,6 @@ namespace OpenEngine {
         bool GetIsStatic() const { return isStatic; }
 
 
-
-
-
-
         void SetInertia(Mat3& i);
         Mat3 GetInertia();
 
@@ -109,7 +108,19 @@ namespace OpenEngine {
         void SetRestitution(float r) { restitution = r; }
         float GetRestitution() { return restitution; }
 
-        
+        //物理方法计算矩阵
+        /*
+        计算全局坐标下的惯性张量
+        惯性张量的坐标变化满足：
+        $I_w = R * I_l * R^T$
+        https://www.zhihu.com/question/24846969
+        这里I指物体在局部坐标下的惯性张量
+        这里R指物体的局部到全局的旋转矩阵
+        另外，旋转矩阵满足正交归一特性，逆等于转置
+        左右求逆矩阵可以得到下面等式
+        */
+        void UpdateInverseInertiaWs();
+       
 
     };
 }
