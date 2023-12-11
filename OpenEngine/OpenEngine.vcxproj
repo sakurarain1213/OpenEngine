@@ -79,8 +79,9 @@
     <LibraryPath>D:\Project\boost_1_83_0\stage\lib;D:\OpenGL\dependency\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\OpenGL\dependency\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\boost_1_83_0\stage\lib;D:\Project\boost_1_83_0\stage\lib;D:\OpenGL\dependency\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\OpenGL\dependency\include;D:\Assimp\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\boost_1_83_0\stage\lib;D:\Project\boost_1_83_0\stage\lib;D:\OpenGL\dependency\lib;D:\Boost\boost_1_83_0\stage\lib;$(LibraryPath)</LibraryPath>
+    <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>D:\OpenGL\dependency\include;$(IncludePath)</IncludePath>
@@ -156,11 +157,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\OpenGL\dependency\src\glad.c" />
+    <ClCompile Include="AABB.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="AssetDatabase.cpp" />
+    <ClCompile Include="BoardPhase.cpp" />
     <ClCompile Include="ButtonComponent.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="CameraSystem.cpp" />
+    <ClCompile Include="ColliderComponent.cpp" />
+    <ClCompile Include="Contact.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GeometryComponent.cpp" />
     <ClCompile Include="imgui.cpp" />
@@ -170,13 +175,29 @@
     <ClCompile Include="imgui_impl_opengl3.cpp" />
     <ClCompile Include="imgui_tables.cpp" />
     <ClCompile Include="imgui_widgets.cpp" />
+    <ClCompile Include="Inertia.cpp" />
     <ClCompile Include="InputMgr.cpp" />
     <ClCompile Include="InputSystem.cpp" />
+    <ClCompile Include="IntegratePhase.cpp" />
+    <ClCompile Include="Jacobian.cpp" />
+    <ClCompile Include="NarrowPhase.cpp" />
+    <ClCompile Include="ResolutionPhase.cpp" />
+    <ClCompile Include="RigidBodyComponent.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UIComponent.cpp" />
     <ClCompile Include="UISystem.cpp" />
+    <ClInclude Include="AABB.h" />
+    <ClInclude Include="BoardPhase.h" />
+    <ClInclude Include="ColliderComponent.h" />
+    <ClInclude Include="Contact.h" />
+    <ClInclude Include="Inertia.h" />
+    <ClInclude Include="IntegratePhase.h" />
+    <ClInclude Include="Jacobian.h" />
     <ClInclude Include="MaterialImporter.h" />
+    <ClInclude Include="NarrowPhase.h" />
     <ClInclude Include="ObjectReference.h" />
+    <ClInclude Include="ResolutionPhase.h" />
+    <ClInclude Include="RigidBodyComponent.h" />
     <ClInclude Include="ServiceLocator.h" />
     <ClInclude Include="ShaderImporter.h" />
     <ClCompile Include="ServiceLocator.cpp" />
