@@ -108,3 +108,24 @@ OpenEngine::Mat4 OpenEngine::CameraComponent::GetProjectionMatrix() {
 OpenEngine::Vec3 OpenEngine::CameraComponent::GetPosition() {
 	return Position;
 }
+
+void OpenEngine::CameraComponent::SetPosition(Vec3 posi) {
+	Position = posi;
+}
+
+void OpenEngine::CameraComponent::SetFront(Vec3 front) {
+	Front = front;
+}
+void OpenEngine::CameraComponent::SetUp(Vec3 up) {
+	Up = up;
+}
+
+void OpenEngine::CameraComponent::SetNearClip(float d) {
+	NearClip = d;
+}
+void OpenEngine::CameraComponent::SetFarClip(float d) {
+	FarClip = d;
+}
+void OpenEngine::CameraComponent::SetFov(float d) {
+	Fov = d;
+}

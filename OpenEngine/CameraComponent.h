@@ -15,6 +15,14 @@ namespace OpenEngine {
 		Mat4 GetViewMatrix();
 		Mat4 GetProjectionMatrix();
 		Vec3 GetPosition();
+
+		void SetPosition(Vec3 posi);
+		void SetFront(Vec3 front);
+		void SetUp(Vec3 up);
+
+		void SetNearClip(float d);
+		void SetFarClip(float d);
+		void SetFov(float d);
 	private:
 		
 		bool VMdirtyflag;//true则重新计算矩阵

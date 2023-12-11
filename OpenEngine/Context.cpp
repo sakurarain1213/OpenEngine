@@ -41,6 +41,11 @@ namespace OpenEngine::App {
 		TransformComponent* transc = e->AddComponent<TransformComponent>();
 		ButtonComponent* buttonc = e->AddComponent<ButtonComponent>();
 		CameraComponent* camerac = e->AddComponent<CameraComponent>();
+		camerac->SetFront({ 0,0,-1 });
+		camerac->SetUp({ 0,1,0 });
+		camerac->SetFov(0.5);
+		camerac->SetNearClip(1);
+		camerac->SetFarClip(3);
 		worldmanager->mCameraSystem->SetMainCamera(camerac);
 		Eigen::Vector3f vel(1, 1, 0);
 		transc->SetLinearVelocity({ 20,20,0 });
