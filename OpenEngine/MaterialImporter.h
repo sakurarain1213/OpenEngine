@@ -15,12 +15,48 @@ namespace OpenEngine::Importer {
 	struct MaterialSerilized {
 		Setting::ObjectReference shader;
 		Setting::PropertyMap uniforms;
+		bool enableDepthTest;
+		bool enableDepthWrite;
+		TestFunc depthFunc;
+		bool enableStencilTest;
+		uint8_t stencilMask;
+		TestFunc stencilFunc;
+		uint8_t stencilFuncRef;
+		uint8_t stencilFuncMask;
+		TestOperation stencilFailOperation;
+		TestOperation stencilDeepTestFailOperation;
+		TestOperation stencilPassOperation;
+		bool enableBlend;
+		BlendFunc blendSrcFunc;
+		BlendFunc blendDstFunc;
+		bool enableCullFace;
+		bool cullFaceFront;
+		bool cullFaceBack;
+		bool frontFaceCCW;
 
 		friend class boost::serialization::access;
 		template<class Archive>
 		void serialize(Archive& ar, const unsigned int version) {
 			ar& BOOST_SERIALIZATION_NVP(shader);
 			ar& BOOST_SERIALIZATION_NVP(uniforms);
+			ar& BOOST_SERIALIZATION_NVP(enableDepthTest);
+			ar& BOOST_SERIALIZATION_NVP(enableDepthWrite);
+			ar& BOOST_SERIALIZATION_NVP(depthFunc);
+			ar& BOOST_SERIALIZATION_NVP(enableStencilTest);
+			ar& BOOST_SERIALIZATION_NVP(stencilMask);
+			ar& BOOST_SERIALIZATION_NVP(stencilFunc);
+			ar& BOOST_SERIALIZATION_NVP(stencilFuncRef);
+			ar& BOOST_SERIALIZATION_NVP(stencilFuncMask);
+			ar& BOOST_SERIALIZATION_NVP(stencilFailOperation);
+			ar& BOOST_SERIALIZATION_NVP(stencilDeepTestFailOperation);
+			ar& BOOST_SERIALIZATION_NVP(stencilPassOperation);
+			ar& BOOST_SERIALIZATION_NVP(enableBlend);
+			ar& BOOST_SERIALIZATION_NVP(blendSrcFunc);
+			ar& BOOST_SERIALIZATION_NVP(blendDstFunc);
+			ar& BOOST_SERIALIZATION_NVP(enableCullFace);
+			ar& BOOST_SERIALIZATION_NVP(cullFaceFront);
+			ar& BOOST_SERIALIZATION_NVP(cullFaceBack);
+			ar& BOOST_SERIALIZATION_NVP(frontFaceCCW);
 		}
 	 };
 
@@ -71,6 +107,26 @@ namespace OpenEngine::Importer {
 					slot = std::make_any<Texture*>(tex);
 				}
 			}
+
+			mat->enableDepthTest = material.enableDepthTest;
+			mat->enableDepthWrite = material.enableDepthWrite;
+			mat->depthFunc = material.depthFunc;
+			mat->enableStencilTest = material.enableStencilTest;
+			mat->stencilMask = material.stencilMask;
+			mat->stencilFunc = material.stencilFunc;
+			mat->stencilFuncRef = material.stencilFuncRef;
+			mat->stencilFuncMask = material.stencilFuncMask;
+			mat->stencilFailOperation = material.stencilFailOperation;
+			mat->stencilDeepTestFailOperation = material.stencilDeepTestFailOperation;
+			mat->stencilPassOperation = material.stencilPassOperation;
+			mat->enableBlend = material.enableBlend;
+			mat->blendSrcFunc = material.blendSrcFunc;
+			mat->blendDstFunc = material.blendDstFunc;
+			mat->enableCullFace = material.enableCullFace;
+			mat->cullFaceFront = material.cullFaceFront;
+			mat->cullFaceBack = material.cullFaceBack;
+			mat->frontFaceCCW = material.frontFaceCCW;
+
 			std::vector<int> ret;
 			ret.push_back(mat->GetInstanceID());
 			return ret;
@@ -118,6 +174,25 @@ namespace OpenEngine::Importer {
 					material.uniforms.SetProperty(name, std::any_cast<Setting::ObjectReference>(objRef));
 				}
 			}
+			material.enableDepthTest = matraw->enableDepthTest;
+			material.enableDepthWrite = matraw->enableDepthWrite;
+			material.depthFunc = matraw->depthFunc;
+			material.enableStencilTest = matraw->enableStencilTest;
+			material.stencilMask = matraw->stencilMask;
+			material.stencilFunc = matraw->stencilFunc;
+			material.stencilFuncRef = matraw->stencilFuncRef;
+			material.stencilFuncMask = matraw->stencilFuncMask;
+			material.stencilFailOperation = matraw->stencilFailOperation;
+			material.stencilDeepTestFailOperation = matraw->stencilDeepTestFailOperation;
+			material.stencilPassOperation = matraw->stencilPassOperation;
+			material.enableBlend = matraw->enableBlend;
+			material.blendSrcFunc = matraw->blendSrcFunc;
+			material.blendDstFunc = matraw->blendDstFunc;
+			material.enableCullFace = matraw->enableCullFace;
+			material.cullFaceFront = matraw->cullFaceFront;
+			material.cullFaceBack = matraw->cullFaceBack;
+			material.frontFaceCCW = matraw->frontFaceCCW;
+
 			std::ofstream ofs(path);
 			{
 				boost::archive::xml_oarchive oa(ofs);
