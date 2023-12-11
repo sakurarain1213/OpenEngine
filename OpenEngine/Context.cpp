@@ -40,7 +40,7 @@ namespace OpenEngine::App {
 		TransformComponent* transc = e->AddComponent<TransformComponent>();
 		ButtonComponent* buttonc = e->AddComponent<ButtonComponent>();
 		Eigen::Vector3f vel(1, 1, 0);
-		transc->SetLinearVelocity({ 5,5,0 });
+		transc->SetLinearVelocity({ 20,20,0 });
 		buttonc->SetText("Start!!!");
 		buttonc->SetSize({ 200,200 });
 		

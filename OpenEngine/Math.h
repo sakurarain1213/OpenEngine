@@ -7,4 +7,7 @@ namespace OpenEngine{
 	using Vec3 = Eigen::Vector3f;
 	using Vec2 = Eigen::Vector2f;
 	using Mat4 = Eigen::Matrix4f;
+	using Qua = Eigen::Quaternionf;
+
+	
 }

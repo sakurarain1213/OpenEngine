@@ -21,6 +21,8 @@ int OpenEngine::World::Initialize() {
 	mTransformSystem->Initialize();
 	mUISystem = new UISystem(this);
 	mUISystem->Initialize();
+	mCameraSystem = new CameraSystem(this);
+	mCameraSystem->Initialize();
 
 	return 0;
 }

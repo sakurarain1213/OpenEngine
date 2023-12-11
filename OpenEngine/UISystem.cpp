@@ -75,12 +75,12 @@ void OpenEngine::UISystem::ShowButton(ButtonComponent* comp) {
 	std::string temp = comp->GetText();
 	char* text = (char*)temp.c_str();
 	
-	printf("%f %f\n", px, py);
+	
 	ImGui::SetNextWindowPos(ImVec2(px, py), ImGuiCond_Always);
 	ImGui::SetNextWindowSize(ImVec2(sx+200, sy+200), ImGuiCond_Always);
 	
 	// Main body of the Demo window starts here.
 	ImGui::Begin("b", &is, window_flags);
-	ImGui::Button(text, ImVec2(size.x(), size.y()));
+	ImGui::Button(text, ImVec2(sx, sy));
 	ImGui::End();
 }
