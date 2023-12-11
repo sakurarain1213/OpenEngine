@@ -4,7 +4,7 @@
 
 namespace OpenEngine::App {
 	Context::Context(std::string base_path):
-		projectSetting(base_path + "/.project")
+		projectSetting(base_path + "\\.project")
 	{
 		Setting::WindowDeviceSetting deviceSetting;
 		deviceSetting.contextVersionMajor = projectSetting.GetInt("device", "contextVersionMajor");
@@ -24,7 +24,7 @@ namespace OpenEngine::App {
 		driver = std::make_unique<RenderDriver>(driverSetting);
 		renderer = std::make_unique<Renderer>(*driver);
 
-		assets = std::make_unique<Editor::AssetDatabase>(base_path + "/Assets");
+		assets = std::make_unique<Editor::AssetDatabase>(base_path + "\\Assets");
 		ServiceLocator::RegisterService<Editor::AssetDatabase>(*assets);
 
 		assets->ImportAllAssets();

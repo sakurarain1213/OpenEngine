@@ -5,7 +5,8 @@
 #include "Uniformbuffer.h"
 #include "Mesh.h"
 #include "Material.h"
-#include"Time.h"
+#include "Time.h"
+
 namespace OpenEngine {
 
 	struct DrawCall {
@@ -105,6 +106,47 @@ namespace OpenEngine {
 				Material* material = m_drawcalls[i].material;
 				material->Use();
 				material->m_shader->SetUniform("OE_Model", m_drawcalls[i].modelMatrix);
+
+				if (material->enableDepthTest) {
+					EnableDepthTest();
+					if (material->enableDepthWrite) EnableDepthWrite();
+					else DisableDepthWrite();
+					SetDepthFunc(material->depthFunc);
+				}
+				else DisableDepthTest();
+				if (material->enableStencilTest) {
+					EnableStencilTest();
+					SetStencilFunc(material->stencilFunc, material->stencilFuncRef, material->stencilFuncMask);
+					SetStencilOperation(material->stencilFailOperation, material->stencilDeepTestFailOperation, material->stencilPassOperation);
+				}
+				else DisableStencilTest();
+				if (material->enableBlend) {
+					EnableBlend();
+					SetBlendFunc(material->blendSrcFunc, material->blendDstFunc);
+				}
+				else DisableBlend();
+				if (material->enableCullFace && (material->cullFaceBack || material->cullFaceFront)) {
+					EnableCullFace();
+					if (material->cullFaceBack && material->cullFaceFront) {
+						SetCullFaceBoth();
+					}
+					else if (material->cullFaceBack) {
+						SetCullFaceBack();
+					}
+					else if (material->cullFaceFront) {
+						SetCullFaceFront();
+					}
+					if (material->frontFaceCCW) {
+						SetFrontFaceCCW();
+					}
+					else {
+						SetFrontFaceCW();
+					}
+				}
+				else {
+					DisableCullFace();
+				}
+
 				mesh->Use();
 				glDrawElements(GL_TRIANGLES, mesh->GetIndiceCount(), GL_UNSIGNED_INT, (void*)0);
 			}

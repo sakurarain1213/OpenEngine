@@ -64,6 +64,9 @@ namespace OpenEngine {
 		BlendFunc blendSrcFunc = OE_BLEND_SRC_ALPHA;
 		BlendFunc blendDstFunc = OE_BLEND_ONE_MINUS_SRC_ALPHA;
 		bool enableCullFace = false;
+		bool cullFaceFront = false;
+		bool cullFaceBack = true;
+		bool frontFaceCCW = true;
 
 	private:
 		void InitUniforms() {

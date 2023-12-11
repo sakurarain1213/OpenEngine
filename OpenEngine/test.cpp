@@ -5,10 +5,17 @@
 #include <iostream>
 using namespace OpenEngine;
 int main() {
-    App::Application app("D:/Project/OETest");
+    App::Application app("D:\\Project\\OETest");
+
+    //Editor::AssetDatabase& assets = OESERVICE(Editor::AssetDatabase);
     
-    Material* mat = OESERVICE(Editor::AssetDatabase).GetAsset<Material>(GUID("f41e3dd0-fce5-4043-b723-1eea0f9fa823"), 0);
-    
+    //assets.CreateAsset("standard.material");
+    //Material* mat = assets.GetAsset<Material>("standard.material", 0);
+    //Shader* shader = assets.GetAsset<Shader>("standard.shader", 0);
+    //Texture* tex = assets.GetAsset<Texture>(GUID("5403deab-728c-4a70-8aa2-f66433b8e237"), 0);
+    //mat->SetShader(shader);
+    //mat->SetUniform("diffuseMap", tex);
+    //assets.Save(mat);
     app.Run();
     return 0;
 }
