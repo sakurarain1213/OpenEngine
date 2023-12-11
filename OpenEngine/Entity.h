@@ -4,6 +4,8 @@
 #include"TransformComponent.h"
 #include"ButtonComponent.h"
 #include"CameraComponent.h"
+#include"RigidBodyComponent.h"
+#include"ColliderComponent.h"
 #include"World.h"
 #include<vector>
 #include<list>
@@ -52,6 +54,8 @@ namespace OpenEngine {
 		TransformComponent* mTransform;
 		ButtonComponent* mButton;
 		CameraComponent* mCamera;
+		//RigidBodyComponent* mRigidBody;
+		//ColliderComponent* mCollider;
 	};
 	template<typename T>
 	T* OpenEngine::Entity::AddComponent() {
@@ -75,6 +79,18 @@ namespace OpenEngine {
 			
 			comp = mCamera;
 		}
+		/*else if (std::is_same<T, RigidBodyComponent>::value) {
+			mRigidBody = new RigidBodyComponent(this);
+			mRigidBody->Initialize();
+
+			comp = mRigidBody;
+		}
+		else if (std::is_same<T, ColliderComponent>::value) {
+			mCollider = new ColliderComponent(this);
+			mCollider->Initialize();
+
+			comp = mCollider;
+		}*/
 
 		return (T*)comp;
 	}
@@ -91,6 +107,12 @@ namespace OpenEngine {
 		else if (std::is_same<T, CameraComponent>::value) {
 			ret = mCamera;
 		}
+		/*else if (std::is_same<T, RigidBodyComponent>::value) {
+			ret = mRigidBody;
+		}
+		else if (std::is_same<T, ColliderComponent>::value) {
+			ret = mCollider;
+		}*/
 		return (T*)ret;
 	}
 
