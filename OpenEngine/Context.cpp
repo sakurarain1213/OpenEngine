@@ -40,10 +40,13 @@ namespace OpenEngine::App {
 		Entity* e = test_entity.get();
 		TransformComponent* transc = e->AddComponent<TransformComponent>();
 		ButtonComponent* buttonc = e->AddComponent<ButtonComponent>();
+		CameraComponent* camerac = e->AddComponent<CameraComponent>();
+		worldmanager->mCameraSystem->SetMainCamera(camerac);
 		Eigen::Vector3f vel(1, 1, 0);
 		transc->SetLinearVelocity({ 20,20,0 });
 		buttonc->SetText("Start!!!");
 		buttonc->SetSize({ 200,200 });
+
 		
 		
 	}
