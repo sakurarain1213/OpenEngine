@@ -180,7 +180,7 @@
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="IntegratePhase.cpp" />
     <ClCompile Include="Jacobian.cpp" />
-    <ClCompile Include="MeshRenderComponent.cpp" />
+    <ClCompile Include="MeshRendererComponent.cpp" />
     <ClCompile Include="MeshRendererSystem.cpp" />
     <ClCompile Include="NarrowPhase.cpp" />
     <ClCompile Include="ResolutionPhase.cpp" />
@@ -196,7 +196,7 @@
     <ClInclude Include="IntegratePhase.h" />
     <ClInclude Include="Jacobian.h" />
     <ClInclude Include="MaterialImporter.h" />
-    <ClInclude Include="MeshRenderComponent.h" />
+    <ClInclude Include="MeshRendererComponent.h" />
     <ClInclude Include="MeshRendererSystem.h" />
     <ClInclude Include="NarrowPhase.h" />
     <ClInclude Include="ObjectReference.h" />

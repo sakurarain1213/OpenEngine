@@ -2,6 +2,7 @@
 #include"IRuntimeModule.h"
 #include"TransformSystem.h"
 #include"UISystem.h"
+#include"PhysicSystem.h"
 #include"ISystem.h"
 #include"CameraSystem.h"
 #include<memory>
@@ -35,6 +36,7 @@ namespace OpenEngine {
 		TransformSystem* mTransformSystem;
 		UISystem* mUISystem;
 		CameraSystem* mCameraSystem;
+		PhysicSystem* mPhysicSystem;
 	private:
 		std::unordered_map<boost::uuids::uuid, std::shared_ptr<Entity>, boost::hash<boost::uuids::uuid>>	mEntities;
 

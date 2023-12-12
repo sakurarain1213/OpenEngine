@@ -1,14 +1,15 @@
 #include "RigidBodyComponent.h"
 #include"Entity.h"
 #include"Eigen/Dense"
-
+#include<iostream>
 using namespace OpenEngine;
 
 
 
 OpenEngine::RigidBodyComponent::RigidBodyComponent()
 {
-	isSleep = true;
+	mOwner = nullptr;
+	isSleep = false;
 	force = Vec3(0, 0, 0);
 	velocity = Vec3(0, 0, 0);
 	acceleration = Vec3(0, 0, 0);
@@ -18,7 +19,8 @@ OpenEngine::RigidBodyComponent::RigidBodyComponent()
 }
 
 OpenEngine::RigidBodyComponent::RigidBodyComponent(Entity* entity) {
-	isSleep = true;
+	mOwner = entity;
+	isSleep = false;
 	force = Vec3(0, 0, 0);
 	velocity = Vec3(0, 0, 0);
 	acceleration = Vec3(0, 0, 0);
@@ -153,10 +155,11 @@ bool OpenEngine::RigidBodyComponent::CheckIfSleep()
 
 void  OpenEngine::RigidBodyComponent::UpdateInverseInertiaWs()
 {
+	
 	TransformComponent* transform = GetOwner()->GetComponent<TransformComponent>();
 	Matrix3f world2local = transform->GetRatationMatrixGlobal2Local33();
 	Matrix3f world2localTranposed;
-	world2localTranposed = world2local.transpose();  //¾ØÕó×ªÖÃ  ÄÚÖÃ
+	world2localTranposed = world2local.transpose();  //çŸ©é˜µè½¬ç½®  å†…ç½®
 	inverseInertiaWs = world2localTranposed * inverseInertia * world2local;
 }
 

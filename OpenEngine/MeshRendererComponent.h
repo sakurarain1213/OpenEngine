@@ -3,11 +3,11 @@
 #include"Mesh.h"
 #include"Material.h"
 namespace OpenEngine {
-	class MeshRenderComponent : public IComponent
+	class MeshRendererComponent : public IComponent
 	{
 	public:
-		MeshRenderComponent(Entity* entity);
-		MeshRenderComponent();
+		MeshRendererComponent(Entity* entity);
+		MeshRendererComponent();
 
 		virtual int Initialize();
 		virtual void Finalize();

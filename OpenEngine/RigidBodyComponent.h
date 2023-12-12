@@ -1,7 +1,7 @@
 #pragma once
 
-//ñîºÏÁË´ó¶àÊıÎïÀíÊôĞÔ ÉáÆúºÜ¶àÏ¸component  Âß¼­ÔÚsystemĞ´
-//ĞèÒª import ...
+//è€¦åˆäº†å¤§å¤šæ•°ç‰©ç†å±æ€§ èˆå¼ƒå¾ˆå¤šç»†component  é€»è¾‘åœ¨systemå†™
+//éœ€è¦ import ...
 
 #include"IComponent.h"
 #include"Math.h"
@@ -14,7 +14,7 @@ namespace OpenEngine {
 	class RigidBodyComponent : public IComponent
 	{
     public:
-        // ÎïÀíÊôĞÔ
+        // ç‰©ç†å±æ€§
         Vec3 force;
         Vec3 velocity;
         Vec3 acceleration;
@@ -24,17 +24,17 @@ namespace OpenEngine {
         float mass;
         float inverseMass;
         float impulseCoefficient;
-        Mat3 inertia;   //// ×ª¶¯¹ßÁ¿ - ¾Ö²¿¿Õ¼ä
-        Mat3 inverseInertia;   // ×ª¶¯¹ßÁ¿Äæ¾ØÕó - ¾Ö²¿¿Õ¼ä
-        Mat3 inverseInertiaWs;   // ×ª¶¯¹ßÁ¿Äæ¾ØÕó - È«¾Ö¿Õ¼ä
+        Mat3 inertia;   //// è½¬åŠ¨æƒ¯é‡ - å±€éƒ¨ç©ºé—´
+        Mat3 inverseInertia;   // è½¬åŠ¨æƒ¯é‡é€†çŸ©é˜µ - å±€éƒ¨ç©ºé—´
+        Mat3 inverseInertiaWs;   // è½¬åŠ¨æƒ¯é‡é€†çŸ©é˜µ - å…¨å±€ç©ºé—´
 
-        // ÃèÊöÅö×²·¢ÉúºóµÄĞŞÕı²ÎÊı½Ó½ü0 - ĞŞ¸´»ºÂı£¬µ«ÊÇÎÈ¶¨¡£½Ó½ü1 - ¿ìËÙĞŞ¸´£¬µ«ÊÇ»á³öÏÖ²»ÎÈ¶¨ÏÖÏó¡£
+        // æè¿°ç¢°æ’å‘ç”Ÿåçš„ä¿®æ­£å‚æ•°æ¥è¿‘0 - ä¿®å¤ç¼“æ…¢ï¼Œä½†æ˜¯ç¨³å®šã€‚æ¥è¿‘1 - å¿«é€Ÿä¿®å¤ï¼Œä½†æ˜¯ä¼šå‡ºç°ä¸ç¨³å®šç°è±¡ã€‚
         float contactBeta;
-        // ÃèÊöÅö×²·¢ÉúºóµÄ·´µ¯Ğ§¹û£¬Àí½âÎªµ¯ĞÔÅö×²ÏµÊı¡£½Ó½ü0 - ÍêÈ«·Çµ¯ĞÔÅö×²½Ó½ü1 - ÍêÈ«µ¯ĞÔÅö×²
+        // æè¿°ç¢°æ’å‘ç”Ÿåçš„åå¼¹æ•ˆæœï¼Œç†è§£ä¸ºå¼¹æ€§ç¢°æ’ç³»æ•°ã€‚æ¥è¿‘0 - å®Œå…¨éå¼¹æ€§ç¢°æ’æ¥è¿‘1 - å®Œå…¨å¼¹æ€§ç¢°æ’
         float restitution;
 
         
-        float frictionCoefficient;   // Ä¦²Á
+        float frictionCoefficient;   // æ‘©æ“¦
 
         AABB aabb;
 
@@ -42,8 +42,11 @@ namespace OpenEngine {
         RigidBodyComponent();
         RigidBodyComponent(Entity* owner);
 
+        int Initialize() { return 0; }
+        void Finalize() {}
+
         void InitializeCoeff(float mass, Mat3& inertia, float impulseCoeff, float frictionCoeff);
-        // Set ºÍ Get 
+        // Set å’Œ Get 
 
         void SetFrictionCoefficient(float f);
 
@@ -108,16 +111,16 @@ namespace OpenEngine {
         void SetRestitution(float r) { restitution = r; }
         float GetRestitution() { return restitution; }
 
-        //ÎïÀí·½·¨¼ÆËã¾ØÕó
+        //ç‰©ç†æ–¹æ³•è®¡ç®—çŸ©é˜µ
         /*
-        ¼ÆËãÈ«¾Ö×ø±êÏÂµÄ¹ßĞÔÕÅÁ¿
-        ¹ßĞÔÕÅÁ¿µÄ×ø±ê±ä»¯Âú×ã£º
+        è®¡ç®—å…¨å±€åæ ‡ä¸‹çš„æƒ¯æ€§å¼ é‡
+        æƒ¯æ€§å¼ é‡çš„åæ ‡å˜åŒ–æ»¡è¶³ï¼š
         $I_w = R * I_l * R^T$
         https://www.zhihu.com/question/24846969
-        ÕâÀïIÖ¸ÎïÌåÔÚ¾Ö²¿×ø±êÏÂµÄ¹ßĞÔÕÅÁ¿
-        ÕâÀïRÖ¸ÎïÌåµÄ¾Ö²¿µ½È«¾ÖµÄĞı×ª¾ØÕó
-        ÁíÍâ£¬Ğı×ª¾ØÕóÂú×ãÕı½»¹éÒ»ÌØĞÔ£¬ÄæµÈÓÚ×ªÖÃ
-        ×óÓÒÇóÄæ¾ØÕó¿ÉÒÔµÃµ½ÏÂÃæµÈÊ½
+        è¿™é‡ŒIæŒ‡ç‰©ä½“åœ¨å±€éƒ¨åæ ‡ä¸‹çš„æƒ¯æ€§å¼ é‡
+        è¿™é‡ŒRæŒ‡ç‰©ä½“çš„å±€éƒ¨åˆ°å…¨å±€çš„æ—‹è½¬çŸ©é˜µ
+        å¦å¤–ï¼Œæ—‹è½¬çŸ©é˜µæ»¡è¶³æ­£äº¤å½’ä¸€ç‰¹æ€§ï¼Œé€†ç­‰äºè½¬ç½®
+        å·¦å³æ±‚é€†çŸ©é˜µå¯ä»¥å¾—åˆ°ä¸‹é¢ç­‰å¼
         */
         void UpdateInverseInertiaWs();
        

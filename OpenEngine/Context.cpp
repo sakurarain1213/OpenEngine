@@ -27,7 +27,7 @@ namespace OpenEngine::App {
 		assets = std::make_unique<Editor::AssetDatabase>(base_path + "\\Assets");
 		ServiceLocator::RegisterService<Editor::AssetDatabase>(*assets);
 		ServiceLocator::RegisterService<Renderer>(*renderer);
-
+		
 		assets->ImportAllAssets();
 
 		
@@ -36,19 +36,36 @@ namespace OpenEngine::App {
 
 		worldmanager = std::make_unique<World>("world");
 		worldmanager->Initialize();
+		ServiceLocator::RegisterService<World>(*worldmanager);
+
 		auto test_entity = worldmanager->CreateEntity("e1");
+		//auto te= worldmanager->CreateEntity("e2");
+		//Entity* e2 = te.get();
 		Entity* e = test_entity.get();
-		TransformComponent* transc = e->AddComponent<TransformComponent>();
+		
 		ButtonComponent* buttonc = e->AddComponent<ButtonComponent>();
-		CameraComponent* camerac = e->AddComponent<CameraComponent>();
-		camerac->SetFront({ 0,0,-1 });
-		camerac->SetUp({ 0,1,0 });
-		camerac->SetFov(0.5);
-		camerac->SetNearClip(1);
-		camerac->SetFarClip(3);
-		worldmanager->mCameraSystem->SetMainCamera(camerac);
+		//CameraComponent* camerac = e->AddComponent<CameraComponent>();
+		//TransformComponent* tranc = e->GetComponent<TransformComponent>();
+		RigidBodyComponent* body = e->AddComponent<RigidBodyComponent>();
+
+		
+		//ButtonComponent* buttonc2 = e2->AddComponent<ButtonComponent>();
+		
+		//RigidBodyComponent* body2 = e2->AddComponent<RigidBodyComponent>();
+		//transc2->SetPosition({ 0,0,0 });
+		//Vec3 f = { -200,0,0 };
+		//body2->SetVelocity(f);
+		//buttonc2->SetText("Go!!!");
+		//buttonc2->SetSize({ 200,200 });
+
+		//camerac->SetFront({ 0,0,-1 });
+		//camerac->SetUp({ 0,1,0 });
+		//camerac->SetFov(0.5);
+		//camerac->SetNearClip(1);
+		//camerac->SetFarClip(3);
+		//worldmanager->mCameraSystem->SetMainCamera(camerac);
 		Eigen::Vector3f vel(1, 1, 0);
-		transc->SetLinearVelocity({ 20,20,0 });
+		
 		buttonc->SetText("Start!!!");
 		buttonc->SetSize({ 200,200 });
 

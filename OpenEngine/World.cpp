@@ -11,12 +11,14 @@ std::string OpenEngine::World::GetType() {
 void OpenEngine::World::Tick() {
 
 	mCameraSystem->Tick();
+	mPhysicSystem->Tick();
 	mTransformSystem->Tick();
 	mUISystem->Tick();
 }
 
 int OpenEngine::World::Initialize() {
-	
+	mPhysicSystem = new PhysicSystem(this);
+	mPhysicSystem->Initialize();
 	mTransformSystem = new TransformSystem(this);
 	mTransformSystem->Initialize();
 	mUISystem = new UISystem(this);
@@ -29,6 +31,7 @@ int OpenEngine::World::Initialize() {
 void OpenEngine::World::Finalize() {
 	mEntities.clear();
 
+	mPhysicSystem->Finalize();
 	mTransformSystem->Finalize();
 	mUISystem->Finalize();
 	mCameraSystem->Finalize();

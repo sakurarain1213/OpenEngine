@@ -8,7 +8,7 @@ OpenEngine::CameraComponent::CameraComponent() {
 					0, 0, 0, 0,
 					0, 0, 0, 0;
 	Position = { 0,0,0 };
-	Front = { 0,0,0 };
+	Front = { 0,1,0 };
 	Up = { 0,0,0 };
 	ProjectionMatrix << 0, 0, 0, 0,
 		0, 0, 0, 0,
@@ -28,7 +28,7 @@ OpenEngine::CameraComponent::CameraComponent(Entity* entity) {
 		0, 0, 0, 0,
 		0, 0, 0, 0;
 	Position = { 0,0,0 };
-	Front = { 0,0,0 }; 
+	Front = { 0,1,0 }; 
 	Up = { 0,0,0 };
 	ProjectionMatrix << 0, 0, 0, 0,
 		0, 0, 0, 0,

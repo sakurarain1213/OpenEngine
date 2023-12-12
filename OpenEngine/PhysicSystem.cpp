@@ -1,13 +1,13 @@
 
-//ËÄ´ó¹ı³Ì
+//å››å¤§è¿‡ç¨‹
 /*
-BoardPhase¡£ÅÅ³ıÎŞÅö×²object pair
-NarrowPhase ×¼È·ÅĞ¶ÏÅö×²µã£¬´©Í¸Éî¶È£¬·ÖÀë·¨ÏßµÈµÈ
-ResolvePhase ½â¾öÔ¼Êø¡£¸÷ÎïÀíÊôĞÔ»áÔÚÅö×²ºó±£³ÖÔ¼ÊøµÈÊ½»òÕß²»µÈÊ½
-Intergration ½á¹ûÍ¬²½
+BoardPhaseã€‚æ’é™¤æ— ç¢°æ’object pair
+NarrowPhase å‡†ç¡®åˆ¤æ–­ç¢°æ’ç‚¹ï¼Œç©¿é€æ·±åº¦ï¼Œåˆ†ç¦»æ³•çº¿ç­‰ç­‰
+ResolvePhase è§£å†³çº¦æŸã€‚å„ç‰©ç†å±æ€§ä¼šåœ¨ç¢°æ’åä¿æŒçº¦æŸç­‰å¼æˆ–è€…ä¸ç­‰å¼
+Intergration ç»“æœåŒæ­¥
 
 */
-
+#include<iostream>
 #include "PhysicSystem.h"
 #include "Time.h"
 #include "World.h"
@@ -25,7 +25,7 @@ using namespace std;
 
 int OpenEngine::PhysicSystem::Initialize() noexcept
 {
-	gravity = Vector3f(0.0f, -9.80665f, 0.0f);
+	gravity = Vector3f(0.0f, 9.80665f, 0.0f);
 	return 0;
 }
 
@@ -36,14 +36,15 @@ void OpenEngine::PhysicSystem::Finalize() noexcept
 void OpenEngine::PhysicSystem::Tick() noexcept
 {
 	float deltaTime = Time::GetDeltaTime();
-
+	
 	std::vector<RigidBodyComponent*> activedRigidBodies;
 	CollectRigidBodies(activedRigidBodies);
-
-	// udpate Inertia tensor in global ×ø±ê
+	
+	// udpate Inertia tensor in global åæ ‡
 	for (auto* rigidBody : activedRigidBodies)
 	{
 		rigidBody->UpdateInverseInertiaWs();
+		
 	}
 
 	// gravity
@@ -57,6 +58,7 @@ void OpenEngine::PhysicSystem::Tick() noexcept
 		}
 		Vector3f tempVelocity = rigidBody->GetVelocity() + gravityImpulse;
 		rigidBody->SetVelocity(tempVelocity);
+		
 	}
 
 
@@ -77,7 +79,7 @@ void OpenEngine::PhysicSystem::Tick() noexcept
 
 	// clearPhase
 	manifolds.clear();
-
+	
 }
 
 void OpenEngine::PhysicSystem::AddComponent(RigidBodyComponent* comp)
@@ -101,12 +103,12 @@ void OpenEngine::PhysicSystem::DeleteComponent(RigidBodyComponent* comp)
 }
 
 /*
-ÔİÊ±ÏÈÃ¿Ö¡¶¼ÊÕ¼¯Ò»±é¡£ºóĞø¿ÉÒÔ¼ÓÔà±ê¼Ç»òÕßÎ¬»¤Ò»¸öÓĞĞ§¼¯ºÏ¡£
+æš‚æ—¶å…ˆæ¯å¸§éƒ½æ”¶é›†ä¸€éã€‚åç»­å¯ä»¥åŠ è„æ ‡è®°æˆ–è€…ç»´æŠ¤ä¸€ä¸ªæœ‰æ•ˆé›†åˆã€‚
 */
 void OpenEngine::PhysicSystem::CollectRigidBodies(std::vector<RigidBodyComponent*>& activedRigidBodies)
 {
 	activedRigidBodies.clear();
-	for (auto* comp : components)    //±éÀúrigidbodyComponent
+	for (auto* comp : components)    //éå†rigidbodyComponent
 	{
 		activedRigidBodies.push_back((comp));
 	}
