@@ -97,6 +97,14 @@ namespace OpenEngine {
 			}
 			comp = mRigidBody;
 		}
+		else if (std::is_same<T, MeshRendererComponent>::value) {
+			if (!mRenderer) {
+				mRenderer = new MeshRendererComponent(this);
+				mWorld->mMeshRendererSystem->AddComponent(mRenderer);
+				mRenderer->Initialize();
+			}
+			comp = mRenderer;
+		}
 		/*else if (std::is_same<T, ColliderComponent>::value) {
 			mCollider = new ColliderComponent(this);
 			mCollider->Initialize();
@@ -121,6 +129,9 @@ namespace OpenEngine {
 		}
 		else if (std::is_same<T, RigidBodyComponent>::value) {
 			ret = mRigidBody;
+		}
+		else if (std::is_same<T, MeshRendererComponent>::value) {
+			ret = mRenderer;
 		}
 		/*else if (std::is_same<T, ColliderComponent>::value) {
 			ret = mCollider;
@@ -154,6 +165,12 @@ namespace OpenEngine {
 			mRigidBody->Finalize();
 			delete mRigidBody;
 			mRigidBody = nullptr;
+		}
+		else if (std::is_same<T, MeshRendererComponent>::value) {
+
+			mRenderer->Finalize();
+			delete mRenderer;
+			mRenderer = nullptr;
 		}
 	}
 	

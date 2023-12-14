@@ -3,14 +3,16 @@
 OpenEngine::ButtonComponent::ButtonComponent(Entity* entity) {
 	mOwner = entity;
 	mIsActive = true;
-
+	size = { 200,200 };
+	window_id = "";
 	text = "";
 }
 
 OpenEngine::ButtonComponent::ButtonComponent() {
 	mOwner = nullptr;
 	mIsActive = true;
-
+	size = { 200,200 };
+	window_id = "";
 	text = "";
 }
 
@@ -41,4 +43,12 @@ OpenEngine::Vec2 OpenEngine::ButtonComponent::GetSize() {
 
 std::string OpenEngine::ButtonComponent::GetText() {
 	return text;
+}
+
+void OpenEngine::ButtonComponent::SetWindowid(std::string nam) {
+	window_id= nam;
+}
+
+std::string OpenEngine::ButtonComponent::GetWindowid() {
+	return window_id;
 }

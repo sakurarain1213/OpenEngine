@@ -1,8 +1,10 @@
 #pragma once
 #include"IComponent.h"
-#include"Mesh.h"
-#include"Material.h"
+
+
 namespace OpenEngine {
+	class Mesh;
+	class Material;
 	class MeshRendererComponent : public IComponent
 	{
 	public:

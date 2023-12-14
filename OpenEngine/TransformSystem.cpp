@@ -19,14 +19,13 @@ void OpenEngine::TransformSystem::Tick()noexcept {
 	float dTime = Time::GetDeltaTime();
 
 	for (TransformComponent* t : components) {
-		if (!t->GetOwner()->GetComponent<RigidBodyComponent>()) {
-			t->SetPosition(t->Position + dTime * t->LinearVelocity);
-		}
-		else {
-			t->SetPosition(t->Position + dTime * t->GetOwner()->GetComponent<RigidBodyComponent>()->GetVelocity());
-		}
-		float x = t->Position.x();
-		float y = t->Position.y();
+		//if (!t->GetOwner()->GetComponent<RigidBodyComponent>()) {
+			//t->SetPosition(t->Position + dTime * t->LinearVelocity);
+		//}
+		//else {
+		//	t->SetPosition(t->Position + dTime * t->GetOwner()->GetComponent<RigidBodyComponent>()->GetVelocity());
+		//}
+		printf("cs");
 		
 	}
 	

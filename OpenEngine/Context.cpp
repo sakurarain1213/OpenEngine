@@ -39,24 +39,28 @@ namespace OpenEngine::App {
 		ServiceLocator::RegisterService<World>(*worldmanager);
 
 		auto test_entity = worldmanager->CreateEntity("e1");
-		//auto te= worldmanager->CreateEntity("e2");
-		//Entity* e2 = te.get();
+		auto te= worldmanager->CreateEntity("e2");
+		Entity* e2 = te.get();
 		Entity* e = test_entity.get();
 		
 		ButtonComponent* buttonc = e->AddComponent<ButtonComponent>();
+		buttonc->SetWindowid("e1");
 		//CameraComponent* camerac = e->AddComponent<CameraComponent>();
-		//TransformComponent* tranc = e->GetComponent<TransformComponent>();
+		TransformComponent* tranc = e->GetComponent<TransformComponent>();
 		RigidBodyComponent* body = e->AddComponent<RigidBodyComponent>();
-
+		//Vec3 f1 = { 0,0,0 };
+		//body->SetVelocity(f1);
 		
-		//ButtonComponent* buttonc2 = e2->AddComponent<ButtonComponent>();
-		
+		ButtonComponent* buttonc2 = e2->AddComponent<ButtonComponent>();
+		buttonc2->SetWindowid("e2");
+		TransformComponent* te2 = e2->GetComponent<TransformComponent>();
+		te2->SetPosition({ 600,0,0 });
 		//RigidBodyComponent* body2 = e2->AddComponent<RigidBodyComponent>();
 		//transc2->SetPosition({ 0,0,0 });
-		//Vec3 f = { -200,0,0 };
+		//Vec3 f = { 0,0,0 };
 		//body2->SetVelocity(f);
-		//buttonc2->SetText("Go!!!");
-		//buttonc2->SetSize({ 200,200 });
+		buttonc2->SetText("Go!!!");
+		
 
 		//camerac->SetFront({ 0,0,-1 });
 		//camerac->SetUp({ 0,1,0 });
@@ -67,7 +71,7 @@ namespace OpenEngine::App {
 		Eigen::Vector3f vel(1, 1, 0);
 		
 		buttonc->SetText("Start!!!");
-		buttonc->SetSize({ 200,200 });
+		
 
 		
 		
