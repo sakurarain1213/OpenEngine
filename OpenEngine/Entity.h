@@ -6,6 +6,7 @@
 #include"CameraComponent.h"
 #include"RigidBodyComponent.h"
 #include"ColliderComponent.h"
+#include"MeshRendererComponent.h"
 #include"World.h"
 #include<vector>
 #include<list>
@@ -55,6 +56,7 @@ namespace OpenEngine {
 		ButtonComponent* mButton;
 		CameraComponent* mCamera;
 		RigidBodyComponent* mRigidBody;
+		MeshRendererComponent* mRenderer;
 		//ColliderComponent* mCollider;
 	};
 	template<typename T>

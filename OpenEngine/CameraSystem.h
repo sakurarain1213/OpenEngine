@@ -3,7 +3,7 @@
 #include"ISystem.h"
 #include"CameraComponent.h"
 
-#include<set>
+
 namespace OpenEngine {
 	class World;
 	class CameraSystem : public ISystem
