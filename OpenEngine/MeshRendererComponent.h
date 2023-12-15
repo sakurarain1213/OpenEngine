@@ -19,6 +19,8 @@ namespace OpenEngine {
 
 		void SetMesh(Mesh* mesh);
 		void SetMaterial(Material* m);
+
+		void DrawMesh();
 	private:
 		bool Visible;
 		Mesh* mMesh;
