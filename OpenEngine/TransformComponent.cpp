@@ -37,7 +37,9 @@ void OpenEngine::TransformComponent::SetPosition(Vector3f posi) {
 void OpenEngine::TransformComponent::Rotate(Quaternionf rota) {
 	Rotation = rota;
 }
-
+void OpenEngine::TransformComponent::SetScale(Vec3 scale) {
+	Scale = scale;
+}
 /*
 void OpenEngine::TransformComponent::SetLinearVelocity(Vector3f vel) {
 	LinearVelocity = vel;
@@ -110,7 +112,18 @@ Mat4 OpenEngine::TransformComponent::GetModelMatrix() {
 			0, 0, 0, 1;
 
 		Rotation.normalized();
-		Mat4 rotM=Rotation.toRotationMatrix();
+		Mat3 rot3=Rotation.toRotationMatrix();
+		Mat4 rotM;
+		rotM <<
+			0, 0, 0, 0,
+			0, 0, 0, 0,
+			0, 0, 0, 0,
+			0, 0, 0, 0;
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				rotM(i, j) = rot3(i, j);
+			}
+		}
 		rotM(3, 3) = 1;
 		Mat4 posiM;
 		posiM <<
@@ -120,7 +133,7 @@ Mat4 OpenEngine::TransformComponent::GetModelMatrix() {
 			0, 0, 0, 1;
 		
 		ModelMatrix = posiM*(rotM * scaleM);
-		
+		ModelMatrixdirtyflag = false;
 	}
 
 	return ModelMatrix;

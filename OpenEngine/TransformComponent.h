@@ -17,6 +17,7 @@ namespace OpenEngine {
 		Vector3f GetPosition() { return this->Position; }
 		void Rotate(Quaternionf rota);
 		Quaternionf GetRotation() { return this->Rotation; }
+		void SetScale(Vec3 scale);
 		//void SetLinearVelocity(Vector3f vel);
 
 		//void SetAngularVelocity(Quaternionf vel);
