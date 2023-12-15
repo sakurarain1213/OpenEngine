@@ -48,8 +48,8 @@ namespace OpenEngine {
 			}
 			return ret;
 		}
-
-
+		Mat4 GetModelMatrix();
+		
 
 	public:
 		Vector3f Position;
@@ -57,6 +57,10 @@ namespace OpenEngine {
 		Quaternionf  AngularVelocity;
 		Quaternionf Rotation;
 		Vector3f Scale;
+
+		bool ModelMatrixdirtyflag;//true则重新计算矩阵
+		Mat4 ModelMatrix;
+
 
 		Matrix4f  mWorldMatrix;
 		Matrix4f  mWorldMatrixInverse;

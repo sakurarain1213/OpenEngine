@@ -25,7 +25,8 @@ void OpenEngine::TransformSystem::Tick()noexcept {
 		//else {
 		//	t->SetPosition(t->Position + dTime * t->GetOwner()->GetComponent<RigidBodyComponent>()->GetVelocity());
 		//}
-		printf("cs");
+		//Vec3 temp=t->GetOwner()->GetComponent<TransformComponent>()->GetPosition();
+		//std::cout << temp;
 		
 	}
 	

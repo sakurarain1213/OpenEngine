@@ -12,7 +12,7 @@ OpenEngine::TransformComponent::TransformComponent() {
 	AngularVelocity = { 0,0,0,0 };
 	mOwner = nullptr;
 	mIsActive = true;
-
+	ModelMatrixdirtyflag = true;
 }
 
 OpenEngine::TransformComponent::TransformComponent(Entity* entity) {
@@ -22,6 +22,7 @@ OpenEngine::TransformComponent::TransformComponent(Entity* entity) {
 	AngularVelocity = { 0,0,0,0 };
 	mOwner = entity;
 	mIsActive = true;
+	ModelMatrixdirtyflag = true;
 }
 int OpenEngine::TransformComponent::Initialize() {
 	return 0;
@@ -89,8 +90,34 @@ Vector3f OpenEngine::TransformComponent::TransformVector(Matrix3f& matrix, Vecto
 	Vector3f tmp = Vector3f(0, 0, 0);
 	for (int r = 0; r < 3; ++r) {
 		for (int c = 0; c < 3; ++c) {
-			tmp[r] += vector[c] * matrix(r * 3 + c);   //!   ·ÃÎÊ¾ØÕóÒªÓÃÐ¡À¨ºÅ  ²»È»»á±¨EigenÄÚ²¿´íÎó
+			tmp[r] += vector[c] * matrix(r * 3 + c);   //!   è®¿é—®çŸ©é˜µè¦ç”¨å°æ‹¬å·  ä¸ç„¶ä¼šæŠ¥Eigenå†…éƒ¨é”™è¯¯
 		}
 	}
 	return tmp;
+}
+
+Mat4 OpenEngine::TransformComponent::GetModelMatrix() {
+	if (ModelMatrixdirtyflag) {
+		Mat4 scaleM;
+		scaleM <<
+			Scale.x(), 0, 0, 0,
+			0, Scale.y(), 0, 0,
+			0, 0, Scale.z(), 0,
+			0, 0, 0, 1;
+
+		Rotation.normalized();
+		Mat4 rotM=Rotation.toRotationMatrix();
+		rotM(3, 3) = 1;
+		Mat4 posiM;
+		posiM <<
+			1, 0, 0, Position.x(),
+			0, 1, 0, Position.y(),
+			0, 0, 1, Position.z(),
+			0, 0, 0, 1;
+		
+		ModelMatrix = posiM*(rotM * scaleM);
+		
+	}
+
+	return ModelMatrix;
 }

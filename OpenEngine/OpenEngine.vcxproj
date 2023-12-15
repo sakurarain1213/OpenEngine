@@ -184,6 +184,7 @@
     <ClCompile Include="MeshRendererSystem.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Monobehaviour.cpp" />
     <ClCompile Include="NarrowPhase.cpp" />
     <ClCompile Include="ResolutionPhase.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />
@@ -202,6 +203,7 @@
     <ClInclude Include="MeshRendererSystem.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Monobehaviour.h" />
     <ClInclude Include="NarrowPhase.h" />
     <ClInclude Include="ObjectReference.h" />
     <ClInclude Include="RenderEnum.h" />

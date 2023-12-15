@@ -13,19 +13,22 @@ void OpenEngine::World::Tick() {
 	mCameraSystem->Tick();
 	mPhysicSystem->Tick();
 	mTransformSystem->Tick();
+	mMeshRendererSystem->Tick();
 	mUISystem->Tick();
 }
 
 int OpenEngine::World::Initialize() {
-	mPhysicSystem = new PhysicSystem(this);
-	mPhysicSystem->Initialize();
 	mTransformSystem = new TransformSystem(this);
 	mTransformSystem->Initialize();
+	mPhysicSystem = new PhysicSystem(this);
+	mPhysicSystem->Initialize();
+	
 	mUISystem = new UISystem(this);
 	mUISystem->Initialize();
 	mCameraSystem = new CameraSystem(this);
 	mCameraSystem->Initialize();
-
+	mMeshRendererSystem = new MeshRendererSystem(this);
+	mMeshRendererSystem->Initialize();
 	return 0;
 }
 void OpenEngine::World::Finalize() {
@@ -35,6 +38,7 @@ void OpenEngine::World::Finalize() {
 	mTransformSystem->Finalize();
 	mUISystem->Finalize();
 	mCameraSystem->Finalize();
+	mMeshRendererSystem->Finalize();
 }
 shared_ptr<Entity> OpenEngine::World::CreateEntity(string name) {
 	auto entity = std::make_shared<Entity>(name);
