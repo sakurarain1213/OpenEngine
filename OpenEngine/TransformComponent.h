@@ -17,9 +17,9 @@ namespace OpenEngine {
 		Vector3f GetPosition() { return this->Position; }
 		void Rotate(Quaternionf rota);
 		Quaternionf GetRotation() { return this->Rotation; }
-		void SetLinearVelocity(Vector3f vel);
+		//void SetLinearVelocity(Vector3f vel);
 
-		void SetAngularVelocity(Quaternionf vel);
+		//void SetAngularVelocity(Quaternionf vel);
 
 		Vector3f GlobalVectorToLocalVector(Vector3f globalVector);
 		Vector3f LocalPointToGlobalPoint(Vector3f localPoint);
@@ -53,8 +53,8 @@ namespace OpenEngine {
 
 	public:
 		Vector3f Position;
-		Vector3f LinearVelocity;
-		Quaternionf  AngularVelocity;
+		//Vector3f LinearVelocity;
+		//Quaternionf  AngularVelocity;
 		Quaternionf Rotation;
 		Vector3f Scale;
 

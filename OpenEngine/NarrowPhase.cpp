@@ -38,6 +38,7 @@ inline Vector3f OpenEngine::MinkowskiDiff::Support1(Vector3f dir)
 	TransformComponent* transform = box1->GetOwner()->GetComponent<TransformComponent>();
 	Vector3f localDir = transform->GlobalVectorToLocalVector(dir);
 	Vector3f localSupportPoint = box1->GetAABB().LocalGetSupportVertex(localDir);
+	//涉及到体积了
 	Vector3f globalSupportPoint = transform->LocalPointToGlobalPoint(localSupportPoint);
 	return globalSupportPoint;
 }
@@ -70,7 +71,9 @@ Vector3f OpenEngine::MinkowskiDiff::Support(Vector3f dir, int idx)
 
 ////////////////////////////////////////////// GJK //////////////////////
 
+//GJK（Gilbert-Johnson-Keerthi）算法用于最初检测两个对象之间的碰撞   具体暂不关心
 
+//需要为m_shape提供相应的形状定义和碰撞检测函数。
 struct GJK
 {
 	struct sSV
@@ -119,9 +122,11 @@ struct GJK
 
 
 	//临时加数学函数
-	static float length(Vector3f &v) { return std::sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]); }
-	static float  length2(Vector3f &v) { return (v[0] * v[0] + v[1] * v[1] + v[2] * v[2]); }
+	static float length(Vector3f &v) { return std::sqrt(v(0) * v(0) + v(1) * v(1) + v(2) * v(2)); }
+	static float  length2(Vector3f &v) { return (v(0) * v(0) + v(1) * v(1) + v(2) * v(2)); }
 
+
+	//深层debug
 	eStatus::_ Evaluate(const tShape& shapearg, const Vector3f& guess)
 	{
 		U iterations = 0;
@@ -512,6 +517,10 @@ void btSwap(T& a, T& b)
 
 
 ////////////////////////////////////////////// EPA //////////////////////
+
+//EPA（Expanding Polytope Algorithm）算法用于更精确地检测在GJK检测到两个对象接近时的碰撞。
+// EPA迭代地扩展简单形状，直到包含原点，从而确定碰撞的深度和法线。
+
 struct EPA
 {
 	/* Types		*/
@@ -573,8 +582,8 @@ struct EPA
 
 
 	//临时加数学函数
-	float length(Vector3f v) { return std::sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]); }
-	float length2(Vector3f v) { return (v[0] * v[0] + v[1] * v[1] + v[2] * v[2]); }
+	float length(Vector3f v) { return std::sqrt(v(0) * v(0) + v(1) * v(1) + v(2) * v(2)); }
+	float length2(Vector3f v) { return (v(0) * v(0) + v(1) * v(1) + v(2) * v(2)); }
 
 
 	static inline void bind(sFace* fa, U ea, sFace* fb, U eb)
@@ -881,7 +890,7 @@ void OpenEngine::NarrowPhaseGJKEPA::UpdateManifolds(std::vector<std::shared_ptr<
 
 }
 
-
+//两大碰撞检测算法结束
 
 /*
 rigidBodiesPairs 所有可能发生碰撞的刚体对
@@ -891,20 +900,38 @@ https://github.com/darktemplar216/PhysicsTest_Chapter2/blob/master/TestFreeLicen
 RearrengeContactPoints
 
 */
+
+//核心函数   传入刚体对  如果有碰撞点    给参数manifolds
 void OpenEngine::NarrowPhaseGJKEPA::CollideDetection(std::vector<RigidBodyPair>& rigidBodiesPairs, std::vector<std::shared_ptr<ContactManifold>>& manifolds)
 {
 	for (auto pair : rigidBodiesPairs)
 	{
 		// A物体的坐标
-		Vector3f position1 = pair.first->GetOwner()->GetComponent<TransformComponent>()->GetPosition();
-		// B物体的左边
-		Vector3f position2 = pair.second->GetOwner()->GetComponent<TransformComponent>()->GetPosition();
+		Vector3f position1 = pair.first->GetOwner()->GetComponent<TransformComponent>()->Position;
+		// B物体的坐标
+		Vector3f position2 = pair.second->GetOwner()->GetComponent<TransformComponent>()->Position;
+		
 		Vector3f guess = position1 - position2;
 		sResults result;
 
+
+		// 第二帧开始 Position  nan(ind)
+		//std::cout << position1;
+		//sResults详情：
+		/*
+		Separated：表示两个形状没有相互穿透，即它们是分开的，没有碰撞。
+		Penetrating：表示两个形状正在相互穿透，即它们发生了碰撞。
+		GJK_Failed：表示GJK阶段失败，但这通常不是严重问题，可能只是形状之间刚刚接触。
+		EPA_Failed：表示EPA阶段失败，这是一个更严重的问题，需要保存参数并进行调试，因为无法确定碰撞的细节。
+		*/
+		//std::cout << position1<<"wai111"<<std::endl;
+		//std::cout << position2 << "wai222" << std::endl;
 		// 如果发生了穿透，则生成对应的ContactPoint信息
 		if (Penetration(pair, guess, result))
 		{
+			//第一帧就碰撞了  且一直卡在0位置
+			//std::cout << "--------------" << result.status << "--------------";
+			//Inside 状态
 			ContactPoint point;
 			point.localPositionA = result.witnessesInFirstLocal[0];
 			point.localPositionB = result.witnessesInFirstLocal[1];
@@ -913,6 +940,10 @@ void OpenEngine::NarrowPhaseGJKEPA::CollideDetection(std::vector<RigidBodyPair>&
 			point.normal = result.normal;
 			point.penetrationDistance = result.distance;
 			GenerateTangents(point);
+
+			//   point  all  tick all  zero   problem
+			
+			//std::cout << point.localPositionA<<"AAAAAAAAAAAA"<<std::endl;
 
 			point.rA = point.globalPositionA - position1;
 			point.rB = point.globalPositionB - position2;
@@ -927,9 +958,13 @@ void OpenEngine::NarrowPhaseGJKEPA::CollideDetection(std::vector<RigidBodyPair>&
 		}
 	}
 
-
-
 }
+
+
+
+
+
+
 
 void OpenEngine::NarrowPhaseGJKEPA::InitializeMinkowskiDiff(RigidBodyPair& pair, sResults& result, MinkowskiDiff& diff)
 {
@@ -942,9 +977,15 @@ void OpenEngine::NarrowPhaseGJKEPA::InitializeMinkowskiDiff(RigidBodyPair& pair,
 	diff.box2 = pair.second;
 }
 
+
+
+
+
 /*
 guess 是 second指向first的向量
 */
+//函数返回一个布尔值，指示是否发生了穿透。
+//把太大的对象分配在栈上会导致栈溢出
 bool OpenEngine::NarrowPhaseGJKEPA::Penetration(RigidBodyPair& pair, Vector3f& guess, sResults& result)
 {
 	MinkowskiDiff shape;
@@ -953,6 +994,9 @@ bool OpenEngine::NarrowPhaseGJKEPA::Penetration(RigidBodyPair& pair, Vector3f& g
 	// gjk 算法求解
 	GJK gjk;
 	GJK::eStatus::_ gjk_status = gjk.Evaluate(shape, guess * -1);
+
+	//-------------------
+	//std::cout << gjk_status <<"SSSS" << std::endl;  永远在inside循环
 
 	switch (gjk_status)
 	{
@@ -973,6 +1017,10 @@ bool OpenEngine::NarrowPhaseGJKEPA::Penetration(RigidBodyPair& pair, Vector3f& g
 				// Support 返回的是全局坐标系的点，所以可以判断w0是全局坐标系下的点。
 				w0 = w0 + shape.Support(epa.m_result.c[i]->d, 1) * epa.m_result.p[i];
 
+				//-------------------  穿透点坐标全0
+				//std::cout << w0 <<"SSSS" << std::endl;  
+
+
 			}
 			Matrix4f wtrs1 = pair.first->GetOwner()->GetComponent<TransformComponent>()->GetWorldMatrixInverse();
 			result.status = sResults::Penetrating;
@@ -991,6 +1039,7 @@ bool OpenEngine::NarrowPhaseGJKEPA::Penetration(RigidBodyPair& pair, Vector3f& g
 		}
 
 	}
+
 	case GJK::eStatus::Failed:
 	{
 		result.status = sResults::GJK_Failed;
@@ -1001,7 +1050,7 @@ bool OpenEngine::NarrowPhaseGJKEPA::Penetration(RigidBodyPair& pair, Vector3f& g
 	}
 
 	}
-	return false;
+	return false;//表示未发生穿透或碰撞检测失败。
 }
 
 

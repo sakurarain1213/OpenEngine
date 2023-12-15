@@ -18,7 +18,7 @@ namespace OpenEngine {
         Vec3 force;
         Vec3 velocity;
         Vec3 acceleration;
-        Vec3 angularVel;
+        Vec3 angularVel;// 当前角速度
         bool isSleep;
         bool isStatic;
         float mass;
@@ -27,16 +27,14 @@ namespace OpenEngine {
         Mat3 inertia;   //// 转动惯量 - 局部空间
         Mat3 inverseInertia;   // 转动惯量逆矩阵 - 局部空间
         Mat3 inverseInertiaWs;   // 转动惯量逆矩阵 - 全局空间
-
         // 描述碰撞发生后的修正参数接近0 - 修复缓慢，但是稳定。接近1 - 快速修复，但是会出现不稳定现象。
         float contactBeta;
         // 描述碰撞发生后的反弹效果，理解为弹性碰撞系数。接近0 - 完全非弹性碰撞接近1 - 完全弹性碰撞
         float restitution;
 
-        
         float frictionCoefficient;   // 摩擦
 
-        AABB aabb;
+        AABB aabb;     //碰撞盒    为了简化  只写了长方体   球collider 待实现
 
     public:
         RigidBodyComponent();
@@ -57,10 +55,7 @@ namespace OpenEngine {
         void SetMass(float mass);
         float GetInverseMass();
 
-
-
-
-        void SetAABB(AABB& ab) { aabb = ab; }
+        void SetAABB(Vec3& minPoint, Vec3& maxPoint) { this->aabb.Initialize( minPoint, maxPoint); }
         AABB GetAABB(){ return aabb; }
 
 

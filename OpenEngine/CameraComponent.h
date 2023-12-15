@@ -1,6 +1,7 @@
 #pragma once
 #include"IComponent.h"
 #include"Math.h"
+//暂时用不到的 实体  （不应该用component）
 namespace OpenEngine {
 	class CameraComponent : IComponent
 	{

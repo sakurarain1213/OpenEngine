@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Context.h"
+#include <iostream>
 
 namespace OpenEngine::App {
 	Context::Context(std::string base_path):
@@ -47,18 +48,41 @@ namespace OpenEngine::App {
 		buttonc->SetWindowid("e1");
 		//CameraComponent* camerac = e->AddComponent<CameraComponent>();
 		TransformComponent* tranc = e->GetComponent<TransformComponent>();
+		tranc->SetPosition({ 0,0,0 });
 		RigidBodyComponent* body = e->AddComponent<RigidBodyComponent>();
-		//Vec3 f1 = { 0,0,0 };
+		body->SetMass(10); 
+
+		Vec3 V1(-100, 0, 0);
+		body->SetVelocity(V1);
+		
+		Vec3 minP = { 0,0,0 }; Vec3 maxP = { 100,100,100 };
+		body->SetAABB(minP, maxP);
+		//
+		//ColliderComponent* coll1 = e->AddComponent<ColliderBox>();
+
+		//Vec3 f1 = { 10,0,0 };
 		//body->SetVelocity(f1);
 		
 		ButtonComponent* buttonc2 = e2->AddComponent<ButtonComponent>();
 		buttonc2->SetWindowid("e2");
 		TransformComponent* te2 = e2->GetComponent<TransformComponent>();
 		te2->SetPosition({ 600,0,0 });
-		//RigidBodyComponent* body2 = e2->AddComponent<RigidBodyComponent>();
-		//transc2->SetPosition({ 0,0,0 });
-		//Vec3 f = { 0,0,0 };
-		//body2->SetVelocity(f);
+		RigidBodyComponent* body2 = e2->AddComponent<RigidBodyComponent>();
+		body2->SetMass(10);
+
+		Vec3 V2(100, 0, 0);
+		body->SetVelocity(V2);
+
+		minP = { 600,0,0 };  maxP = { 800,200,200 };  //minP  is same   as   position
+		body2->SetAABB(minP, maxP);
+
+	// 碰撞需要设置质量和碰撞盒(体积边界)   
+
+		/*
+		Eigen::Vector3f tempaabb3(1,1,0); Eigen::Vector3f tempaabb4(2, 2, 2);
+		body2->SetAABB(tempaabb3, tempaabb4);
+		*/
+	
 		buttonc2->SetText("Go!!!");
 		
 

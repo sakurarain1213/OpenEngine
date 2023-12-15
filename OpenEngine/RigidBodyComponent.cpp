@@ -29,6 +29,8 @@ OpenEngine::RigidBodyComponent::RigidBodyComponent(Entity* entity) {
 }
 
 
+
+
 void OpenEngine::RigidBodyComponent::InitializeCoeff(float mass,  Mat3& inertia, float impulseCoeff, float frictionCoeff)
 {
 	SetMass(mass);
