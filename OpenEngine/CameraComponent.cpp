@@ -56,9 +56,9 @@ OpenEngine::Mat4 OpenEngine::CameraComponent::GetViewMatrix() {
 		Vec3 s = f;
 		s = s.cross(Up);
 		s.normalize();
-		std::cout <<"pre" << s << std::endl;
+		
 		Vec3 u = s.cross(f);
-		std::cout << "aft" << s << std::endl;
+	
 		u.normalize();
 		Mat4 Result;
 
