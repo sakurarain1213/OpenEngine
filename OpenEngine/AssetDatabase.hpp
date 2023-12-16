@@ -29,9 +29,18 @@ namespace OpenEngine::Editor {
 			}
 		}
 		template <class T>
-		T* GetAsset(std::string path, uint32_t localid) {
+		T* GetAssetByPath(std::string path, uint32_t localid) {
+			if (__PATH_TO_GUID_MAP.find(path) == __PATH_TO_GUID_MAP.end()) {
+				OE_WARNING("[AssetDatabase] " + path + " is not found");
+				return nullptr;
+			}
+			return GetAsset<T>(GUID(__PATH_TO_GUID_MAP.at(path)), localid);
+		}
+		template <class T>
+		T* GetAssetByRelativePath(std::string path, uint32_t localid) {
 			path = assetPath + "\\" + path;
 			if (__PATH_TO_GUID_MAP.find(path) == __PATH_TO_GUID_MAP.end()) {
+				OE_WARNING("[AssetDatabase] " + path + " is not found");
 				return nullptr;
 			}
 			return GetAsset<T>(GUID(__PATH_TO_GUID_MAP.at(path)), localid);
