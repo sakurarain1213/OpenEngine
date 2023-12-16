@@ -9,7 +9,7 @@ OpenEngine::CameraComponent::CameraComponent() {
 					0, 0, 0, 0,
 					0, 0, 0, 0;
 	Position = { 0,0,20 };
-	Center = { 0,0,1 };
+	Front = { 0,0,1 };
 	Up = { 0,1,0 };
 	ProjectionMatrix << 0, 0, 0, 0,
 		0, 0, 0, 0,
@@ -29,7 +29,7 @@ OpenEngine::CameraComponent::CameraComponent(Entity* entity) {
 		0, 0, 0, 0,
 		0, 0, 0, 0;
 	Position = { 0,0,20 };
-	Center = { 0,0,1 };
+	Front = { 0,0,1 };
 	Up = { 0,1,0 };
 	ProjectionMatrix << 0, 0, 0, 0,
 		0, 0, 0, 0,
@@ -51,35 +51,35 @@ void OpenEngine::CameraComponent::Finalize() {
 
 OpenEngine::Mat4 OpenEngine::CameraComponent::GetViewMatrix() {
 	
-	
-		Vec3 z((Position - Center).normalized());
-		std::cout << z << std::endl;
-		//Vec3 x(z.cross(Up).normalized());
-		//Vec3 y(x.cross(z));
+	if (VMdirtyflag) {
+		Vec3 f = Front.normalized();
+		Vec3 s = f;
+		s = s.cross(Up);
+		s.normalize();
 
-		Mat4 result;
+		Vec3 u = s.cross(f);
+		u.normalize();
+		Mat4 Result;
 
-		result[0] = x.x();
-		result[4] = x.y();
-		result[8] = x.z();
-		result[12] = -x.dot(Position);
-
-		result[1] = y.x();
-		result[5] = y.y();
-		result[9] = y.z();
-		result[13] = -y.dot(Position);
-
-		result[2] = z.x();
-		result[6] = z.y();
-		result[10] = z.z();
-		result[14] = -z.dot(Position);
-
-		result[3] = result[7] = result[11] = 0.0f;
-		result[15] = 1.0f;
-		
-		ViewMatrix = result;
+		Result(0, 0) = s.x();
+		Result(1, 0) = s.y();
+		Result(2, 0) = s.z();
+		Result(0, 1) = u.x();
+		Result(1, 1) = u.y();
+		Result(2, 1) = u.z();
+		Result(0, 2) = -f.x();
+		Result(1, 2) = -f.y();
+		Result(2, 2) = -f.z();
+		Result(3, 0) = -s.dot(Position);
+		Result(3, 1) = -u.dot(Position);
+		Result(3, 2) = f.dot(Position);
+		Result(0, 3) = 0;
+		Result(1, 3) = 0;
+		Result(2, 3) = 0;
+		Result(3, 3) = 1;
+		ViewMatrix = Result;
 		VMdirtyflag = false;
-	
+	}
 
 	return ViewMatrix;
 }
@@ -118,7 +118,7 @@ void OpenEngine::CameraComponent::SetPosition(Vec3 posi) {
 }
 
 void OpenEngine::CameraComponent::SetFront(Vec3 front) {
-	Center = front;
+	Front = front;
 	VMdirtyflag = true;
 	PMdirtyflag = true;
 }
