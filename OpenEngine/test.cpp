@@ -16,6 +16,7 @@ int main() {
     //mat->SetShader(shader);
     //mat->SetUniform("diffuseMap", tex);
     //assets.Save(mat);
+
     app.Run();
     return 0;
 }

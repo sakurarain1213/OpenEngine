@@ -470,5 +470,8 @@
     <ClInclude Include="RenderEnum.h">
       <Filter>头文件\OERendering</Filter>
     </ClInclude>
+    <ClInclude Include="ModelImporter.h">
+      <Filter>头文件\OECore\AssetImporter</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

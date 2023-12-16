@@ -194,6 +194,7 @@
     <ClInclude Include="IntegratePhase.h" />
     <ClInclude Include="Jacobian.h" />
     <ClInclude Include="MaterialImporter.h" />
+    <ClInclude Include="ModelImporter.h" />
     <ClInclude Include="NarrowPhase.h" />
     <ClInclude Include="ObjectReference.h" />
     <ClInclude Include="RenderEnum.h" />
