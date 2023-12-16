@@ -102,6 +102,7 @@ namespace OpenEngine {
 			m_drawcalls.emplace_back(mesh, material, modelMatrix);
 		}
 		void ExecuteDrawCalls() {
+			Clear(true, true, true);
 			SetGlobalUBO();
 			for (int i = 0;i < m_drawcalls.size();++i) {
 				Mesh* mesh = m_drawcalls[i].mesh;
@@ -148,7 +149,16 @@ namespace OpenEngine {
 				else {
 					DisableCullFace();
 				}
-
+				for (int j = 0;j < 1;++j) {
+					Vec4 p = m_projectionMatrix * m_viewMatrix * m_drawcalls[i].modelMatrix * Vec4(mesh->vertices[j].position.x(), mesh->vertices[j].position.y(), mesh->vertices[j].position.z(), 1.0f);
+					if (p.x() / p.w() > 1) continue;
+					if (p.x() / p.w() < -1) continue;
+					if (p.y() / p.w() > 1) continue;
+					if (p.y() / p.w() < -1) continue;
+					if (p.z() / p.w() > 1) continue;
+					if (p.z() / p.w() < -1) continue;
+					std::cout << p << std::endl << std::endl;
+				}
 				mesh->Use();
 				glDrawElements(GL_TRIANGLES, mesh->GetIndiceCount(), GL_UNSIGNED_INT, (void*)0);
 			}

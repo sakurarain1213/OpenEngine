@@ -14,9 +14,9 @@ OpenEngine::CameraComponent::CameraComponent() {
 		0, 0, 0, 0,
 		0, 0, 0, 0,
 		0, 0, 0, 0;
-	NearClip = 10;
-	FarClip = 30;
-	Fov = 0.5;
+	NearClip = 1;
+	FarClip = 50;
+	Fov = 1.57;
 	VMdirtyflag = true;
 	PMdirtyflag = true;
 }
@@ -75,7 +75,7 @@ OpenEngine::Mat4 OpenEngine::CameraComponent::GetViewMatrix() {
 		Result(3, 0) = 0;
 		Result(3, 1) = 0;
 		Result(3, 2) = 0;
-		Result(3, 3) = 0;
+		Result(3, 3) = 1;
 		ViewMatrix = Result;
 		VMdirtyflag = false;
 	}
