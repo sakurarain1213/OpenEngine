@@ -7,7 +7,7 @@ using namespace OpenEngine;
 int main() {
     App::Application app("D:\\Project\\OETest");
 
-    //Editor::AssetDatabase& assets = OESERVICE(Editor::AssetDatabase);
+    Editor::AssetDatabase& assets = OESERVICE(Editor::AssetDatabase);
     
     //assets.CreateAsset("standard.material");
     //Material* mat = assets.GetAsset<Material>("standard.material", 0);
@@ -16,7 +16,9 @@ int main() {
     //mat->SetShader(shader);
     //mat->SetUniform("diffuseMap", tex);
     //assets.Save(mat);
-
+    Entity* model = assets.GetAsset<Entity>(GUID("f083afbb-ef5c-496c-bfb7-d1575868d447"), 0);
+    OE_LOG(std::to_string((size_t)model));
+    model->SetWorld(&OESERVICE(World));
     app.Run();
     return 0;
 }
