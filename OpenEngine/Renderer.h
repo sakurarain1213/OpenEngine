@@ -7,6 +7,8 @@
 #include "Material.h"
 #include "Time.h"
 
+#include <iostream>
+
 namespace OpenEngine {
 
 	struct DrawCall {
