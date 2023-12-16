@@ -2,10 +2,10 @@
 using namespace OpenEngine;
 
 Input::Input(Window& win):mWindow(win) {
-	keyDownListener = mWindow.KeyDownEvent.AddListener(std::bind(&OnKeyDown, this, std::placeholders::_1));
-	keyUpListener = mWindow.KeyUpEvent.AddListener(std::bind(&OnKeyUp, this, std::placeholders::_1));
-	mouseButtonDownListener = mWindow.MouseButtonDownEvent.AddListener(std::bind(&OnMouseButtonDown, this, std::placeholders::_1));
-	mouseButtonUpListener = mWindow.MouseButtonUpEvent.AddListener(std::bind(&OnMouseButtonUp, this, std::placeholders::_1));
+	keyDownListener = mWindow.KeyDownEvent.AddListener(std::bind(&Input::OnKeyDown, this, std::placeholders::_1));
+	keyUpListener = mWindow.KeyUpEvent.AddListener(std::bind(&Input::OnKeyUp, this, std::placeholders::_1));
+	mouseButtonDownListener = mWindow.MouseButtonDownEvent.AddListener(std::bind(&Input::OnMouseButtonDown, this, std::placeholders::_1));
+	mouseButtonUpListener = mWindow.MouseButtonUpEvent.AddListener(std::bind(&Input::OnMouseButtonUp, this, std::placeholders::_1));
 
 }
 Input::~Input() {
