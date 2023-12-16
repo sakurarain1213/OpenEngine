@@ -14,7 +14,7 @@ int OpenEngine::UISystem::Initialize()noexcept {
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 
 	
-	clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+	clear_color = ImVec4(0.3f, 0.4f, 0.5f, 1.00f);
 
 	if (no_titlebar)        window_flags |= ImGuiWindowFlags_NoTitleBar;
 	if (no_scrollbar)       window_flags |= ImGuiWindowFlags_NoScrollbar;

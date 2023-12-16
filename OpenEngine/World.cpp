@@ -24,7 +24,7 @@ void OpenEngine::World::Tick() {
 	mPhysicSystem->Tick();
 	mTransformSystem->Tick();
 	mMeshRendererSystem->Tick();
-	mUISystem->Tick();
+	//mUISystem->Tick();
 }
 
 int OpenEngine::World::Initialize() {

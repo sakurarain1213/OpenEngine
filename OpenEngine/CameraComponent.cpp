@@ -9,7 +9,7 @@ OpenEngine::CameraComponent::CameraComponent() {
 					0, 0, 0, 0,
 					0, 0, 0, 0;
 	Position = { 0,0,20 };
-	Front = { 0,0,1 };
+	Front = { 0,0,-1 };
 	Up = { 0,1,0 };
 	ProjectionMatrix << 0, 0, 0, 0,
 		0, 0, 0, 0,
@@ -17,7 +17,7 @@ OpenEngine::CameraComponent::CameraComponent() {
 		0, 0, 0, 0;
 	NearClip = 1;
 	FarClip = 50;
-	Fov = 0.6;
+	Fov = 1;
 	VMdirtyflag = true;
 	PMdirtyflag = true;
 }
@@ -29,15 +29,15 @@ OpenEngine::CameraComponent::CameraComponent(Entity* entity) {
 		0, 0, 0, 0,
 		0, 0, 0, 0;
 	Position = { 0,0,20 };
-	Front = { 0,0,1 };
+	Front = { 0,0,-1 };
 	Up = { 0,1,0 };
 	ProjectionMatrix << 0, 0, 0, 0,
 		0, 0, 0, 0,
 		0, 0, 0, 0,
 		0, 0, 0, 0;
-	NearClip = 10;
-	FarClip = 30;
-	Fov = 0.5;
+	NearClip = 1;
+	FarClip = 50;
+	Fov = 1;
 	VMdirtyflag = true;
 	PMdirtyflag = true;
 }
