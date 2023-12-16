@@ -180,7 +180,7 @@
     <ClCompile Include="imgui_impl_opengl3.cpp">
       <Filter>Imgui\sources</Filter>
     </ClCompile>
-    <ClCompile Include="InputMgr.cpp">
+    <ClCompile Include="Input.cpp">
       <Filter>头文件\OECore\Input</Filter>
     </ClCompile>
     <ClCompile Include="UI.cpp">
@@ -242,6 +242,9 @@
     </ClCompile>
     <ClCompile Include="Monobehaviour.cpp">
       <Filter>源文件\OECore</Filter>
+    </ClCompile>
+    <ClCompile Include="InputComponent.cpp">
+      <Filter>头文件\OECore\ECS\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -410,7 +413,7 @@
     <ClInclude Include="imstb_truetype.h">
       <Filter>Imgui</Filter>
     </ClInclude>
-    <ClInclude Include="InputMgr.h">
+    <ClInclude Include="Input.h">
       <Filter>头文件\OECore\Input</Filter>
     </ClInclude>
     <ClInclude Include="UI.h">
@@ -487,6 +490,21 @@
     </ClInclude>
     <ClInclude Include="Monobehaviour.h">
       <Filter>头文件\OECore</Filter>
+    </ClInclude>
+    <ClInclude Include="InputComponent.h">
+      <Filter>头文件\OECore\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="EKey.h">
+      <Filter>头文件\OECore\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="EKeyState.h">
+      <Filter>头文件\OECore\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="EMouseButton.h">
+      <Filter>头文件\OECore\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="EMouseButtonState.h">
+      <Filter>头文件\OECore\Input</Filter>
     </ClInclude>
     <ClInclude Include="ModelImporter.h">
       <Filter>头文件\OECore\AssetImporter</Filter>

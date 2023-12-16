@@ -3,6 +3,7 @@
 #include <memory>
 #include "WindowDevice.h"
 #include "Window.h"
+#include"Input.h"
 #include "RenderDriver.h"
 #include "Renderer.h"
 #include "AssetDatabase.hpp"
@@ -21,6 +22,7 @@ namespace OpenEngine::App {
 		std::unique_ptr<Renderer> renderer;
 		std::unique_ptr<Editor::AssetDatabase> assets;
 		std::unique_ptr<World> worldmanager;
+		std::unique_ptr<Input>inputMgr;
 		IniFile projectSetting;
 
 	};
