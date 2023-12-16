@@ -51,8 +51,14 @@ namespace OpenEngine {
 	bool Window::ShouldClose() const {
 		return glfwWindowShouldClose(m_window);
 	}
-	
-	//test gui
+	Window* Window::FindInstance(GLFWwindow* p_glfwWindow)
+	{
+		return _glfw_window_map.find(p_glfwWindow) != _glfw_window_map.end() ? _glfw_window_map[p_glfwWindow] : nullptr;
+	}
+	GLFWwindow* Window::GetGlfwWindow() const {
+		return m_window;
+	}
+	//imgui
 	void Window::testUIRender() {
 		
 		// Poll and handle events (inputs, window resize, etc.)
@@ -158,6 +164,43 @@ namespace OpenEngine {
 		clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
 		
+	}
+
+	//CallBack bind
+	void Window::BindKeyCallBack()const {
+		auto keyCallback = [](GLFWwindow* p_window, int p_key, int p_scancode, int p_action, int p_mods)
+		{
+			Window* windowInstance = FindInstance(p_window);
+
+			if (windowInstance)
+			{
+				if (p_action == GLFW_PRESS)
+					windowInstance->KeyDownEvent.Invoke(p_key);
+
+				if (p_action == GLFW_RELEASE)
+					windowInstance->KeyUpEvent.Invoke(p_key);
+			}
+		};
+
+		glfwSetKeyCallback(m_window, keyCallback);
+	}
+	void Window::BindMouseCallBack() const
+	{
+		auto mouseCallback = [](GLFWwindow* p_window, int p_button, int p_action, int p_mods)
+		{
+			Window* windowInstance = FindInstance(p_window);
+
+			if (windowInstance)
+			{
+				if (p_action == GLFW_PRESS)
+					windowInstance->MouseButtonDownEvent.Invoke(p_button);
+
+				if (p_action == GLFW_RELEASE)
+					windowInstance->MouseButtonUpEvent.Invoke(p_button);
+			}
+		};
+
+		glfwSetMouseButtonCallback(m_window, mouseCallback);
 	}
 	std::unordered_map<GLFWwindow*, Window*> Window::_glfw_window_map;
 }

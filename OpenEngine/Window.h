@@ -35,7 +35,8 @@ namespace OpenEngine {
 			
 			CreateimguiContext();
 			
-
+			BindKeyCallBack();
+			BindMouseCallBack();
 			BindOnResize();
 			onResize.AddListener(std::bind(&Window::updateSizeAfterResize, this, std::placeholders::_1, std::placeholders::_2));
 		}
@@ -45,6 +46,9 @@ namespace OpenEngine {
 		void SetContextCurrent() const;
 		void SwapBuffers() const;
 		bool ShouldClose() const;
+
+		static Window* FindInstance(GLFWwindow* p_glfwWindow);
+		GLFWwindow* GetGlfwWindow() const;
 		void testUIRender();
 	private:
 		void CreateGLFWWindow();
@@ -61,6 +65,17 @@ namespace OpenEngine {
 		void CreateimguiContext();
 	public:
 		Action<uint16_t, uint16_t> onResize;
+
+		//Input relatives
+		Action<int> KeyDownEvent;
+		Action<int> KeyUpEvent;
+		Action<int> MouseButtonDownEvent;
+		Action<int> MouseButtonUpEvent;
+	private:
+		//Input Bind
+		void BindKeyCallBack()const;
+		void BindMouseCallBack()const;
+		
 	private:
 		static std::unordered_map<GLFWwindow*, Window*> _glfw_window_map;
 		const WindowDevice& device;
