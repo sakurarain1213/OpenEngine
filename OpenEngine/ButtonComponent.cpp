@@ -5,7 +5,7 @@ OpenEngine::ButtonComponent::ButtonComponent(Entity* entity) {
 	mIsActive = true;
 	size = { 200,200 };
 	window_id = "";
-	text = "";
+	text = " ";
 }
 
 OpenEngine::ButtonComponent::ButtonComponent() {
@@ -13,7 +13,7 @@ OpenEngine::ButtonComponent::ButtonComponent() {
 	mIsActive = true;
 	size = { 200,200 };
 	window_id = "";
-	text = "";
+	text = " ";
 }
 
 int OpenEngine::ButtonComponent::Initialize() {

@@ -36,8 +36,9 @@ namespace OpenEngine::App {
 		//以下为初始化一个测试用World,包含一个entity
 
 		worldmanager = std::make_unique<World>("world");
-		worldmanager->Initialize();
 		ServiceLocator::RegisterService<World>(*worldmanager);
+		worldmanager->Initialize();
+		
 
 		assets->ImportAllAssets();
 

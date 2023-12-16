@@ -14,7 +14,11 @@ void MeshRendererSystem::Finalize() noexcept {
 }
 
 void MeshRendererSystem::Tick()noexcept {
+	for (MeshRendererComponent* comp : components) {
 
+		comp->DrawMesh();
+
+	}
 }
 void MeshRendererSystem::AddComponent(MeshRendererComponent* comp) {
 	if (nullptr == comp)

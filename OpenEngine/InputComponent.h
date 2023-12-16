@@ -1,3 +1,6 @@
+
+//未投入使用
+
 #pragma once
 #include"IComponent.h"
 #include"Action.h"
