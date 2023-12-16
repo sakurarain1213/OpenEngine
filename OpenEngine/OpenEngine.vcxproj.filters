@@ -240,11 +240,14 @@
     <ClCompile Include="MeshRendererSystem.cpp">
       <Filter>头文件\OECore\ECS\System</Filter>
     </ClCompile>
-    <ClCompile Include="Monobehaviour.cpp">
-      <Filter>源文件\OECore</Filter>
-    </ClCompile>
     <ClCompile Include="InputComponent.cpp">
       <Filter>头文件\OECore\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="MonoBehaviour.cpp">
+      <Filter>头文件\OECore\ECS\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="MonoBehaviourSystem.cpp">
+      <Filter>头文件\OECore\ECS\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -488,9 +491,6 @@
     <ClInclude Include="MeshRendererSystem.h">
       <Filter>头文件\OECore\ECS\System</Filter>
     </ClInclude>
-    <ClInclude Include="Monobehaviour.h">
-      <Filter>头文件\OECore</Filter>
-    </ClInclude>
     <ClInclude Include="InputComponent.h">
       <Filter>头文件\OECore\ECS\Component</Filter>
     </ClInclude>
@@ -505,6 +505,12 @@
     </ClInclude>
     <ClInclude Include="EMouseButtonState.h">
       <Filter>头文件\OECore\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="MonoBehaviour.h">
+      <Filter>头文件\OECore\ECS\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="MonoBehaviourSystem.h">
+      <Filter>头文件\OECore\ECS\System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

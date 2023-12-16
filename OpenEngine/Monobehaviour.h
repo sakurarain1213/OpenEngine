@@ -1,15 +1,16 @@
 #pragma once
 #include"IComponent.h"
 namespace OpenEngine {
-	class Monobehaviour : public IComponent
+	class MonoBehaviour : public IComponent
 	{
 	public:
-		int Initialize() {};
+		int Initialize() { return 0; };
 		void OnEnable(){};
 		void FixedUpdate(){};
 		void Update(){};
 		void OnDisable(){};
 		void Finalize(){};
+		void OnCollision() {};
 
 	private:
 
