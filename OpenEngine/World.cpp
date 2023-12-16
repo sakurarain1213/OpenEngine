@@ -29,6 +29,8 @@ int OpenEngine::World::Initialize() {
 	mCameraSystem->Initialize();
 	mMeshRendererSystem = new MeshRendererSystem(this);
 	mMeshRendererSystem->Initialize();
+
+	//shared_ptr<Entity> maincamera
 	return 0;
 }
 void OpenEngine::World::Finalize() {

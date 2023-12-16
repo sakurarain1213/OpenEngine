@@ -4,6 +4,8 @@ namespace OpenEngine {
 	class MonoBehaviour : public IComponent
 	{
 	public:
+		MonoBehaviour();
+
 		int Initialize() { return 0; };
 		void OnEnable(){};
 		void FixedUpdate(){};

@@ -1,6 +1,7 @@
 #pragma once
 
 #include"ISystem.h"
+#include"MonoBehaviour.h"
 #include<set>
 namespace OpenEngine {
 	class MonoBehaviourSystem :public ISystem 
@@ -11,8 +12,10 @@ namespace OpenEngine {
 		void Finalize();
 		void Tick();
 
+
+
 	private:
-		std::set<MeshRendererComponent*>components;
+		std::set<MonoBehaviour*>components;
 		World* mWorld;
 	};
 }
