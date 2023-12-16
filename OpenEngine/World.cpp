@@ -3,7 +3,17 @@
 using namespace std;
 using namespace OpenEngine;
 OpenEngine::World::World(std::string name) : IRuntimeModule(name) {
+	mTransformSystem = new TransformSystem(this);
+	mTransformSystem->Initialize();
+	mPhysicSystem = new PhysicSystem(this);
+	mPhysicSystem->Initialize();
 
+	mUISystem = new UISystem(this);
+	mUISystem->Initialize();
+	mCameraSystem = new CameraSystem(this);
+	mCameraSystem->Initialize();
+	mMeshRendererSystem = new MeshRendererSystem(this);
+	mMeshRendererSystem->Initialize();
 }
 std::string OpenEngine::World::GetType() {
 	return "World";
@@ -18,19 +28,11 @@ void OpenEngine::World::Tick() {
 }
 
 int OpenEngine::World::Initialize() {
-	mTransformSystem = new TransformSystem(this);
-	mTransformSystem->Initialize();
-	mPhysicSystem = new PhysicSystem(this);
-	mPhysicSystem->Initialize();
 	
-	mUISystem = new UISystem(this);
-	mUISystem->Initialize();
-	mCameraSystem = new CameraSystem(this);
-	mCameraSystem->Initialize();
-	mMeshRendererSystem = new MeshRendererSystem(this);
-	mMeshRendererSystem->Initialize();
 
-	//shared_ptr<Entity> maincamera
+	shared_ptr<Entity> mainCamera = CreateEntity("mainCamera");
+	CameraComponent* comp=mainCamera->AddComponent<CameraComponent>();
+	mCameraSystem->SetMainCamera(comp);
 	return 0;
 }
 void OpenEngine::World::Finalize() {
