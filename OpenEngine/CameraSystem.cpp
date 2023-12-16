@@ -38,3 +38,4 @@ void OpenEngine::CameraSystem::SetRenderer() {
 	OESERVICE(Renderer).SetProjectionMatrix(MainCamera->GetProjectionMatrix());
 	OESERVICE(Renderer).SetCameraPosition(MainCamera->GetPosition());
 }
+

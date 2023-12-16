@@ -1,6 +1,8 @@
 #include"UISystem.h"
 #include"Math.h"
-OpenEngine::UISystem::UISystem(World* world) {
+#include"Entity.h"
+#include<iostream>
+OpenEngine::UISystem::UISystem(World* world) :window_id(0) {
 	mWorld = world;
 }
 
@@ -38,7 +40,7 @@ void OpenEngine::UISystem::Tick()noexcept {
 	
 	
 	for (ButtonComponent* comp : components) {
-
+		
 		ShowButton(comp);
 		
 	}
@@ -71,16 +73,18 @@ void OpenEngine::UISystem::ShowButton(ButtonComponent* comp) {
 	bool is = comp->IsActive();
 	Vec3 posi=comp->GetPosition();
 	Vec2 size = comp->GetSize();
-	float px = posi.x(),py=posi.y(),sx=size.x(),sy=size.y();
-	std::string temp = comp->GetText();
-	char* text = (char*)temp.c_str();
+	float sx=size.x(),sy=size.y();
+	std::string temptext = comp->GetText();
+	char* text = (char*)temptext.c_str();
+	std::string tempname = comp->GetText();
+	char* name = (char*)tempname.c_str();
 	
-	
-	ImGui::SetNextWindowPos(ImVec2(px, py), ImGuiCond_Always);
+	ImGui::SetNextWindowPos(ImVec2(posi.x(), posi.y()), ImGuiCond_Always);
 	ImGui::SetNextWindowSize(ImVec2(sx+200, sy+200), ImGuiCond_Always);
 	
+	
 	// Main body of the Demo window starts here.
-	ImGui::Begin("b", &is, window_flags);
+	ImGui::Begin(name, &is, window_flags);
 	ImGui::Button(text, ImVec2(sx, sy));
 	ImGui::End();
 }

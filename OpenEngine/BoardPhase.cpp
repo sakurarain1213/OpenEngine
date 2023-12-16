@@ -9,6 +9,7 @@ void OpenEngine::BoardPhaseNquared::Update(float dt)
 {
 }
 
+//只枚举刚体对
 std::vector<RigidBodyPair>& OpenEngine::BoardPhaseNquared::GeneratePossiblePair(std::vector<RigidBodyComponent*>& rigidbodies, std::vector<RigidBodyPair>& candicate)
 {
 	candicate.clear();

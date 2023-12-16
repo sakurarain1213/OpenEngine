@@ -2,6 +2,7 @@
 #include"Time.h"
 #include<algorithm>
 #include<iostream>
+#include"Entity.h"
 using namespace Eigen;
 OpenEngine::TransformSystem::TransformSystem(World* world) {
 	mWorld = world;
@@ -18,11 +19,14 @@ void OpenEngine::TransformSystem::Tick()noexcept {
 	float dTime = Time::GetDeltaTime();
 
 	for (TransformComponent* t : components) {
-		
-		t->SetPosition(t->Position + dTime * t->LinearVelocity);
-
-		float x = t->Position.x();
-		float y = t->Position.y();
+		//if (!t->GetOwner()->GetComponent<RigidBodyComponent>()) {
+			//t->SetPosition(t->Position + dTime * t->LinearVelocity);
+		//}
+		//else {
+		//	t->SetPosition(t->Position + dTime * t->GetOwner()->GetComponent<RigidBodyComponent>()->GetVelocity());
+		//}
+		//Vec3 temp=t->GetOwner()->GetComponent<TransformComponent>()->GetPosition();
+		//std::cout << temp;
 		
 	}
 	

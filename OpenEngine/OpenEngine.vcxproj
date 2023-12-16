@@ -180,6 +180,11 @@
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="IntegratePhase.cpp" />
     <ClCompile Include="Jacobian.cpp" />
+    <ClCompile Include="MeshRendererComponent.cpp" />
+    <ClCompile Include="MeshRendererSystem.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Monobehaviour.cpp" />
     <ClCompile Include="NarrowPhase.cpp" />
     <ClCompile Include="ResolutionPhase.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />
@@ -194,6 +199,11 @@
     <ClInclude Include="IntegratePhase.h" />
     <ClInclude Include="Jacobian.h" />
     <ClInclude Include="MaterialImporter.h" />
+    <ClInclude Include="MeshRendererComponent.h" />
+    <ClInclude Include="MeshRendererSystem.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Monobehaviour.h" />
     <ClInclude Include="ModelImporter.h" />
     <ClInclude Include="NarrowPhase.h" />
     <ClInclude Include="ObjectReference.h" />

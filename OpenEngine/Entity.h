@@ -6,6 +6,7 @@
 #include"CameraComponent.h"
 #include"RigidBodyComponent.h"
 #include"ColliderComponent.h"
+#include"MeshRendererComponent.h"
 #include"World.h"
 #include<vector>
 #include<list>
@@ -54,38 +55,57 @@ namespace OpenEngine {
 		TransformComponent* mTransform;
 		ButtonComponent* mButton;
 		CameraComponent* mCamera;
-		//RigidBodyComponent* mRigidBody;
+		RigidBodyComponent* mRigidBody;
+		MeshRendererComponent* mRenderer;
 		//ColliderComponent* mCollider;
 	};
 	template<typename T>
 	T* OpenEngine::Entity::AddComponent() {
 		void* comp = nullptr;
 		if (std::is_same<T, TransformComponent>::value) {
+			if(!mTransform){
 			mTransform = new TransformComponent(this);
 
 			mTransform->Initialize();
 			mWorld->mTransformSystem->AddComponent(mTransform);
+			
+			}
 			comp = mTransform;
 		}
 		else if (std::is_same<T, ButtonComponent>::value) {
-			mButton = new ButtonComponent(this);
-			mButton->Initialize();
-			mWorld->mUISystem->AddComponent(mButton);
+			
+			if (!mButton) {
+				mButton = new ButtonComponent(this);
+				mButton->Initialize();
+				mWorld->mUISystem->AddComponent(mButton);
+			}
 			comp = mButton;
 		}
 		else if (std::is_same<T, CameraComponent>::value) {
-			mCamera = new CameraComponent(this);
-			mCamera->Initialize();
 			
+			if (!mCamera) {
+				mCamera = new CameraComponent(this);
+				mCamera->Initialize();
+			}
 			comp = mCamera;
 		}
-		/*else if (std::is_same<T, RigidBodyComponent>::value) {
-			mRigidBody = new RigidBodyComponent(this);
-			mRigidBody->Initialize();
-
+		else if (std::is_same<T, RigidBodyComponent>::value) {
+			if (!mRigidBody) {
+				mRigidBody = new RigidBodyComponent(this);
+				mWorld->mPhysicSystem->AddComponent(mRigidBody);
+				mRigidBody->Initialize();
+			}
 			comp = mRigidBody;
 		}
-		else if (std::is_same<T, ColliderComponent>::value) {
+		else if (std::is_same<T, MeshRendererComponent>::value) {
+			if (!mRenderer) {
+				mRenderer = new MeshRendererComponent(this);
+				mWorld->mMeshRendererSystem->AddComponent(mRenderer);
+				mRenderer->Initialize();
+			}
+			comp = mRenderer;
+		}
+		/*else if (std::is_same<T, ColliderComponent>::value) {
 			mCollider = new ColliderComponent(this);
 			mCollider->Initialize();
 
@@ -107,10 +127,13 @@ namespace OpenEngine {
 		else if (std::is_same<T, CameraComponent>::value) {
 			ret = mCamera;
 		}
-		/*else if (std::is_same<T, RigidBodyComponent>::value) {
+		else if (std::is_same<T, RigidBodyComponent>::value) {
 			ret = mRigidBody;
 		}
-		else if (std::is_same<T, ColliderComponent>::value) {
+		else if (std::is_same<T, MeshRendererComponent>::value) {
+			ret = mRenderer;
+		}
+		/*else if (std::is_same<T, ColliderComponent>::value) {
 			ret = mCollider;
 		}*/
 		return (T*)ret;
@@ -136,6 +159,18 @@ namespace OpenEngine {
 			mCamera->Finalize();
 			delete mCamera;
 			mCamera = nullptr;
+		}
+		else if (std::is_same<T, RigidBodyComponent>::value) {
+
+			mRigidBody->Finalize();
+			delete mRigidBody;
+			mRigidBody = nullptr;
+		}
+		else if (std::is_same<T, MeshRendererComponent>::value) {
+
+			mRenderer->Finalize();
+			delete mRenderer;
+			mRenderer = nullptr;
 		}
 	}
 	

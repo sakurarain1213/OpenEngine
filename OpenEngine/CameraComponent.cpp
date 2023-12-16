@@ -8,7 +8,7 @@ OpenEngine::CameraComponent::CameraComponent() {
 					0, 0, 0, 0,
 					0, 0, 0, 0;
 	Position = { 0,0,0 };
-	Front = { 0,0,0 };
+	Front = { 0,1,0 };
 	Up = { 0,0,0 };
 	ProjectionMatrix << 0, 0, 0, 0,
 		0, 0, 0, 0,
@@ -28,7 +28,7 @@ OpenEngine::CameraComponent::CameraComponent(Entity* entity) {
 		0, 0, 0, 0,
 		0, 0, 0, 0;
 	Position = { 0,0,0 };
-	Front = { 0,0,0 }; 
+	Front = { 0,1,0 }; 
 	Up = { 0,0,0 };
 	ProjectionMatrix << 0, 0, 0, 0,
 		0, 0, 0, 0,
@@ -77,6 +77,7 @@ OpenEngine::Mat4 OpenEngine::CameraComponent::GetViewMatrix() {
 		Result(3, 2) = 0;
 		Result(3, 3) = 0;
 		ViewMatrix = Result;
+		VMdirtyflag = false;
 	}
 
 	return ViewMatrix;
@@ -99,7 +100,7 @@ OpenEngine::Mat4 OpenEngine::CameraComponent::GetProjectionMatrix() {
 			0, 0, -1, 0;
 
 		ProjectionMatrix = Result;
-		
+		PMdirtyflag = false;
 	}
 	
 	return ProjectionMatrix;
@@ -107,4 +108,36 @@ OpenEngine::Mat4 OpenEngine::CameraComponent::GetProjectionMatrix() {
 
 OpenEngine::Vec3 OpenEngine::CameraComponent::GetPosition() {
 	return Position;
+}
+
+void OpenEngine::CameraComponent::SetPosition(Vec3 posi) {
+	Position = posi;
+	VMdirtyflag = true;
+	PMdirtyflag = true;
+}
+
+void OpenEngine::CameraComponent::SetFront(Vec3 front) {
+	Front = front;
+	VMdirtyflag = true;
+	PMdirtyflag = true;
+}
+void OpenEngine::CameraComponent::SetUp(Vec3 up) {
+	Up = up;
+	VMdirtyflag = true;
+	PMdirtyflag = true;
+}
+
+void OpenEngine::CameraComponent::SetNearClip(float d) {
+	NearClip = d; VMdirtyflag = true;
+	PMdirtyflag = true;
+}
+void OpenEngine::CameraComponent::SetFarClip(float d) {
+	FarClip = d;
+	VMdirtyflag = true;
+	PMdirtyflag = true;
+}
+void OpenEngine::CameraComponent::SetFov(float d) {
+	Fov = d;
+	VMdirtyflag = true;
+	PMdirtyflag = true;
 }

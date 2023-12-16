@@ -22,6 +22,7 @@ namespace  OpenEngine
 			: normalImpulseSum(0.0f)
 			, tangentImpulseSum1(0.0f)
 			, tangentImpulseSum2(0.0f)
+			, penetrationDistance(0.0f)
 			, m_jN(JacobianType::Normal)
 			, m_jT(JacobianType::Tangent)
 			, m_jB(JacobianType::Tangent)
@@ -50,7 +51,7 @@ namespace  OpenEngine
 		float tangentImpulseSum1;
 		float tangentImpulseSum2;
 
-		Jacobian m_jN;
+		Jacobian m_jN; //法线和两个切线方向的雅可比矩阵
 		Jacobian m_jT;
 		Jacobian m_jB;
 

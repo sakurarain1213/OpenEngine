@@ -1,5 +1,6 @@
 #include "Entity.h"
 #include<stdio.h>
+#include"ServiceLocator.h"
 using namespace OpenEngine;
 std::string OpenEngine::Entity::GetType() {
 	return "Entity";
@@ -24,12 +25,19 @@ void OpenEngine::Entity::Tick() noexcept{}
 OpenEngine::Entity::Entity(std::string name) : IRuntimeModule(name) {
 	mParent = nullptr;
 	mTransform = nullptr;
+	mButton = nullptr;
+	mCamera = nullptr;
+	mRigidBody = nullptr;
 	mGuid = boost::uuids::random_generator()();
+	mWorld = &(OESERVICE(World));
+	this->AddComponent<TransformComponent>();
 }
 OpenEngine::Entity::Entity(std::string name, const boost::uuids::uuid& guid) : IRuntimeModule(name) {
 	mParent = nullptr;
 	mTransform = nullptr;
 	mGuid = guid;
+	mWorld = &(OESERVICE(World));
+	this->AddComponent<TransformComponent>();
 }
 OpenEngine::Entity::~Entity() {
 	

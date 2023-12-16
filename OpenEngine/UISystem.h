@@ -42,7 +42,7 @@ namespace OpenEngine {
 		ImVec4 clear_color;
 		ImGuiIO io;
 	
-
+		int window_id;
 		bool no_titlebar = true;
 		bool no_scrollbar = true;
 		bool no_menu = true;

@@ -36,6 +36,7 @@ namespace OpenEngine
 		float distance;
 	};
 
+	//两个物体的Minkowski差，用于GJK和EPA碰撞检测算法
 	struct MinkowskiDiff
 	{
 		RigidBodyComponent* box1;
@@ -49,14 +50,24 @@ namespace OpenEngine
 
 	class NarrowPhaseGJKEPA : public INarrowPhase
 	{
+		//
 		virtual void UpdateManifolds(std::vector<std::shared_ptr<ContactManifold>>& collisions);
+		
+		
 		virtual void CollideDetection(std::vector<RigidBodyPair>& rigidBodies, std::vector<std::shared_ptr<ContactManifold>>&);
 
-		void InitializeMinkowskiDiff(RigidBodyPair& pair, sResults& result, MinkowskiDiff& diff);
+
+		void InitializeMinkowskiDiff(RigidBodyPair& pair, sResults& result, MinkowskiDiff& diff);//用于初始化Minkowski差
+		
+		//检测两个物体是否发生了穿透，通常在碰撞检测的GJK阶段
 		bool Penetration(RigidBodyPair& pair, Vector3f& guess, sResults& result);
+
+		//生成切线信息的函数，在检测到碰撞时调用
 		void GenerateTangents(ContactPoint& contactPoint);
 
-		//需要的数学工具类
+
+
+		//需要的数学工具类  归一化模=1
 		Vector3f TransformPoint(Matrix4f matrix, Vector3f point)
 		{
 			Vector4f hSpace = Vector4f(point(0), point(1), point(2), 1);

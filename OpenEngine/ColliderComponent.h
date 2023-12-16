@@ -1,6 +1,4 @@
 #pragma once
-
-
 //只存物理属性   逻辑在system写
 
 #include"IComponent.h"
