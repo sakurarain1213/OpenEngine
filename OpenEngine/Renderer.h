@@ -7,6 +7,8 @@
 #include "Material.h"
 #include "Time.h"
 
+#include <iostream>
+
 namespace OpenEngine {
 
 	struct DrawCall {
@@ -150,6 +152,7 @@ namespace OpenEngine {
 				mesh->Use();
 				glDrawElements(GL_TRIANGLES, mesh->GetIndiceCount(), GL_UNSIGNED_INT, (void*)0);
 			}
+			m_drawcalls.clear();
 		}
 	private:
 		void SetGlobalUBO() {

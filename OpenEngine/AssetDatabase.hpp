@@ -29,9 +29,18 @@ namespace OpenEngine::Editor {
 			}
 		}
 		template <class T>
-		T* GetAsset(std::string path, uint32_t localid) {
+		T* GetAssetByPath(std::string path, uint32_t localid) {
+			if (__PATH_TO_GUID_MAP.find(path) == __PATH_TO_GUID_MAP.end()) {
+				OE_WARNING("[AssetDatabase] " + path + " is not found");
+				return nullptr;
+			}
+			return GetAsset<T>(GUID(__PATH_TO_GUID_MAP.at(path)), localid);
+		}
+		template <class T>
+		T* GetAssetByRelativePath(std::string path, uint32_t localid) {
 			path = assetPath + "\\" + path;
 			if (__PATH_TO_GUID_MAP.find(path) == __PATH_TO_GUID_MAP.end()) {
+				OE_WARNING("[AssetDatabase] " + path + " is not found");
 				return nullptr;
 			}
 			return GetAsset<T>(GUID(__PATH_TO_GUID_MAP.at(path)), localid);
@@ -52,9 +61,9 @@ namespace OpenEngine::Editor {
 		std::unordered_map<int, std::string> __OBJECT_TO_GUID_MAP;
 		std::unordered_map<int, int> __OBJECT_TO_LOCALID_MAP;
 		Importer::AssetImporter* m_assetImporter;
-		void CreateMetaFile(std::string path);
-		void SaveMetaFile(std::string path, const Setting::ImportSetting& setting);
-		Setting::ImportSetting LoadMetaFile(std::string path);
+		void CreateMeta(std::string path);
+		void SaveMeta(std::string path, const Setting::ImportSetting& setting);
+		Setting::ImportSetting LoadMeta(std::string path);
 		void Initialize();
 	};
 }

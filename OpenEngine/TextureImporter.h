@@ -11,6 +11,7 @@ namespace OpenEngine::Importer {
 		TextureImporter() {
 			supported_extensions.push_back(".png");
 			supported_extensions.push_back(".jpg");
+			supported_extensions.push_back(".bmp");
 		}
 		std::vector<int> Import(std::string path, const Setting::ImportSetting& importSetting) {
 			int width, height, nrChannels;

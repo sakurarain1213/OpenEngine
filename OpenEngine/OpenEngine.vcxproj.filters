@@ -512,5 +512,11 @@
     <ClInclude Include="MonoBehaviourSystem.h">
       <Filter>头文件\OECore\ECS\System</Filter>
     </ClInclude>
+    <ClInclude Include="ModelImporter.h">
+      <Filter>头文件\OECore\AssetImporter</Filter>
+    </ClInclude>
+    <ClInclude Include="StringConvert.h">
+      <Filter>头文件\OETool</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
