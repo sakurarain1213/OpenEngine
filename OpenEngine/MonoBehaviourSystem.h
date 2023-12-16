@@ -4,9 +4,12 @@
 #include"MonoBehaviour.h"
 #include<set>
 namespace OpenEngine {
+	class World;
 	class MonoBehaviourSystem :public ISystem 
 	{
 	public:
+
+
 
 		int Initialize();
 		void Finalize();
