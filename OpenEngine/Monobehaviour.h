@@ -5,6 +5,7 @@ namespace OpenEngine {
 	{
 	public:
 		MonoBehaviour();
+		~MonoBehaviour();
 
 		int Initialize() { return 0; };
 		void OnEnable(){};
@@ -14,6 +15,7 @@ namespace OpenEngine {
 		void Finalize(){};
 		void OnCollision() {};
 
+		void SetActive(bool state);
 	private:
 
 	};
