@@ -52,9 +52,9 @@ namespace OpenEngine::Editor {
 		std::unordered_map<int, std::string> __OBJECT_TO_GUID_MAP;
 		std::unordered_map<int, int> __OBJECT_TO_LOCALID_MAP;
 		Importer::AssetImporter* m_assetImporter;
-		void CreateMetaFile(std::string path);
-		void SaveMetaFile(std::string path, const Setting::ImportSetting& setting);
-		Setting::ImportSetting LoadMetaFile(std::string path);
+		void CreateMeta(std::string path);
+		void SaveMeta(std::string path, const Setting::ImportSetting& setting);
+		Setting::ImportSetting LoadMeta(std::string path);
 		void Initialize();
 	};
 }

@@ -3,6 +3,7 @@
 #include "TextureImporter.h"
 #include "ShaderImporter.h"
 #include "MaterialImporter.h"
+#include "ModelImporter.h"
 #include <boost/filesystem.hpp>
 
 namespace OpenEngine::Importer {
@@ -12,6 +13,7 @@ namespace OpenEngine::Importer {
 			m_importers.push_back(std::make_unique<TextureImporter>());
 			m_importers.push_back(std::make_unique<ShaderImporter>());
 			m_importers.push_back(std::make_unique<MaterialImporter>());
+			m_importers.push_back(std::make_unique<ModelImporter>());
 			for (int i = 0;i < m_importers.size();++i) {
 				for (int j = 0;j < m_importers[i]->supported_extensions.size();++j)
 					m_importer_map[m_importers[i]->supported_extensions[j]] = i;

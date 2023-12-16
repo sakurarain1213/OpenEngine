@@ -28,16 +28,14 @@ namespace OpenEngine::App {
 		assets = std::make_unique<Editor::AssetDatabase>(base_path + "\\Assets");
 		ServiceLocator::RegisterService<Editor::AssetDatabase>(*assets);
 		ServiceLocator::RegisterService<Renderer>(*renderer);
-		
-		assets->ImportAllAssets();
-
-		
 
 		//以下为初始化一个测试用World,包含一个entity
 
 		worldmanager = std::make_unique<World>("world");
 		worldmanager->Initialize();
 		ServiceLocator::RegisterService<World>(*worldmanager);
+
+		assets->ImportAllAssets();
 
 		auto test_entity = worldmanager->CreateEntity("e1");
 		auto te= worldmanager->CreateEntity("e2");
