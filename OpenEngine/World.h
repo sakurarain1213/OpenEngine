@@ -6,6 +6,7 @@
 #include"ISystem.h"
 #include"CameraSystem.h"
 #include"MeshRendererSystem.h"
+#include"MonoBehaviourSystem.h"
 #include<memory>
 #include<string>
 #include<list>
@@ -39,6 +40,7 @@ namespace OpenEngine {
 		CameraSystem* mCameraSystem;
 		PhysicSystem* mPhysicSystem;
 		MeshRendererSystem* mMeshRendererSystem;
+		MonoBehaviourSystem* mMonoBehaviourSystem;
 	private:
 		std::unordered_map<boost::uuids::uuid, std::shared_ptr<Entity>, boost::hash<boost::uuids::uuid>>	mEntities;
 

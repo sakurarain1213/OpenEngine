@@ -4,14 +4,17 @@
 #include"MonoBehaviour.h"
 #include<set>
 namespace OpenEngine {
+	class World;
 	class MonoBehaviourSystem :public ISystem 
 	{
 	public:
 
+		MonoBehaviourSystem(World* world);
+
 		int Initialize();
 		void Finalize();
 		void Tick();
-
+		void FixedTick();
 
 
 	private:
