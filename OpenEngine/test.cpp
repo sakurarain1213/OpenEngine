@@ -27,7 +27,7 @@ int main() {
     model->SetWorld(&OESERVICE(World));
     Move* move = new Move(model);
     model->AddMonoBehaviour(move);
-    model->GetComponent<TransformComponent>()->SetPosition({ 0,0,200 });
+    model->GetComponent<TransformComponent>()->SetPosition({ 0,0,0 });
     app.Run();
     return 0;
 }
