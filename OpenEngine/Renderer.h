@@ -21,7 +21,7 @@ namespace OpenEngine {
 	public:
 		Renderer(RenderDriver& driver) :
 			m_driver(driver),
-			m_UBO(148, OE_UNIFORM_GLOBALUBO) {}
+			m_UBO(256, OE_UNIFORM_GLOBALUBO) {}
 		void EnableDepthTest() {
 			glEnable(GL_DEPTH_TEST);
 		}
@@ -102,6 +102,7 @@ namespace OpenEngine {
 			m_drawcalls.emplace_back(mesh, material, modelMatrix);
 		}
 		void ExecuteDrawCalls() {
+			Clear(true, true, true);
 			SetGlobalUBO();
 			for (int i = 0;i < m_drawcalls.size();++i) {
 				Mesh* mesh = m_drawcalls[i].mesh;
@@ -148,7 +149,6 @@ namespace OpenEngine {
 				else {
 					DisableCullFace();
 				}
-
 				mesh->Use();
 				glDrawElements(GL_TRIANGLES, mesh->GetIndiceCount(), GL_UNSIGNED_INT, (void*)0);
 			}
@@ -156,10 +156,11 @@ namespace OpenEngine {
 		}
 	private:
 		void SetGlobalUBO() {
-			m_UBO.SetSubData<Mat4>(m_viewMatrix, 0);
-			m_UBO.SetSubData<Mat4>(m_projectionMatrix, 64);
-			m_UBO.SetSubData<Vec3>(m_cameraPosition, 128);
-			m_UBO.SetSubData<float>(Time::GetRealtimeSinceStartup(), 144);
+			m_UBO.SetSubData<Mat4>(m_viewMatrix.data(), 0);
+			m_UBO.SetSubData<Mat4>(m_projectionMatrix.data(), 64);
+			m_UBO.SetSubData<Vec3>(m_cameraPosition.data(), 128);
+			float totalTime = Time::GetRealtimeSinceStartup();
+			m_UBO.SetSubData<float>(&totalTime, 144);
 		}
 
 		RenderDriver& m_driver;

@@ -17,7 +17,6 @@ namespace OpenEngine::Buffer {
 		void Upload(const void* src, GLsizeiptr size) const{
 			Bind();
 			glBufferData(GL_ARRAY_BUFFER, size, src, GL_STATIC_DRAW);
-			Unbind();
 		}
 		~VertexBuffer() {
 			glDeleteBuffers(1, &bufferID);

@@ -7,6 +7,10 @@ using namespace OpenEngine;
 int main() {
     App::Application app("D:\\Project\\OETest");
 
+    GLint uniformBufferOffsetAlign = 0;
+    glGetIntegerv(GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT, &uniformBufferOffsetAlign);
+    OE_LOG(std::to_string(uniformBufferOffsetAlign));
+
     Editor::AssetDatabase& assets = OESERVICE(Editor::AssetDatabase);
     
     //assets.CreateAsset("standard.material");

@@ -7,15 +7,9 @@
 namespace OpenEngine::Buffer{
 	class VertexArray : public IBuffer {
 	public:
-		VertexArray(const VertexBuffer& vertexBuffer, const ElementBuffer& elementBuffer) :
-			m_vertexBuffer(vertexBuffer),
-			m_elementBuffer(elementBuffer),
+		VertexArray() :
 			IBuffer() {
 			glGenVertexArrays(1, &bufferID);
-			Bind();
-			m_vertexBuffer.Bind();
-			m_elementBuffer.Bind();
-			Unbind();
 		}
 		void Bind() const{
 			glBindVertexArray(bufferID);
@@ -29,8 +23,5 @@ namespace OpenEngine::Buffer{
 		~VertexArray() {
 			glDeleteVertexArrays(1, &bufferID);
 		}
-	private:
-		const VertexBuffer& m_vertexBuffer;
-		const ElementBuffer& m_elementBuffer;
 	};
 }
