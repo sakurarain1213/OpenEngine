@@ -4,7 +4,7 @@ namespace OpenEngine {
 	class MonoBehaviour : public IComponent
 	{
 	public:
-		MonoBehaviour();
+		MonoBehaviour(Entity* entity);
 		~MonoBehaviour();
 
 		int Initialize() { return 0; };

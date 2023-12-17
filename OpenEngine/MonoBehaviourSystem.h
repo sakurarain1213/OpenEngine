@@ -9,12 +9,12 @@ namespace OpenEngine {
 	{
 	public:
 
-
+		MonoBehaviourSystem(World* world);
 
 		int Initialize();
 		void Finalize();
 		void Tick();
-
+		void FixedTick();
 
 
 	private:

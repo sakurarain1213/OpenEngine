@@ -7,6 +7,7 @@
 #include"RigidBodyComponent.h"
 #include"ColliderComponent.h"
 #include"MeshRendererComponent.h"
+#include"MonoBehaviour.h"
 #include"World.h"
 #include<vector>
 #include<list>
@@ -57,6 +58,7 @@ namespace OpenEngine {
 		CameraComponent* mCamera;
 		RigidBodyComponent* mRigidBody;
 		MeshRendererComponent* mRenderer;
+		std::list<MonoBehaviour*> MonoBehaviours;
 		//ColliderComponent* mCollider;
 	};
 	template<typename T>
@@ -105,6 +107,7 @@ namespace OpenEngine {
 			}
 			comp = mRenderer;
 		}
+		
 		/*else if (std::is_same<T, ColliderComponent>::value) {
 			mCollider = new ColliderComponent(this);
 			mCollider->Initialize();

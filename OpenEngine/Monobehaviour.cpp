@@ -1,6 +1,7 @@
 #include "MonoBehaviour.h"
 using namespace OpenEngine;
-MonoBehaviour::MonoBehaviour() {
+MonoBehaviour::MonoBehaviour(Entity* entity) {
+	mOwner = entity;
 	Initialize();
 
 }

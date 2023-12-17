@@ -14,6 +14,9 @@ OpenEngine::World::World(std::string name) : IRuntimeModule(name) {
 	mCameraSystem->Initialize();
 	mMeshRendererSystem = new MeshRendererSystem(this);
 	mMeshRendererSystem->Initialize();
+
+	mMonoBehaviourSystem = new MonoBehaviourSystem(this);
+	mMonoBehaviourSystem->Initialize();
 }
 std::string OpenEngine::World::GetType() {
 	return "World";
@@ -25,6 +28,7 @@ void OpenEngine::World::Tick() {
 	mTransformSystem->Tick();
 	mMeshRendererSystem->Tick();
 	//mUISystem->Tick();
+	mMonoBehaviourSystem->Tick();
 }
 
 int OpenEngine::World::Initialize() {
