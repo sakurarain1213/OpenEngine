@@ -187,6 +187,9 @@
     </ClCompile>
     <ClCompile Include="MonoBehaviour.cpp" />
     <ClCompile Include="MonoBehaviourSystem.cpp" />
+    <ClCompile Include="Move.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="NarrowPhase.cpp" />
     <ClCompile Include="ResolutionPhase.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />
@@ -213,6 +216,9 @@
     <ClInclude Include="MonoBehaviour.h" />
     <ClInclude Include="MonoBehaviourSystem.h" />
     <ClInclude Include="ModelImporter.h" />
+    <ClInclude Include="Move.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="NarrowPhase.h" />
     <ClInclude Include="ObjectReference.h" />
     <ClInclude Include="RenderEnum.h" />

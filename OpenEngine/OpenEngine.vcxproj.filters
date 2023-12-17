@@ -97,6 +97,9 @@
     <Filter Include="头文件\OECore\ECS\System\Physics">
       <UniqueIdentifier>{b0ae765c-db50-4bc4-a7d6-72064c26cac6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="小球游戏">
+      <UniqueIdentifier>{109c727c-977c-47f6-b29b-f56b71f5880e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp">
@@ -248,6 +251,9 @@
     </ClCompile>
     <ClCompile Include="MonoBehaviourSystem.cpp">
       <Filter>头文件\OECore\ECS\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Move.cpp">
+      <Filter>小球游戏</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -517,6 +523,9 @@
     </ClInclude>
     <ClInclude Include="StringConvert.h">
       <Filter>头文件\OETool</Filter>
+    </ClInclude>
+    <ClInclude Include="Move.h">
+      <Filter>小球游戏</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

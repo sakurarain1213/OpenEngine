@@ -14,10 +14,11 @@ namespace OpenEngine {
 		virtual void Finalize();
 
 		void SetPosition(Vector3f posi);
-		Vector3f GetPosition() { return this->Position; }
+		Vec3 GetPosition();
 		void Rotate(Quaternionf rota);
-		Quaternionf GetRotation() { return this->Rotation; }
+		Quaternionf GetRotation();
 		void SetScale(Vec3 scale);
+		Vec3 GetScale();
 		//void SetLinearVelocity(Vector3f vel);
 
 		//void SetAngularVelocity(Quaternionf vel);
