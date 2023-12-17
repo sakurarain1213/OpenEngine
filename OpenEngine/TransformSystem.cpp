@@ -2,7 +2,8 @@
 #include"Time.h"
 #include<algorithm>
 #include<iostream>
-#include"Entity.h"
+
+
 using namespace Eigen;
 OpenEngine::TransformSystem::TransformSystem(World* world) {
 	mWorld = world;

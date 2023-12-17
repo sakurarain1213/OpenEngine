@@ -1,8 +1,8 @@
 #include "CameraComponent.h"
 #include<iostream>
+#include"Entity.h"
 #include<math.h>
-#include"Renderer.h"
-#include"ServiceLocator.h"
+
 OpenEngine::CameraComponent::CameraComponent() {
 	ViewMatrix <<   0, 0, 0, 0,
 					0, 0, 0, 0,
@@ -60,6 +60,7 @@ OpenEngine::Mat4 OpenEngine::CameraComponent::GetViewMatrix() {
 		Vec3 u = s.cross(f);
 	
 		u.normalize();
+		Vec3 p = GetPosition();
 		Mat4 Result;
 
 		Result(0, 0) = s.x();
@@ -71,9 +72,9 @@ OpenEngine::Mat4 OpenEngine::CameraComponent::GetViewMatrix() {
 		Result(2, 0) = -f.x();
 		Result(2, 1) = -f.y();
 		Result(2, 2) = -f.z();
-		Result(0, 3) = -s.dot(Position);
-		Result(1, 3) = -u.dot(Position);
-		Result(2, 3) = f.dot(Position);
+		Result(0, 3) = -s.dot(p);
+		Result(1, 3) = -u.dot(p);
+		Result(2, 3) = f.dot(p);
 		Result(3, 0) = 0;
 		Result(3, 1) = 0;
 		Result(3, 2) = 0;
@@ -109,10 +110,11 @@ OpenEngine::Mat4 OpenEngine::CameraComponent::GetProjectionMatrix() {
 }
 
 OpenEngine::Vec3 OpenEngine::CameraComponent::GetPosition() {
-	return Position;
+	return this->GetOwner()->GetComponent<TransformComponent>()->GetPosition();
 }
 
 void OpenEngine::CameraComponent::SetPosition(Vec3 posi) {
+	this->GetOwner()->GetComponent<TransformComponent>()->SetPosition(posi);
 	Position = posi;
 	VMdirtyflag = true;
 	PMdirtyflag = true;
