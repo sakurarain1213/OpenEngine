@@ -2,6 +2,8 @@
 
 #include "Application.h"
 #include "Material.h"
+#include"Move.h"
+
 #include <iostream>
 using namespace OpenEngine;
 int main() {
@@ -23,6 +25,9 @@ int main() {
     Entity* model = assets.GetAsset<Entity>(GUID("f083afbb-ef5c-496c-bfb7-d1575868d447"), 0);
     OE_LOG(std::to_string((size_t)model));
     model->SetWorld(&OESERVICE(World));
+    Move* move = new Move(model);
+    model->AddMonoBehaviour(move);
+    model->GetComponent<TransformComponent>()->SetPosition({ 0,0,0 });
     app.Run();
     return 0;
 }

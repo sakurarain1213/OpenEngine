@@ -39,7 +39,7 @@ void OpenEngine::PhysicSystem::Tick() noexcept
 
 	float deltaTime = Time::GetDeltaTime();
 	//gravity = Vector3f(0, 980.665, 0);  //尝试强制重设  gravity值 稳定
-	cout << deltaTime;
+	
 	
 	std::vector<RigidBodyComponent*> activedRigidBodies;
 	CollectRigidBodies(activedRigidBodies);
@@ -104,7 +104,7 @@ void OpenEngine::PhysicSystem::Tick() noexcept
 
 	for (auto pair : candicate)
 	{
-		std::cout << "M";   //现在只会碰撞一帧 move提示
+		//std::cout << "M";   //现在只会碰撞一帧 move提示
 		RigidBodyComponent* A = pair.first;
 		RigidBodyComponent* B = pair.second;
 		Vector3f position1 = A->GetOwner()->GetComponent<TransformComponent>()->Position;

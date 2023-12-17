@@ -1,4 +1,7 @@
 #pragma once
+#include<glad/glad.h>
+
+
 #include"ISystem.h"
 #include<set>
 #include"ButtonComponent.h"

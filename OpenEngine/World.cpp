@@ -47,6 +47,7 @@ void OpenEngine::World::Finalize() {
 	mUISystem->Finalize();
 	mCameraSystem->Finalize();
 	mMeshRendererSystem->Finalize();
+	mMonoBehaviourSystem->Finalize();
 }
 shared_ptr<Entity> OpenEngine::World::CreateEntity(string name) {
 	auto entity = std::make_shared<Entity>(name);

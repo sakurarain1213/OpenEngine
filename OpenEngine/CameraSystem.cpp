@@ -16,16 +16,16 @@ void OpenEngine::CameraSystem::Tick()noexcept {
 	Vec3 temp={0,0,0};
 	
 	if (OESERVICE(Input).GetKeyDown(EKey::KEY_A)) {
-		temp = { -0.1,0,0 };
+		temp(0) += -0.1;
 	}
-	else if (OESERVICE(Input).GetKeyDown(EKey::KEY_D)) {
-		temp = { 0.1,0,0 };
+	if (OESERVICE(Input).GetKeyDown(EKey::KEY_D)) {
+		temp(0) += 0.1;
 	}
-	else if (OESERVICE(Input).GetKeyDown(EKey::KEY_W)) {
-		temp = { 0,0.1,0 };
+	if (OESERVICE(Input).GetKeyDown(EKey::KEY_W)) {
+		temp(1) += 0.1;
 	}
-	else if (OESERVICE(Input).GetKeyDown(EKey::KEY_S)) {
-		temp = { 0,-0.1,0 };
+	if (OESERVICE(Input).GetKeyDown(EKey::KEY_S)) {
+		temp (1) = -0.1;
 	}
 
 	Vec3 newposi = MainCamera->Position + temp;
