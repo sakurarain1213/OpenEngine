@@ -92,7 +92,6 @@ namespace OpenEngine::Importer {
 		Material* ProcessMaterial(aiMesh* mesh, const aiScene* scene, std::string dic) {
 			Material* mat = new Material(OESERVICE(Editor::AssetDatabase).GetAssetByRelativePath<Shader>("standard.shader", 0));
 			mat->cullFaceBack = true;
-			mat->enableBlend = true;
 			if (mesh->mMaterialIndex >= 0) {
 				aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 				if (material->GetTextureCount(aiTextureType_DIFFUSE)) {
