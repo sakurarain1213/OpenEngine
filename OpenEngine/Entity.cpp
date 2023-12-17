@@ -97,3 +97,8 @@ size_t OpenEngine::Entity::GetChildrenCount() {
 }
 
 
+void OpenEngine::Entity::AddMonoBehaviour(MonoBehaviour* mono) {
+	mono->Initialize();
+	MonoBehaviours.emplace_back(mono);
+	mWorld->mMonoBehaviourSystem->AddComponent(mono);
+}

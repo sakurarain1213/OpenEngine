@@ -11,6 +11,9 @@ namespace OpenEngine {
 
 		MonoBehaviourSystem(World* world);
 
+		virtual void AddComponent(MonoBehaviour* comp);
+		virtual void DeleteComponent(MonoBehaviour* comp);
+
 		int Initialize();
 		void Finalize();
 		void Tick();

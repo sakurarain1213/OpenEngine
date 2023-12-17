@@ -7,14 +7,14 @@ namespace OpenEngine {
 		MonoBehaviour(Entity* entity);
 		~MonoBehaviour();
 
-		int Initialize() { return 0; };
-		void OnEnable(){};
-		void FixedUpdate(){};
-		void Update(){};
-		void OnDisable(){};
-		void Finalize(){};
-		void OnCollision() {};
-
+		virtual int Initialize() { return 0; };
+		virtual void OnEnable(){};
+		virtual void FixedUpdate(){};
+		virtual	 void Update(){};
+		virtual void OnDisable(){};
+		virtual void Finalize(){};
+		virtual void OnCollision() {};
+		
 		void SetActive(bool state);
 	private:
 

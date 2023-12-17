@@ -15,6 +15,7 @@
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid.hpp>
 namespace OpenEngine {
+	
 	class World;
 	class Entity : public IRuntimeModule
 	{
@@ -46,6 +47,8 @@ namespace OpenEngine {
 		template<typename T>T* GetComponent();
 		template<typename T>void	RemoveComponent();
 		
+		void AddMonoBehaviour(MonoBehaviour* mono);
+
 
 	private:
 		boost::uuids::uuid		mGuid;

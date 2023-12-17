@@ -17,7 +17,7 @@ OpenEngine::CameraComponent::CameraComponent() {
 		0, 0, 0, 0;
 	NearClip = 1;
 	FarClip = 50;
-	Fov = 1.57;
+	Fov = 1;
 	VMdirtyflag = true;
 	PMdirtyflag = true;
 }
@@ -37,7 +37,7 @@ OpenEngine::CameraComponent::CameraComponent(Entity* entity) {
 		0, 0, 0, 0;
 	NearClip = 1;
 	FarClip = 50;
-	Fov = 1.57;
+	Fov = 1;
 	VMdirtyflag = true;
 	PMdirtyflag = true;
 }

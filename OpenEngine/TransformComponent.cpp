@@ -31,15 +31,49 @@ int OpenEngine::TransformComponent::Initialize() {
 void OpenEngine::TransformComponent::Finalize() {
 
 }
+
+Vec3 OpenEngine::TransformComponent::GetPosition() {
+	Entity* parentEntity = GetOwner()->GetParent();
+	if (parentEntity == nullptr) {
+		return Position;
+	}
+	else {
+		return parentEntity->GetComponent<TransformComponent>()->GetPosition()+Position;
+	}
+}
 void OpenEngine::TransformComponent::SetPosition(Vector3f posi) {
 	Position = posi;
+	ModelMatrixdirtyflag = true;
+}
+
+Quaternionf OpenEngine::TransformComponent::GetRotation() {
+	Entity* parentEntity = GetOwner()->GetParent();
+	if (parentEntity == nullptr) {
+		return Rotation;
+	}
+	else {
+		return Rotation*parentEntity->GetComponent<TransformComponent>()->GetRotation();
+	}
 }
 
 void OpenEngine::TransformComponent::Rotate(Quaternionf rota) {
 	Rotation = rota;
+	ModelMatrixdirtyflag = true;
+}
+
+Vec3 OpenEngine::TransformComponent::GetScale() {
+	Entity* parentEntity = GetOwner()->GetParent();
+	if (parentEntity == nullptr) {
+		return Scale;
+	}
+	else {
+		Vec3 parScale = parentEntity->GetComponent<TransformComponent>()->GetScale();
+		return { Scale.x()*parScale.x(),Scale.y() * parScale.y(), Scale.z() * parScale.z(),};
+	}
 }
 void OpenEngine::TransformComponent::SetScale(Vec3 scale) {
 	Scale = scale;
+	ModelMatrixdirtyflag = true;
 }
 /*
 void OpenEngine::TransformComponent::SetLinearVelocity(Vector3f vel) {
@@ -104,16 +138,21 @@ Vector3f OpenEngine::TransformComponent::TransformVector(Matrix3f& matrix, Vecto
 }
 
 Mat4 OpenEngine::TransformComponent::GetModelMatrix() {
-	if (ModelMatrixdirtyflag) {
+	if (1) {
+
+		Vec3 _scale = GetScale();
+		Quaternionf _rotation = GetRotation();
+		Vec3 _posi = GetPosition();
+
 		Mat4 scaleM;
 		scaleM <<
-			Scale.x(), 0, 0, 0,
-			0, Scale.y(), 0, 0,
-			0, 0, Scale.z(), 0,
+			_scale.x(), 0, 0, 0,
+			0, _scale.y(), 0, 0,
+			0, 0, _scale.z(), 0,
 			0, 0, 0, 1;
 
-		Rotation.normalized();
-		Mat3 rot3=Rotation.toRotationMatrix();
+		_rotation.normalized();
+		Mat3 rot3= _rotation.toRotationMatrix();
 		Mat4 rotM;
 		rotM <<
 			0, 0, 0, 0,
@@ -128,13 +167,13 @@ Mat4 OpenEngine::TransformComponent::GetModelMatrix() {
 		rotM(3, 3) = 1;
 		Mat4 posiM;
 		posiM <<
-			1, 0, 0, Position.x(),
-			0, 1, 0, Position.y(),
-			0, 0, 1, Position.z(),
+			1, 0, 0, _posi.x(),
+			0, 1, 0, _posi.y(),
+			0, 0, 1, _posi.z(),
 			0, 0, 0, 1;
 		
 		ModelMatrix = posiM*(rotM * scaleM);
-		ModelMatrixdirtyflag = false;
+		//ModelMatrixdirtyflag = false;
 	}
 
 	return ModelMatrix;
