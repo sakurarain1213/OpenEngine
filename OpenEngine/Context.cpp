@@ -95,6 +95,7 @@ namespace OpenEngine::App {
 		body3->SetAABB(minP, maxP);
 
 		
+
 		//4 是 static
 		ButtonComponent* buttonc4 = e4->AddComponent<ButtonComponent>();
 		buttonc4->SetWindowid("e   j3");
