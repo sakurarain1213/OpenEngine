@@ -42,42 +42,75 @@ namespace OpenEngine::App {
 
 		assets->ImportAllAssets();
 
-		auto test_entity = worldmanager->CreateEntity("e1");
-		auto te= worldmanager->CreateEntity("e2");
-		Entity* e2 = te.get();
-		Entity* e = test_entity.get();
+		auto entity1 = worldmanager->CreateEntity("e1");
+		auto entity2= worldmanager->CreateEntity("e2");
+		auto entity3 = worldmanager->CreateEntity("e3");
+		auto entity4 = worldmanager->CreateEntity("e4");
+		Entity* e1 = entity1.get();
+		Entity* e2 = entity2.get();
+		Entity* e3 = entity3.get();
+		Entity* e4 = entity4.get();
 		
-		ButtonComponent* buttonc = e->AddComponent<ButtonComponent>();
+
+		//建议速度不要超过400   要测static 
+		ButtonComponent* buttonc = e1->AddComponent<ButtonComponent>();
 		buttonc->SetWindowid("e1");
-		//CameraComponent* camerac = e->AddComponent<CameraComponent>();
-		TransformComponent* tranc = e->GetComponent<TransformComponent>();
-		tranc->SetPosition({ 0,0,0 });
-		RigidBodyComponent* body = e->AddComponent<RigidBodyComponent>();
-		body->SetMass(10); 
+		buttonc->SetSize({ 100,100 });
+		TransformComponent* tc1 = e1->GetComponent<TransformComponent>();
+		tc1->SetPosition({ 0,0,0 });
+		RigidBodyComponent* body1 = e1->AddComponent<RigidBodyComponent>();
+		body1->SetMass(10); 
+		Vec3 V1(10, 200, 0);
+		body1->SetVelocity(V1);
+		Vec3 tiji(100, 100, 100);
+		Vec3 minP = tc1->GetPosition(); Vec3 maxP = tc1->GetPosition() + tiji;
+		body1->SetAABB(minP, maxP);
 
-		Vec3 V1(-100, 0, 0);
-		body->SetVelocity(V1);
-		
-		Vec3 minP = { 0,0,0 }; Vec3 maxP = { 100,100,100 };
-		body->SetAABB(minP, maxP);
-		//
-		//ColliderComponent* coll1 = e->AddComponent<ColliderBox>();
-
-		//Vec3 f1 = { 10,0,0 };
-		//body->SetVelocity(f1);
 		
 		ButtonComponent* buttonc2 = e2->AddComponent<ButtonComponent>();
 		buttonc2->SetWindowid("e2");
-		TransformComponent* te2 = e2->GetComponent<TransformComponent>();
-		te2->SetPosition({ 600,0,0 });
+		buttonc2->SetSize({ 100,100 });
+		TransformComponent* tc2 = e2->GetComponent<TransformComponent>();
+		tc2->SetPosition({ 600,0,0 });
 		RigidBodyComponent* body2 = e2->AddComponent<RigidBodyComponent>();
-		body2->SetMass(10);
-
+		body2->SetMass(1);
 		Vec3 V2(100, 0, 0);
-		body->SetVelocity(V2);
-
-		minP = { 600,0,0 };  maxP = { 800,200,200 };  //minP  is same   as   position
+		body2->SetVelocity(V2);
+		tiji << 100, 100, 100;
+		minP = tc2->GetPosition();  maxP = tc2->GetPosition() + tiji;
 		body2->SetAABB(minP, maxP);
+
+		ButtonComponent* buttonc3 = e3->AddComponent<ButtonComponent>();
+		buttonc3->SetWindowid("eklj3");
+		buttonc3->SetText("e3!!!");
+		buttonc3->SetSize({ 100,100 });
+		TransformComponent* tc3 = e3->GetComponent<TransformComponent>();
+		tc3->SetPosition({ 1800,0,0 });
+		RigidBodyComponent* body3 = e3->AddComponent<RigidBodyComponent>();
+		body3->SetMass(10);
+		Vec3 V3(-100, 0, 0);
+		body3->SetVelocity(V3);
+		tiji << 100, 100, 100;
+		minP = tc3->GetPosition();  maxP = tc3->GetPosition() + tiji;
+		body3->SetAABB(minP, maxP);
+
+		
+		//4 是 static
+		ButtonComponent* buttonc4 = e4->AddComponent<ButtonComponent>();
+		buttonc4->SetWindowid("e   j3");
+		buttonc4->SetText("e3   !");
+		buttonc4->SetSize({ 100,100 });
+		TransformComponent* tc4 = e4->GetComponent<TransformComponent>();
+		tc4->SetPosition({ -10000,1000,0 });
+		RigidBodyComponent* body4 = e4->AddComponent<RigidBodyComponent>();
+		body4->SetMass(10000);
+		Vec3 V4(0, 0, 0);
+		body4->SetVelocity(V4);
+		tiji << 20000, 200, 200;
+		body4->SetStatic(true);   //先设静态  
+		minP = tc4->GetPosition();  maxP = tc4->GetPosition() + tiji;
+		body4->aabb.minPoint = minP; body4->aabb.maxPoint = maxP;  //静态的AABB不要用set
+		//body4->SetAABB(minP, maxP);
 
 	// 碰撞需要设置质量和碰撞盒(体积边界)   
 
@@ -98,8 +131,6 @@ namespace OpenEngine::App {
 		Eigen::Vector3f vel(1, 1, 0);
 		
 		buttonc->SetText("Start!!!");
-		
-
 		
 		
 	}
