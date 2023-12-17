@@ -1,4 +1,5 @@
 #include "CameraComponent.h"
+#include<iostream>
 #include<math.h>
 #include"Renderer.h"
 #include"ServiceLocator.h"
@@ -29,7 +30,7 @@ OpenEngine::CameraComponent::CameraComponent(Entity* entity) {
 		0, 0, 0, 0;
 	Position = { 0,0,20 };
 	Front = { 0,0,-1 };
-	Up = { 1,0,0 };
+	Up = { 0,1,0 };
 	ProjectionMatrix << 0, 0, 0, 0,
 		0, 0, 0, 0,
 		0, 0, 0, 0,
@@ -55,8 +56,9 @@ OpenEngine::Mat4 OpenEngine::CameraComponent::GetViewMatrix() {
 		Vec3 s = f;
 		s = s.cross(Up);
 		s.normalize();
-
+		
 		Vec3 u = s.cross(f);
+	
 		u.normalize();
 		Mat4 Result;
 

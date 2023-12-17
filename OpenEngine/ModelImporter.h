@@ -28,8 +28,7 @@ namespace OpenEngine::Importer {
 				return ret;
 			}
 			Entity* root = new Entity(importSetting.GetProperty("name"));
-			boost::filesystem::path p(path);
-			ProcessNode(scene->mRootNode, scene, root, p.parent_path().string());
+			ProcessNode(scene->mRootNode, scene, root);
 			ret.push_back(root->GetInstanceID());
 			return ret;
 		}
@@ -45,19 +44,19 @@ namespace OpenEngine::Importer {
 			OE_WARNING("[ModelImporter] can't create texture");
 		}
 	private:
-		void ProcessNode(aiNode* node, const aiScene* scene,Entity* parent, std::string dic) {
+		void ProcessNode(aiNode* node, const aiScene* scene,Entity* parent) {
 			for (int i = 0;i < node->mNumMeshes;++i) {
 				aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
 				Entity* cur = new Entity("SubMesh" + std::to_string(i));
 				cur->SetParent(parent);
 				MeshRendererComponent* meshRenderer = cur->AddComponent<MeshRendererComponent>();
 				meshRenderer->SetMesh(ProcessMesh(mesh, scene));
-				meshRenderer->SetMaterial(ProcessMaterial(mesh, scene, dic));
+				meshRenderer->SetMaterial(ProcessMaterial(mesh, scene));
 			}
 			for (int i = 0;i < node->mNumChildren;++i) {
 				Entity* cur = new Entity("Child" + std::to_string(i));
 				cur->SetParent(parent);
-				ProcessNode(node->mChildren[i], scene, cur, dic);
+				ProcessNode(node->mChildren[i], scene, cur);  
 			}
 		}
 		Mesh* ProcessMesh(aiMesh* mesh, const aiScene *scene) {
@@ -98,10 +97,9 @@ namespace OpenEngine::Importer {
 				if (material->GetTextureCount(aiTextureType_DIFFUSE)) {
 					aiString str;
 					material->GetTexture(aiTextureType_DIFFUSE, 0, &str);
-					std::string str_ansi = dic + "\\" + Utf8ToAnsi(str.C_Str());
+					std::string str_ansi = Utf8ToAnsi(str.C_Str());
 					OE_INFO("[ModelImporter] Texture load from " + str_ansi);
-
-					Texture* tex = OESERVICE(Editor::AssetDatabase).GetAssetByPath<Texture>(str_ansi, 0);
+					Texture* tex = OESERVICE(Editor::AssetDatabase).GetAsset<Texture>(str_ansi, 0);
 					mat->SetUniform<Texture*>("diffuseMap", tex);
 				}
 			}
