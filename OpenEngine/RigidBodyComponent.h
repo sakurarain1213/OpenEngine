@@ -21,6 +21,9 @@ namespace OpenEngine {
         Vec3 angularVel;// 当前角速度
         bool isSleep;
         bool isStatic;
+
+        bool isMove;//加一个刷新判断  保证每物理帧只执行一次刷新
+
         float mass;
         float inverseMass;
         float impulseCoefficient;
@@ -51,7 +54,15 @@ namespace OpenEngine {
         bool IsStatic();
         void SetStatic(bool isStatic);
 
+
+        void SetMove(bool isMove);
+        bool GetMove();
+
+
         float GetMass();
+
+
+
         void SetMass(float mass);
         float GetInverseMass();
 

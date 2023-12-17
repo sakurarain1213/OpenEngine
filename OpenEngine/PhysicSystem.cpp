@@ -63,14 +63,10 @@ void OpenEngine::PhysicSystem::Tick() noexcept
 	for (auto* rigidBody : activedRigidBodies)
 	{
 		rigidBody->UpdateInverseInertiaWs();  //无影响
-
 	}
 
 	// gravity
 	Vector3f gravityImpulse = VectorScale(gravity, deltaTime);
-
-	//std::cout << gravity << std::endl;
-
 	for (auto* rigidBody : activedRigidBodies)
 	{
 		if (rigidBody->IsStatic())
@@ -78,16 +74,10 @@ void OpenEngine::PhysicSystem::Tick() noexcept
 			continue;
 		}
 		Vector3f tempVelocity = rigidBody->GetVelocity() + gravityImpulse;
-
 		rigidBody->SetVelocity(tempVelocity);
 		//cout <<rigidBody->GetVelocity() << endl;
 	}
 
-	//速度 相同
-	//ok  gravityImpulse是速度增量
-
-	//debug this
-	// boardPhase
 	boardPhase->Update(deltaTime);
 
 	vector<RigidBodyPair> candicate;
@@ -105,6 +95,13 @@ void OpenEngine::PhysicSystem::Tick() noexcept
 	//------------------------------------------
 	//重构   耦合narrowPhase+ resolutionPhase  解决碰撞
 
+	//先假设都不碰撞 先全部没动  (包括静态)
+	for (auto* rigidBody : activedRigidBodies)
+	{
+		rigidBody->SetMove(false);
+	}
+
+
 	for (auto pair : candicate)
 	{
 		//std::cout << "M";   //现在只会碰撞一帧 move提示
@@ -119,8 +116,14 @@ void OpenEngine::PhysicSystem::Tick() noexcept
 		bool overlapX = obj1.maxPoint(0) > obj2.minPoint(0) && obj1.minPoint(0) < obj2.maxPoint(0);
 		bool overlapY = obj1.maxPoint(1) > obj2.minPoint(1) && obj1.minPoint(1) < obj2.maxPoint(1);
 		bool overlapZ = obj1.maxPoint(2) > obj2.minPoint(2) && obj1.minPoint(2) < obj2.maxPoint(2);
+		
+		
+		
 		// 如果在所有轴上都有重叠，表示碰撞
 		if (overlapX && overlapY && overlapZ) {
+			//如果碰撞  设置AB的ismov = T   单独解决碰撞盒移动分离
+			A->SetMove(true); B->SetMove(true);   //key phase   -----------------------唯一标志move  move只增不减
+			//同一帧  move过了也可能和别的再碰  再加进move就行  只要set只有一次就行
 			// 计算碰撞后的速度
 			//std::cout << "CCCCCLLLLLLIIIICCCCCCC";   //现在只会碰撞一帧
 			Vec3 velocityA = A->GetVelocity();
@@ -140,9 +143,7 @@ void OpenEngine::PhysicSystem::Tick() noexcept
 			overlapMinPoint(2) = max(obj1.minPoint(2), obj2.minPoint(2));
 			overlapMaxPoint(2) = min(obj1.maxPoint(2), obj2.maxPoint(2));
 			//重叠部分的坐标
-
 			//求最大重叠方向
-
 			float overlapXLength = overlapMaxPoint(0) - overlapMinPoint(0);
 			float overlapYLength = overlapMaxPoint(1) - overlapMinPoint(1);
 			float overlapZLength = overlapMaxPoint(2) - overlapMinPoint(2);
@@ -152,139 +153,42 @@ void OpenEngine::PhysicSystem::Tick() noexcept
 			float SY = overlapXLength * overlapZLength;
 			float SZ = overlapXLength * overlapYLength;
 
-			if (SX >= SY && SX >= SZ) {
-				SmaxX = true;
-			}
-			else if (SY >= SX && SY >= SZ) {
-				SmaxY = true;
-			}
-			else {
-				SmaxZ = true;
-			}
 			//确定解除碰撞的方向
-
+			if (SX >= SY && SX >= SZ) {
+				SmaxX = true;}
+			else if (SY >= SX && SY >= SZ) {
+				SmaxY = true;}
+			else {
+				SmaxZ = true;}
+			
+			//solve
 			if (SmaxX) {
-				velocityA(0) = ((A->GetVelocity()(0) * (massA - massB) + 2 * massB * B->GetVelocity()(0)) / (massA + massB));
-				velocityB(0) = ((B->GetVelocity()(0) * (massB - massA) + 2 * massA * A->GetVelocity()(0)) / (massA + massB));
-
-				// 对应方向碰撞  更新物体的速度
-				A->SetVelocity(velocityA);
-				B->SetVelocity(velocityB);
-				//循环防止相交   如果还相交 继续按照速度匀速移动
-				int cnt = 0;
-				while (overlapX) {
-					//aabb位置要根据碰撞之后的速度乘时间 刷新	这里取巧了  避免无穷碰撞  与体积有关 每次解决碰撞的最小帧数
-					//建议速度不要超过1k像素/s
-					Vec3 newMinPoint = A->GetAABB().minPoint + VectorScale(A->GetVelocity(), deltaTime);
-					Vec3 newMaxPoint = A->GetAABB().maxPoint + VectorScale(A->GetVelocity(), deltaTime);
-					A->SetAABB(newMinPoint, newMaxPoint);
-					Vec3 newMinPointB = B->GetAABB().minPoint + VectorScale(B->GetVelocity(), deltaTime);
-					Vec3 newMaxPointB = B->GetAABB().maxPoint + VectorScale(B->GetVelocity(), deltaTime);
-					B->SetAABB(newMinPointB, newMaxPointB);
-					overlapX = A->GetAABB().maxPoint(0) > B->GetAABB().minPoint(0) && A->GetAABB().minPoint(0) < B->GetAABB().maxPoint(0);
-					cnt++;
-					if (cnt > 10)//cnt重复算10帧 强制回弹
-					{
-						Vec3 temp1 = velocityA; Vec3 temp2 = velocityB;
-						temp1(0) = -velocityA(0); temp2(0) = -velocityB(0);
-						A->SetVelocity(temp1);
-						B->SetVelocity(temp2);
-						overlapX = false;
-					}
-					//std::cout << "warning  X collidsion";   //现在只会碰撞一帧 ???
-				}
+					solveCollid(A, B, 0 /*维度 0 1 2*/, overlapX/*碰撞flag*/, deltaTime);
 			}
 			else if (SmaxY) {
-				velocityA(1) = ((A->GetVelocity()(1) * (massA - massB) + 2 * massB * B->GetVelocity()(1)) / (massA + massB));
-				velocityB(1) = ((B->GetVelocity()(1) * (massB - massA) + 2 * massA * A->GetVelocity()(1)) / (massA + massB));
-
-				A->SetVelocity(velocityA);
-				B->SetVelocity(velocityB);
-				int cnt = 0;
-				while (overlapY) {
-					cout << "-----------" << velocityA(1) << "-----------";
-					Vec3 newMinPoint = A->GetAABB().minPoint + VectorScale(A->GetVelocity(), deltaTime);
-					Vec3 newMaxPoint = A->GetAABB().maxPoint + VectorScale(A->GetVelocity(), deltaTime);
-					A->SetAABB(newMinPoint, newMaxPoint);
-					Vec3 newMinPointB = B->GetAABB().minPoint + VectorScale(B->GetVelocity(), deltaTime);
-					Vec3 newMaxPointB = B->GetAABB().maxPoint + VectorScale(B->GetVelocity(), deltaTime);
-					B->SetAABB(newMinPointB, newMaxPointB);
-
-					overlapY = A->GetAABB().maxPoint(1) > B->GetAABB().minPoint(1) && A->GetAABB().minPoint(1) < B->GetAABB().maxPoint(1);
-					cnt++;
-					if (cnt > 10)//cnt重复算10帧 强制回弹
-					{
-						Vec3 temp1 = velocityA; Vec3 temp2 = velocityB;
-						temp1(1) = -velocityA(1); temp2(1) = -velocityB(1);
-						A->SetVelocity(temp1);
-						B->SetVelocity(temp2);
-						overlapY = false;
-					}
-					//std::cout << "warning  Y  collidsion";   //现在只会碰撞一帧 ???
-				}
+					solveCollid(A, B, 1 /*维度 0 1 2*/, overlapY/*碰撞flag*/, deltaTime);
 			}
 			else {
-				velocityA(2) = ((A->GetVelocity()(2) * (massA - massB) + 2 * massB * B->GetVelocity()(2)) / (massA + massB));
-				velocityB(2) = ((B->GetVelocity()(2) * (massB - massA) + 2 * massA * A->GetVelocity()(2)) / (massA + massB));
-				A->SetVelocity(velocityA);
-				B->SetVelocity(velocityB);
-				int cnt = 0;
-				while (overlapZ) {
-					// aabb位置要根据pos刷新
-					Vec3 newMinPoint = A->GetAABB().minPoint + VectorScale(A->GetVelocity(), deltaTime);
-					Vec3 newMaxPoint = A->GetAABB().maxPoint + VectorScale(A->GetVelocity(), deltaTime);
-					A->SetAABB(newMinPoint, newMaxPoint);
-
-					Vec3 newMinPointB = B->GetAABB().minPoint + VectorScale(B->GetVelocity(), deltaTime);
-					Vec3 newMaxPointB = B->GetAABB().maxPoint + VectorScale(B->GetVelocity(), deltaTime);
-					B->SetAABB(newMinPointB, newMaxPointB);
-
-					overlapZ = A->GetAABB().maxPoint(2) > B->GetAABB().minPoint(2) && A->GetAABB().minPoint(2) < B->GetAABB().maxPoint(2);
-					cnt++;
-					if (cnt > 10)//cnt重复算10帧 强制回弹
-					{
-						Vec3 temp1 = velocityA; Vec3 temp2 = velocityB;
-						temp1(2) = -velocityA(2); temp2(2) = -velocityB(2);
-						A->SetVelocity(temp1);
-						B->SetVelocity(temp2);
-						overlapZ = false;
-					}
-					//std::cout << "warning  Z  collidsion";   //现在只会碰撞一帧 ???
-				}
+					solveCollid(A, B, 2 /*维度 0 1 2*/, overlapZ/*碰撞flag*/, deltaTime);
 			}
 
 			//一组碰撞处理结束
-			//fin?  
 		}
 		else {
-			//没发生碰撞  也是两个刚体对  也要更新aabb box
-			Vec3 newMinPoint = A->GetAABB().minPoint + A->GetVelocity() * deltaTime;
-			Vec3 newMaxPoint = A->GetAABB().maxPoint + A->GetVelocity() * deltaTime;
-			A->SetAABB(newMinPoint, newMaxPoint);
-
-			Vec3 newMinPointB = B->GetAABB().minPoint + B->GetVelocity() * deltaTime;
-			Vec3 newMaxPointB = B->GetAABB().maxPoint + B->GetVelocity() * deltaTime;
-			B->SetAABB(newMinPointB, newMaxPointB);
-
+			//没发生碰撞  也是两个刚体对  也要更新aabb以及pos   留到后续
 			/*
 			std::cout << A->GetAABB().minPoint << "------AMIN" << endl;
-			std::cout << A->GetAABB().maxPoint << "------Amax" << endl;
-			std::cout << B->GetAABB().minPoint << "------BMIN" << endl;
-			std::cout << B->GetAABB().maxPoint << "------Bmax" << endl;
 			std::cout << endl;
 			std::cout << position1 << "------A POS" << endl;
-			std::cout << position2 << "------B POS" << endl;
-			std::cout << endl;
 			*/
 		}
 	}
-	//rigid pair处理结束  位置没更新
+	//rigid pair碰撞处理结束  只有碰撞的对 更新了AABB和pos
 
-	//继续测速   重点测角速度
-	// integratePhase   更新位置
+	// integratePhase 
+	//integratePhase->integrate(activedRigidBodies, deltaTime);
 
-	integratePhase->integrate(activedRigidBodies, deltaTime);
-
+	updateAABBandPOS(activedRigidBodies, deltaTime);
 
 
 
@@ -293,11 +197,8 @@ void OpenEngine::PhysicSystem::Tick() noexcept
 	for (auto* rigidBody : activedRigidBodies)
 	{
 		cout << rigidBody->GetOwner()->GetComponent<TransformComponent>()->GetRotation().w() << endl;
-		cout << rigidBody->GetOwner()->GetComponent<TransformComponent>()->GetRotation().x() << endl;
-		cout << rigidBody->GetOwner()->GetComponent<TransformComponent>()->GetRotation().y() << endl;
-		cout << rigidBody->GetOwner()->GetComponent<TransformComponent>()->GetRotation().z() << endl;
-		cout << "next" << endl;
-	}   //仍然没问题
+
+	}   
 	*/
 	// clearPhase
 	manifolds.clear();
@@ -337,5 +238,105 @@ void OpenEngine::PhysicSystem::CollectRigidBodies(std::vector<RigidBodyComponent
 	{
 		activedRigidBodies.push_back((comp));
 	}
+
+}
+
+void OpenEngine::PhysicSystem:: updateAABBandPOS(std::vector<RigidBodyComponent*> activedRigidBodies, float deltaTime) {
+	for (auto* rigidBodyComponent : activedRigidBodies)
+	{
+		if (rigidBodyComponent->IsStatic())
+		{
+			Vector3f tempset(0, 0, 0);
+			rigidBodyComponent->SetVelocity(tempset);
+			rigidBodyComponent->SetAngularVelocity(tempset);
+			continue;
+		}
+		if (rigidBodyComponent->GetMove())
+		{
+			continue;
+		}
+		//更新AABB
+		Vec3 newMinPoint = rigidBodyComponent->GetAABB().minPoint + rigidBodyComponent->GetVelocity() * deltaTime;
+		Vec3 newMaxPoint = rigidBodyComponent->GetAABB().maxPoint + rigidBodyComponent->GetVelocity() * deltaTime;
+		rigidBodyComponent->SetAABB(newMinPoint, newMaxPoint);
+
+		//更新POS
+		TransformComponent* transform = rigidBodyComponent->GetOwner()->GetComponent<TransformComponent>();
+		Vector3f newPosition(0, 0, 0);
+		newPosition = transform->GetPosition() + rigidBodyComponent->GetVelocity() * deltaTime;
+		transform->SetPosition(newPosition);
+	}
+}
+
+void OpenEngine::PhysicSystem:: solveCollid(RigidBodyComponent* A, RigidBodyComponent* B, int wei/*维度 0 1 2*/, bool overlap/*碰撞flag*/, float deltaTime) {
+	float massA = A->GetMass(); float massB = B->GetMass();
+	Vec3 velocityA = A->GetVelocity(); Vec3 velocityB = B->GetVelocity();
+	velocityA(wei) = ((A->GetVelocity()(wei) * (massA - massB) + 2 * massB * B->GetVelocity()(wei)) / (massA + massB));
+	velocityB(wei) = ((B->GetVelocity()(wei) * (massB - massA) + 2 * massA * A->GetVelocity()(wei)) / (massA + massB));
+	// 对应方向碰撞  更新物体的速度
+	A->SetVelocity(velocityA);
+	B->SetVelocity(velocityB);
+	//循环防止相交   如果还相交 继续按照变速的速度移动
+	int cnt = 0;
+	while (overlap) {
+		//aabb位置要根据碰撞之后的速度乘时间 刷新	这里取巧了  避免无穷碰撞  与体积有关
+		Vec3 newMinPoint = A->GetAABB().minPoint + VectorScale(A->GetVelocity(), deltaTime);
+		Vec3 newMaxPoint = A->GetAABB().maxPoint + VectorScale(A->GetVelocity(), deltaTime);
+
+		if (!A->IsStatic()) {
+			A->SetAABB(newMinPoint, newMaxPoint);    //-------SET  AABB
+			TransformComponent* tA = A->GetOwner()->GetComponent<TransformComponent>();  	//-----SET  POS
+			Vector3f newPosition(0, 0, 0);
+			newPosition = tA->GetPosition() + A->GetVelocity() * deltaTime;
+			tA->SetPosition(newPosition);
+		}
+
+		Vec3 newMinPointB = B->GetAABB().minPoint + VectorScale(B->GetVelocity(), deltaTime);
+		Vec3 newMaxPointB = B->GetAABB().maxPoint + VectorScale(B->GetVelocity(), deltaTime);
+		if (!B->IsStatic()) {
+			B->SetAABB(newMinPointB, newMaxPointB);  //-------SET  AABB
+
+			TransformComponent* tB = B->GetOwner()->GetComponent<TransformComponent>();  	//-----SET  POS
+			Vector3f newPosition(0, 0, 0);
+			newPosition = tB->GetPosition() + B->GetVelocity() * deltaTime;
+			tB->SetPosition(newPosition);
+
+		}
+
+		overlap = A->GetAABB().maxPoint(wei) > B->GetAABB().minPoint(wei) && A->GetAABB().minPoint(wei) < B->GetAABB().maxPoint(wei);
+
+		cnt++;
+		if (cnt > 10)//cnt重复算10帧 强制回弹
+		{
+			Vec3 temp1 = velocityA; Vec3 temp2 = velocityB;
+			temp1(wei) = -velocityA(wei); temp2(wei) = -velocityB(wei);
+			A->SetVelocity(temp1);
+			B->SetVelocity(temp2);
+			Vec3 newMinPoint = A->GetAABB().minPoint + VectorScale(A->GetVelocity(), deltaTime);
+			Vec3 newMaxPoint = A->GetAABB().maxPoint + VectorScale(A->GetVelocity(), deltaTime);
+			if (!A->IsStatic()) {
+				A->SetAABB(newMinPoint, newMaxPoint);    //-------SET  AABB
+				TransformComponent* tA = A->GetOwner()->GetComponent<TransformComponent>();  	//-----SET  POS
+				Vector3f newPosition(0, 0, 0);
+				newPosition = tA->GetPosition() + A->GetVelocity() * deltaTime;
+				tA->SetPosition(newPosition);
+			}
+			Vec3 newMinPointB = B->GetAABB().minPoint + VectorScale(B->GetVelocity(), deltaTime);
+			Vec3 newMaxPointB = B->GetAABB().maxPoint + VectorScale(B->GetVelocity(), deltaTime);
+			if (!B->IsStatic()) {
+				B->SetAABB(newMinPointB, newMaxPointB);  //-------SET  AABB
+				TransformComponent* tB = B->GetOwner()->GetComponent<TransformComponent>();  	//-----SET  POS
+				Vector3f newPosition(0, 0, 0);
+				newPosition = tB->GetPosition() + B->GetVelocity() * deltaTime;
+				tB->SetPosition(newPosition);
+			}
+
+			overlap = false;
+		}
+		std::cout << " warning  collidsion in  " << wei << std::endl;   //现在只会碰撞一帧 ???
+	}
+
+
+
 
 }
