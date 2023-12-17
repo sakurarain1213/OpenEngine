@@ -175,8 +175,6 @@ void OpenEngine::PhysicSystem::Tick() noexcept
 				while (overlapX) {
 					//aabb位置要根据碰撞之后的速度乘时间 刷新	这里取巧了  避免无穷碰撞  与体积有关 每次解决碰撞的最小帧数
 					//建议速度不要超过1k像素/s
-
-
 					Vec3 newMinPoint = A->GetAABB().minPoint + VectorScale(A->GetVelocity(), deltaTime);
 					Vec3 newMaxPoint = A->GetAABB().maxPoint + VectorScale(A->GetVelocity(), deltaTime);
 					A->SetAABB(newMinPoint, newMaxPoint);
@@ -286,6 +284,11 @@ void OpenEngine::PhysicSystem::Tick() noexcept
 	// integratePhase   更新位置
 
 	integratePhase->integrate(activedRigidBodies, deltaTime);
+
+
+
+
+
 	/*
 	for (auto* rigidBody : activedRigidBodies)
 	{
