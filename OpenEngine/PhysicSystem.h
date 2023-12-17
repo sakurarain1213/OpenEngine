@@ -11,6 +11,7 @@
 #include "NarrowPhase.h"
 #include "ResolutionPhase.h"
 #include "IntegratePhase.h"
+
 #include <iostream>
 
 
@@ -100,13 +101,15 @@ namespace OpenEngine {
 				a->SetVelocity(velocityA);
 				b->SetVelocity(velocityB);
 
-
 			}
 
 		}
 
 
-
+		//只给 非静态and还没更新过的   更新
+		void updateAABBandPOS(std::vector<RigidBodyComponent*> activedRigidBodies, float deltaTime);
+		//解决碰撞核心函数
+		void solveCollid(RigidBodyComponent* A, RigidBodyComponent* B, int wei/*维度 0 1 2*/, bool overlap/*碰撞flag*/, float deltaTime);
 
 
 	private:

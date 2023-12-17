@@ -54,6 +54,17 @@ void OpenEngine::RigidBodyComponent::SetStatic(bool isStatic)
 	this->isStatic = isStatic;
 }
 
+void  OpenEngine::RigidBodyComponent::SetMove(bool isMove) {
+	this->isMove = isMove;
+}
+
+bool OpenEngine::RigidBodyComponent::GetMove() {
+	return this->isMove;
+}
+
+
+
+
 void OpenEngine::RigidBodyComponent::SetMass(float mass)
 {
 	this->mass = mass;
