@@ -17,7 +17,6 @@ namespace OpenEngine::Buffer {
 		void Upload(const void* src, GLsizeiptr size) const {
 			Bind();
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, src, GL_STATIC_DRAW);
-			Unbind();
 		}
 		~ElementBuffer() {
 			glDeleteBuffers(1, &bufferID);

@@ -85,7 +85,9 @@ namespace OpenEngine {
 			glUniformMatrix4fv(GetUniformLocation(name), 1, GL_TRUE, val.data());
 		}
 		void SetUniformBlock(const std::string& block_name, GLuint bind_point) {
-			glUniformBlockBinding(m_shaderID, glGetUniformBlockIndex(m_shaderID, block_name.c_str()), bind_point);
+			GLuint blockIndex = glGetUniformBlockIndex(m_shaderID, block_name.c_str());
+			OE_INFO("[shader] " + block_name + " " + std::to_string(blockIndex));
+			glUniformBlockBinding(m_shaderID, blockIndex, bind_point);
 		}
 		int GetUniformInt(const std::string& name) {
 			int value;
@@ -164,7 +166,7 @@ namespace OpenEngine {
 			if (m_uniformLocation.find(name) != m_uniformLocation.end())
 				return m_uniformLocation.at(name);
 			const GLint location = glGetUniformLocation(m_shaderID, name.c_str());
-			if (location == -1) OE_WARNING("[shader] Uniform location" + name + "." + name + " is not found");
+			if (location == -1) OE_WARNING("[shader] Uniform location " + name + " is not found");
 			m_uniformLocation[name] = location;
 			return location;
 		}

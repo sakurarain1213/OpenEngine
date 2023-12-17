@@ -20,9 +20,9 @@ namespace OpenEngine::Buffer {
 			glBindBuffer(GL_UNIFORM_BUFFER, 0);
 		}
 		template<typename T>
-		void SetSubData(const T& data, GLsizeiptr offset) {
+		void SetSubData(const void* data, GLsizeiptr offset) {
 			Bind();
-			glBufferSubData(GL_UNIFORM_BUFFER, offset, sizeof(T), std::addressof(data));
+			glBufferSubData(GL_UNIFORM_BUFFER, offset, sizeof(T), data);
 			Unbind();
 		}
 		~UniformBuffer() {

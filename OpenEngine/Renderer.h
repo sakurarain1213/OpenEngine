@@ -7,8 +7,6 @@
 #include "Material.h"
 #include "Time.h"
 
-#include <iostream>
-
 namespace OpenEngine {
 
 	struct DrawCall {
@@ -21,7 +19,7 @@ namespace OpenEngine {
 	public:
 		Renderer(RenderDriver& driver) :
 			m_driver(driver),
-			m_UBO(148, OE_UNIFORM_GLOBALUBO) {}
+			m_UBO(256, OE_UNIFORM_GLOBALUBO) {}
 		void EnableDepthTest() {
 			glEnable(GL_DEPTH_TEST);
 		}
@@ -149,16 +147,6 @@ namespace OpenEngine {
 				else {
 					DisableCullFace();
 				}
-				for (int j = 0;j < 1;++j) {
-					Vec4 p = m_projectionMatrix * m_viewMatrix * m_drawcalls[i].modelMatrix * Vec4(mesh->vertices[j].position.x(), mesh->vertices[j].position.y(), mesh->vertices[j].position.z(), 1.0f);
-					if (p.x() / p.w() > 1) continue;
-					if (p.x() / p.w() < -1) continue;
-					if (p.y() / p.w() > 1) continue;
-					if (p.y() / p.w() < -1) continue;
-					if (p.z() / p.w() > 1) continue;
-					if (p.z() / p.w() < -1) continue;
-					std::cout << p << std::endl << std::endl;
-				}
 				mesh->Use();
 				glDrawElements(GL_TRIANGLES, mesh->GetIndiceCount(), GL_UNSIGNED_INT, (void*)0);
 			}
@@ -166,10 +154,11 @@ namespace OpenEngine {
 		}
 	private:
 		void SetGlobalUBO() {
-			m_UBO.SetSubData<Mat4>(m_viewMatrix, 0);
-			m_UBO.SetSubData<Mat4>(m_projectionMatrix, 64);
-			m_UBO.SetSubData<Vec3>(m_cameraPosition, 128);
-			m_UBO.SetSubData<float>(Time::GetRealtimeSinceStartup(), 144);
+			m_UBO.SetSubData<Mat4>(m_viewMatrix.data(), 0);
+			m_UBO.SetSubData<Mat4>(m_projectionMatrix.data(), 64);
+			m_UBO.SetSubData<Vec3>(m_cameraPosition.data(), 128);
+			float totalTime = Time::GetRealtimeSinceStartup();
+			m_UBO.SetSubData<float>(&totalTime, 144);
 		}
 
 		RenderDriver& m_driver;

@@ -23,14 +23,16 @@ namespace OpenEngine {
 			indices(indices),
 			m_vertexBuffer(),
 			m_elementBuffer(),
-			m_vertexArray(m_vertexBuffer, m_elementBuffer),
+			m_vertexArray(),
 			Object(name) {
-			SetupVertexAttribPoint();
 			UploadMeshData();
+			SetupVertexAttribPoint();
 		}
 		void UploadMeshData() {
+			m_vertexArray.Bind();
 			m_vertexBuffer.Upload(&vertices[0], sizeof(Vertex) * vertices.size());
 			m_elementBuffer.Upload(&indices[0], sizeof(uint32_t) * indices.size());
+			m_vertexArray.Unbind();
 			m_vertice_count = (uint32_t)vertices.size();
 			m_indice_count = (uint32_t)indices.size();
 			OE_INFO("[Mesh] " + name + " : Upload " + std::to_string(vertices.size()) + " vertices and " + std::to_string(indices.size() / 3) + " faces with total memory " + std::to_string(vertices.size() * sizeof(Vertex) + indices.size() * sizeof(uint32_t)));
@@ -56,9 +58,13 @@ namespace OpenEngine {
 		void SetupVertexAttribPoint() {
 			m_vertexArray.Bind();
 			m_vertexArray.BindAttribute(0, 3, sizeof(Vertex), offsetof(Vertex, position));
+			glEnableVertexAttribArray(0);
 			m_vertexArray.BindAttribute(1, 3, sizeof(Vertex), offsetof(Vertex, normal));
+			glEnableVertexAttribArray(1);
 			m_vertexArray.BindAttribute(2, 3, sizeof(Vertex), offsetof(Vertex, tangent));
+			glEnableVertexAttribArray(2);
 			m_vertexArray.BindAttribute(3, 2, sizeof(Vertex), offsetof(Vertex, texCoords));
+			glEnableVertexAttribArray(3);
 			m_vertexArray.Unbind();
 		}
 		Buffer::VertexBuffer m_vertexBuffer;
