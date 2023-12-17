@@ -83,7 +83,6 @@ namespace OpenEngine {
 		}
 		void SetUniform(const std::string& name, const Mat4& val) {
 			glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, val.data());
-			OE_LOG(std::to_string(glGetError()));
 		}
 		void SetUniformBlock(const std::string& block_name, GLuint bind_point) {
 			GLuint blockIndex = glGetUniformBlockIndex(m_shaderID, block_name.c_str());
