@@ -55,7 +55,11 @@ namespace OpenEngine {
         void SetMass(float mass);
         float GetInverseMass();
 
-        void SetAABB(Vec3& minPoint, Vec3& maxPoint) { this->aabb.Initialize( minPoint, maxPoint); }
+        void SetAABB(Vec3& minPoint, Vec3& maxPoint) { 
+            if (!this->IsStatic())  this->aabb.Initialize(minPoint, maxPoint);
+            else return;
+        }
+        //  如果需要构造静止障碍物  要么质量无穷大  要么根据static  ban掉setAABB   要设置直接访问属性不要用函数
         AABB GetAABB(){ return aabb; }
 
 

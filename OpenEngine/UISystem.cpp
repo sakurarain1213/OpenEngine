@@ -80,7 +80,7 @@ void OpenEngine::UISystem::ShowButton(ButtonComponent* comp) {
 	char* name = (char*)tempname.c_str();
 	
 	ImGui::SetNextWindowPos(ImVec2(posi.x(), posi.y()), ImGuiCond_Always);
-	ImGui::SetNextWindowSize(ImVec2(sx+200, sy+200), ImGuiCond_Always);
+	ImGui::SetNextWindowSize(ImVec2(sx, sy), ImGuiCond_Always);
 	
 	
 	// Main body of the Demo window starts here.

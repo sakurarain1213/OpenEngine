@@ -43,15 +43,15 @@ namespace OpenEngine {
 		ImGuiIO io;
 	
 		int window_id;
-		bool no_titlebar = true;
-		bool no_scrollbar = true;
-		bool no_menu = true;
+		bool no_titlebar = false;
+		bool no_scrollbar = false;
+		bool no_menu = false;
 		bool no_move = false;
 		bool no_resize = true;
-		bool no_collapse = true;
-		bool no_close = true;
-		bool no_nav = true;
-		bool no_background = true;
+		bool no_collapse = false;
+		bool no_close = false;
+		bool no_nav = false;
+		bool no_background = false;
 		bool no_bring_to_front = false;
 		bool unsaved_document = false;
 
