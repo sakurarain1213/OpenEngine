@@ -33,13 +33,16 @@ void OpenEngine::TransformComponent::Finalize() {
 }
 void OpenEngine::TransformComponent::SetPosition(Vector3f posi) {
 	Position = posi;
+	ModelMatrixdirtyflag = false;
 }
 
 void OpenEngine::TransformComponent::Rotate(Quaternionf rota) {
 	Rotation = rota;
+	ModelMatrixdirtyflag = false;
 }
 void OpenEngine::TransformComponent::SetScale(Vec3 scale) {
 	Scale = scale;
+	ModelMatrixdirtyflag = false;
 }
 /*
 void OpenEngine::TransformComponent::SetLinearVelocity(Vector3f vel) {
