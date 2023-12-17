@@ -2,7 +2,7 @@
 #include"ServiceLocator.h"
 #include"Renderer.h"
 #include"Entity.h"
-#include<iostream>
+
 using namespace OpenEngine;
 MeshRendererComponent::MeshRendererComponent(Entity* entity) {
 	mOwner = entity;
@@ -33,5 +33,5 @@ void MeshRendererComponent::SetMesh(Mesh* m) {
 void MeshRendererComponent::DrawMesh() {
 	Mat4 ModelMatrix=this->GetOwner()->GetComponent<TransformComponent>()->GetModelMatrix();
 	OESERVICE(Renderer).DrawMash(mMesh, mMaterial, ModelMatrix);
-	std::cout << "Matrix is::" << ModelMatrix << "\n";
+
 }
