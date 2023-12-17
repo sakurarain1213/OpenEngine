@@ -102,7 +102,6 @@ namespace OpenEngine {
 			m_drawcalls.emplace_back(mesh, material, modelMatrix);
 		}
 		void ExecuteDrawCalls() {
-			Clear(true, true, true);
 			SetGlobalUBO();
 			for (int i = 0;i < m_drawcalls.size();++i) {
 				Mesh* mesh = m_drawcalls[i].mesh;

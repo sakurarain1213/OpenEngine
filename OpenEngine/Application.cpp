@@ -12,6 +12,7 @@ namespace OpenEngine::App {
 		while (IsRunning()) {
 			m_context.device->PollEvents();
 			Time::Update();
+			m_context.renderer->Clear(true, true, true);
 
 			m_game.PreUpdate();
 			m_game.Update();
