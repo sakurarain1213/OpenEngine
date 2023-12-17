@@ -80,12 +80,12 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>D:\OpenGL\dependency\include;D:\Assimp\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\boost_1_83_0\stage\lib;D:\Project\boost_1_83_0\stage\lib;D:\OpenGL\dependency\lib;D:\Boost\boost_1_83_0\stage\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\Assimp\lib\x64;D:\boost_1_83_0\stage\lib;D:\Project\boost_1_83_0\stage\lib;D:\OpenGL\dependency\lib;D:\Boost\boost_1_83_0\stage\lib;$(LibraryPath)</LibraryPath>
     <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>D:\OpenGL\dependency\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Project\boost_1_83_0\stage\lib;D:\OpenGL\dependency\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\Assimp\lib\x64;D:\Project\boost_1_83_0\stage\lib;D:\OpenGL\dependency\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -133,7 +133,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -152,7 +152,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3dll.lib;assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -176,7 +176,8 @@
     <ClCompile Include="imgui_tables.cpp" />
     <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="Inertia.cpp" />
-    <ClCompile Include="InputMgr.cpp" />
+    <ClCompile Include="InputComponent.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="IntegratePhase.cpp" />
     <ClCompile Include="Jacobian.cpp" />
@@ -184,7 +185,8 @@
     <ClCompile Include="MeshRendererSystem.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Monobehaviour.cpp" />
+    <ClCompile Include="MonoBehaviour.cpp" />
+    <ClCompile Include="MonoBehaviourSystem.cpp" />
     <ClCompile Include="NarrowPhase.cpp" />
     <ClCompile Include="ResolutionPhase.cpp" />
     <ClCompile Include="RigidBodyComponent.cpp" />
@@ -195,7 +197,12 @@
     <ClInclude Include="BoardPhase.h" />
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="Contact.h" />
+    <ClInclude Include="EKey.h" />
+    <ClInclude Include="EKeyState.h" />
+    <ClInclude Include="EMouseButton.h" />
+    <ClInclude Include="EMouseButtonState.h" />
     <ClInclude Include="Inertia.h" />
+    <ClInclude Include="InputComponent.h" />
     <ClInclude Include="IntegratePhase.h" />
     <ClInclude Include="Jacobian.h" />
     <ClInclude Include="MaterialImporter.h" />
@@ -203,7 +210,9 @@
     <ClInclude Include="MeshRendererSystem.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Monobehaviour.h" />
+    <ClInclude Include="MonoBehaviour.h" />
+    <ClInclude Include="MonoBehaviourSystem.h" />
+    <ClInclude Include="ModelImporter.h" />
     <ClInclude Include="NarrowPhase.h" />
     <ClInclude Include="ObjectReference.h" />
     <ClInclude Include="RenderEnum.h" />
@@ -239,7 +248,7 @@
     <ClInclude Include="imstb_rectpack.h" />
     <ClInclude Include="imstb_textedit.h" />
     <ClInclude Include="imstb_truetype.h" />
-    <ClInclude Include="InputMgr.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="IRuntimeModule.h" />
     <ClInclude Include="ISystem.h" />
@@ -254,6 +263,7 @@
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="stb_image.cpp" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="StringConvert.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureImporter.h" />

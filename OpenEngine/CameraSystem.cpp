@@ -1,6 +1,7 @@
 #include "CameraSystem.h"
 #include"ServiceLocator.h"
 #include"Renderer.h"
+
 OpenEngine::CameraSystem::CameraSystem(World* world) {
 	mWorld = world;
 }

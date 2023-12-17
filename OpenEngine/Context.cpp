@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Context.h"
+#include"Input.h"
 #include <iostream>
 
 namespace OpenEngine::App {
@@ -26,18 +27,20 @@ namespace OpenEngine::App {
 		renderer = std::make_unique<Renderer>(*driver);
 
 		assets = std::make_unique<Editor::AssetDatabase>(base_path + "\\Assets");
+		
+		inputMgr = std::make_unique<Input>(*window);
+		ServiceLocator::RegisterService<Input>(*inputMgr);
 		ServiceLocator::RegisterService<Editor::AssetDatabase>(*assets);
 		ServiceLocator::RegisterService<Renderer>(*renderer);
-		
-		assets->ImportAllAssets();
-
-		
 
 		//以下为初始化一个测试用World,包含一个entity
 
 		worldmanager = std::make_unique<World>("world");
-		worldmanager->Initialize();
 		ServiceLocator::RegisterService<World>(*worldmanager);
+		worldmanager->Initialize();
+		
+
+		assets->ImportAllAssets();
 
 		auto entity1 = worldmanager->CreateEntity("e1");
 		auto entity2= worldmanager->CreateEntity("e2");

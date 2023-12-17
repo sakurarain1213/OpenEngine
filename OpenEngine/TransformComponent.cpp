@@ -5,10 +5,10 @@
 using namespace OpenEngine;
 
 OpenEngine::TransformComponent::TransformComponent() {
-
-	Position= Vector3f(0.0f, 0.0f, 0.0f);
+	Scale = { 1,1,1 };
+	Position = { 0,0,0 };
 	//LinearVelocity = { 0,0,0 };
-	Rotation = Vector4f(0.0f, 0.0f, 0.0f, 0.0f);
+	Rotation = { 0,0,0,0 };
 	//AngularVelocity = { 0,0,0,0 };
 	mOwner = nullptr;
 	mIsActive = true;
@@ -16,8 +16,9 @@ OpenEngine::TransformComponent::TransformComponent() {
 }
 
 OpenEngine::TransformComponent::TransformComponent(Entity* entity) {
-	Position = Vector3f(0.0, 0.0, 0.0);
-	Rotation = Vector4f(0.0, 0.0, 0.0, 0.0);
+	Scale = { 1,1,1 };
+	Position = { 0,0,0 };
+	Rotation = { 0,0,0 ,0 };
 	//LinearVelocity = { 0,0,0 };
 	//AngularVelocity = { 0,0,0,0 };
 	mOwner = entity;

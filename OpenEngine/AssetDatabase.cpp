@@ -50,8 +50,8 @@ namespace OpenEngine::Editor {
 			return;
 		}
 		if (!ExistPath(path)) {
-			CreateMetaFile(path);
-			Setting::ImportSetting setting = LoadMetaFile(path);
+			CreateMeta(path);
+			Setting::ImportSetting setting = LoadMeta(path);
 			__IMPORTSETTING_MAP[setting.GetGUID().uid] = setting;
 			__IMPORTPATH_MAP[setting.GetGUID().uid] = path;
 			__PATH_TO_GUID_MAP[path] = setting.GetGUID().uid;
@@ -75,7 +75,7 @@ namespace OpenEngine::Editor {
 		std::string uid = __OBJECT_TO_GUID_MAP[obj->GetInstanceID()];
 		std::string path = __IMPORTPATH_MAP[uid];
 		const Setting::ImportSetting& setting = __IMPORTSETTING_MAP[uid];
-		SaveMetaFile(uid, setting);
+		SaveMeta(uid, setting);
 		m_assetImporter->Save(path, obj);
 		OE_INFO(obj->name  + " saved");
 	}
@@ -85,7 +85,7 @@ namespace OpenEngine::Editor {
 		}
 	}
 
-	void AssetDatabase::CreateMetaFile(std::string path) {
+	void AssetDatabase::CreateMeta(std::string path) {
 		if (!m_assetImporter->CanImport(path)) return;
 		std::ofstream fs(path + ".meta");
 		if (!fs) {
@@ -99,7 +99,7 @@ namespace OpenEngine::Editor {
 		}
 		fs.close();
 	}
-	Setting::ImportSetting AssetDatabase::LoadMetaFile(std::string path) {
+	Setting::ImportSetting AssetDatabase::LoadMeta(std::string path) {
 		std::ifstream fs(path + ".meta");
 		if (!fs) {
 			OE_ERROR(path + ".meta" + " can't open");
@@ -113,7 +113,7 @@ namespace OpenEngine::Editor {
 		fs.close();
 		return setting;
 	}
-	void AssetDatabase::SaveMetaFile(std::string path, const Setting::ImportSetting& setting) {
+	void AssetDatabase::SaveMeta(std::string path, const Setting::ImportSetting& setting) {
 		std::ofstream fs(path + ".meta");
 		if (!fs) {
 			OE_ERROR(path + ".meta" + " can't open");
@@ -150,9 +150,9 @@ namespace OpenEngine::Editor {
 			if (!m_assetImporter->CanImport(ret[i])) continue;
 			std::string metaFile = ret[i] + ".meta";
 			if (!boost::filesystem::exists(boost::filesystem::path(metaFile))) {
-				CreateMetaFile(ret[i]);
+				CreateMeta(ret[i]);
 			}
-			Setting::ImportSetting setting = LoadMetaFile(ret[i]);
+			Setting::ImportSetting setting = LoadMeta(ret[i]);
 			__IMPORTSETTING_MAP[setting.GetGUID().uid] = setting;
 			__IMPORTPATH_MAP[setting.GetGUID().uid] = ret[i];
 			__PATH_TO_GUID_MAP[ret[i]] = setting.GetGUID().uid;
