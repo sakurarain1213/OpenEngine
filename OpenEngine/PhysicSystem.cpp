@@ -39,10 +39,23 @@ void OpenEngine::PhysicSystem::Tick() noexcept
 
 	float deltaTime = Time::GetDeltaTime();
 	//gravity = Vector3f(0, 980.665, 0);  //尝试强制重设  gravity值 稳定
-	//cout << deltaTime;
-
+	cout << deltaTime;
+	
 	std::vector<RigidBodyComponent*> activedRigidBodies;
 	CollectRigidBodies(activedRigidBodies);
+
+	//使用物理时间
+
+	/*
+	if (curPhysicDTime <= deltaTime) {
+		//按照curPhysicDTime更新位置，然后用PhysicDTime执行物理运算，在用deltaTime更新位置。再重置curPhysicDTime=PhysicDTime再return
+	}
+	else {
+		curPhysicDTime -= deltaTime;
+		//按照deltaTime更新位置
+	}
+	*/
+	
 
 	//std::cout << activedRigidBodies.size()<<"SIZESSSSS";  
 
@@ -64,8 +77,8 @@ void OpenEngine::PhysicSystem::Tick() noexcept
 		{
 			continue;
 		}
-		Vector3f tempVelocity = rigidBody->GetVelocity() + gravityImpulse ;
-		
+		Vector3f tempVelocity = rigidBody->GetVelocity() + gravityImpulse;
+
 		rigidBody->SetVelocity(tempVelocity);
 		//cout <<rigidBody->GetVelocity() << endl;
 	}
@@ -130,9 +143,9 @@ void OpenEngine::PhysicSystem::Tick() noexcept
 
 			//求最大重叠方向
 
-			float overlapXLength = overlapMaxPoint(0) - overlapMinPoint(0) ;
-			float overlapYLength = overlapMaxPoint(1) - overlapMinPoint(1) ;
-			float overlapZLength = overlapMaxPoint(2) - overlapMinPoint(2) ;
+			float overlapXLength = overlapMaxPoint(0) - overlapMinPoint(0);
+			float overlapYLength = overlapMaxPoint(1) - overlapMinPoint(1);
+			float overlapZLength = overlapMaxPoint(2) - overlapMinPoint(2);
 
 			bool SmaxX = false; bool SmaxY = false; bool SmaxZ = false;
 			float SX = overlapYLength * overlapZLength;
@@ -140,11 +153,14 @@ void OpenEngine::PhysicSystem::Tick() noexcept
 			float SZ = overlapXLength * overlapYLength;
 
 			if (SX >= SY && SX >= SZ) {
-				SmaxX = true;}
+				SmaxX = true;
+			}
 			else if (SY >= SX && SY >= SZ) {
-				SmaxY = true;}
+				SmaxY = true;
+			}
 			else {
-				SmaxZ = true;}
+				SmaxZ = true;
+			}
 			//确定解除碰撞的方向
 
 			if (SmaxX) {
@@ -187,18 +203,18 @@ void OpenEngine::PhysicSystem::Tick() noexcept
 				A->SetVelocity(velocityA);
 				B->SetVelocity(velocityB);
 				int cnt = 0;
-				while (overlapY ) {			
+				while (overlapY) {
 					cout << "-----------" << velocityA(1) << "-----------";
-					Vec3 newMinPoint = A->GetAABB().minPoint + VectorScale(A->GetVelocity(),   deltaTime);
-					Vec3 newMaxPoint = A->GetAABB().maxPoint + VectorScale(A->GetVelocity(),  deltaTime);
+					Vec3 newMinPoint = A->GetAABB().minPoint + VectorScale(A->GetVelocity(), deltaTime);
+					Vec3 newMaxPoint = A->GetAABB().maxPoint + VectorScale(A->GetVelocity(), deltaTime);
 					A->SetAABB(newMinPoint, newMaxPoint);
-					Vec3 newMinPointB = B->GetAABB().minPoint + VectorScale(B->GetVelocity(),  deltaTime);
-					Vec3 newMaxPointB = B->GetAABB().maxPoint + VectorScale(B->GetVelocity(),  deltaTime);
+					Vec3 newMinPointB = B->GetAABB().minPoint + VectorScale(B->GetVelocity(), deltaTime);
+					Vec3 newMaxPointB = B->GetAABB().maxPoint + VectorScale(B->GetVelocity(), deltaTime);
 					B->SetAABB(newMinPointB, newMaxPointB);
 
 					overlapY = A->GetAABB().maxPoint(1) > B->GetAABB().minPoint(1) && A->GetAABB().minPoint(1) < B->GetAABB().maxPoint(1);
 					cnt++;
-					if (cnt >10)//cnt重复算10帧 强制回弹
+					if (cnt > 10)//cnt重复算10帧 强制回弹
 					{
 						Vec3 temp1 = velocityA; Vec3 temp2 = velocityB;
 						temp1(1) = -velocityA(1); temp2(1) = -velocityB(1);
@@ -238,36 +254,37 @@ void OpenEngine::PhysicSystem::Tick() noexcept
 					std::cout << "warning  Z  collidsion";   //现在只会碰撞一帧 ???
 				}
 			}
-		
+
 			//一组碰撞处理结束
 			//fin?  
 		}
-		else{
-		//没发生碰撞  也是两个刚体对  也要更新aabb box
-		Vec3 newMinPoint = A->GetAABB().minPoint + A->GetVelocity() * deltaTime;
-		Vec3 newMaxPoint = A->GetAABB().maxPoint + A->GetVelocity() * deltaTime;
-		A->SetAABB(newMinPoint, newMaxPoint);
+		else {
+			//没发生碰撞  也是两个刚体对  也要更新aabb box
+			Vec3 newMinPoint = A->GetAABB().minPoint + A->GetVelocity() * deltaTime;
+			Vec3 newMaxPoint = A->GetAABB().maxPoint + A->GetVelocity() * deltaTime;
+			A->SetAABB(newMinPoint, newMaxPoint);
 
-		Vec3 newMinPointB = B->GetAABB().minPoint + B->GetVelocity() * deltaTime;
-		Vec3 newMaxPointB = B->GetAABB().maxPoint + B->GetVelocity() * deltaTime;
-		B->SetAABB(newMinPointB, newMaxPointB);
+			Vec3 newMinPointB = B->GetAABB().minPoint + B->GetVelocity() * deltaTime;
+			Vec3 newMaxPointB = B->GetAABB().maxPoint + B->GetVelocity() * deltaTime;
+			B->SetAABB(newMinPointB, newMaxPointB);
 
-		/*
-		std::cout << A->GetAABB().minPoint << "------AMIN" << endl;
-		std::cout << A->GetAABB().maxPoint << "------Amax" << endl;
-		std::cout << B->GetAABB().minPoint << "------BMIN" << endl;
-		std::cout << B->GetAABB().maxPoint << "------Bmax" << endl;
-		std::cout << endl;
-		std::cout << position1 << "------A POS" << endl;
-		std::cout << position2 << "------B POS" << endl;
-		std::cout << endl;
-		*/
+			/*
+			std::cout << A->GetAABB().minPoint << "------AMIN" << endl;
+			std::cout << A->GetAABB().maxPoint << "------Amax" << endl;
+			std::cout << B->GetAABB().minPoint << "------BMIN" << endl;
+			std::cout << B->GetAABB().maxPoint << "------Bmax" << endl;
+			std::cout << endl;
+			std::cout << position1 << "------A POS" << endl;
+			std::cout << position2 << "------B POS" << endl;
+			std::cout << endl;
+			*/
 		}
 	}
 	//rigid pair处理结束  位置没更新
-	
+
 	//继续测速   重点测角速度
 	// integratePhase   更新位置
+
 	integratePhase->integrate(activedRigidBodies, deltaTime);
 	/*
 	for (auto* rigidBody : activedRigidBodies)

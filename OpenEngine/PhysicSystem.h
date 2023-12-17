@@ -54,12 +54,12 @@ namespace OpenEngine {
 			return result;
 		}
 
-		//ÖØ¹¹  ¼ò»¯ ³¤·½ÌåAABBÅö×²ÅÐ¶Ï 
+		//é‡æž„  ç®€åŒ– é•¿æ–¹ä½“AABBç¢°æ’žåˆ¤æ–­ 
 		bool isCollid(AABB obj1, AABB obj2) {
 			bool overlapX = obj1.maxPoint(0) >= obj2.minPoint(0) && obj1.minPoint(0) <= obj2.maxPoint(0);
 			bool overlapY = obj1.maxPoint(1) >= obj2.minPoint(1) && obj1.minPoint(1) <= obj2.maxPoint(1);
 			bool overlapZ = obj1.maxPoint(2) >= obj2.minPoint(2) && obj1.minPoint(2) <= obj2.maxPoint(2);
-			// Èç¹ûÔÚËùÓÐÖáÉÏ¶¼ÓÐÖØµþ£¬±íÊ¾Åö×²
+			// å¦‚æžœåœ¨æ‰€æœ‰è½´ä¸Šéƒ½æœ‰é‡å ï¼Œè¡¨ç¤ºç¢°æ’ž
 			return overlapX && overlapY && overlapZ;
 		}
 
@@ -69,16 +69,16 @@ namespace OpenEngine {
 			bool overlapX = obj1.maxPoint(0) >= obj2.minPoint(0) && obj1.minPoint(0) <= obj2.maxPoint(0);
 			bool overlapY = obj1.maxPoint(1) >= obj2.minPoint(1) && obj1.minPoint(1) <= obj2.maxPoint(1);
 			bool overlapZ = obj1.maxPoint(2) >= obj2.minPoint(2) && obj1.minPoint(2) <= obj2.maxPoint(2);
-			// Èç¹ûÔÚËùÓÐÖáÉÏ¶¼ÓÐÖØµþ£¬±íÊ¾Åö×²
+			// å¦‚æžœåœ¨æ‰€æœ‰è½´ä¸Šéƒ½æœ‰é‡å ï¼Œè¡¨ç¤ºç¢°æ’ž
 			if(overlapX&& overlapY&& overlapZ){
-				// ¼ÆËãÅö×²ºóµÄËÙ¶È
-				//std::cout << "CCCCCLLLLLLIIIICCCCCCC";  ÏÖÔÚÖ»»áÅö×²Ò»Ö¡
+				// è®¡ç®—ç¢°æ’žåŽçš„é€Ÿåº¦
+				//std::cout << "CCCCCLLLLLLIIIICCCCCCC";  çŽ°åœ¨åªä¼šç¢°æ’žä¸€å¸§
 				Vec3 velocityA = a->GetVelocity();
 				Vec3 velocityB = b->GetVelocity();
 				float massA = a->GetMass();
 				float massB = b->GetMass();
 
-				// ÔÚÈý¸ö·½ÏòÉÏ·¢ÉúÅö×²£¬¸üÐÂËÙ¶È·ÖÁ¿   µ«ÊÇÈÝÒ×´©Í¸  ·´¸´±äÏò  ÓÀÔ¶Åö×²  ¿¼ÂÇ·´³å¼ò»¯
+				// åœ¨ä¸‰ä¸ªæ–¹å‘ä¸Šå‘ç”Ÿç¢°æ’žï¼Œæ›´æ–°é€Ÿåº¦åˆ†é‡   ä½†æ˜¯å®¹æ˜“ç©¿é€  åå¤å˜å‘  æ°¸è¿œç¢°æ’ž  è€ƒè™‘åå†²ç®€åŒ–
 				if (overlapX) {
 					
 					velocityA(0) = ((velocityA(0) * (massA - massB) + 2 * massB * velocityB(0)) / (massA + massB));
@@ -96,7 +96,7 @@ namespace OpenEngine {
 				
 				
 				}
-				// ¸üÐÂÎïÌåµÄËÙ¶È
+				// æ›´æ–°ç‰©ä½“çš„é€Ÿåº¦
 				a->SetVelocity(velocityA);
 				b->SetVelocity(velocityB);
 
@@ -122,6 +122,9 @@ namespace OpenEngine {
 
 		std::vector< std::shared_ptr<ContactManifold> > manifolds;
 
+
+		float PhysicDTime=0.02;
+		float curPhysicDTime;
 	};
 
 }
